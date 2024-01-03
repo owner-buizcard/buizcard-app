@@ -30,4 +30,11 @@ jobs:
       - run: echo "${{ secrets.KEY_JKS }}" | base64 --decode > android/app/store.jks
       - run: flutter pub get
       - run: flutter build apk --release --target-platform android-arm,android-arm64 --split-per-abi --flavor dev
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: "Dev Build APK release ${{ env.current_date_time }}"
+          document: build/app/outputs/flutter-apk/app-arm64-v8a-dev-release.apk
       
