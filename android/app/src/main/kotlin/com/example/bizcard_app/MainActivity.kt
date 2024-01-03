@@ -1,4 +1,4 @@
-package com.example.bizcard_app
+package com.spiderlingz.bizcard
 
 import io.flutter.embedding.android.FlutterActivity
 

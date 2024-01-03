@@ -1,0 +1,33 @@
+name: Flutter APK - Dev release
+
+on:
+  push:
+    branches: 
+      - dev
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    env:
+      KEY_PROP: ${{ secrets.KEY_PROPERTIES }}
+      KEY_JKS: ${{ secrets.KEY_JKS }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Get current date time
+        run: echo "current_date_time=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.8.0
+        with:
+          channel: 'stable'
+          cache: true
+          # flutter-version: '3.7.12'
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:' # optional, change this to force refresh cache
+          cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:' # optional, change this to specify the cache path
+          architecture: x64 # optional, x64 or arm64
+      - run: echo "${{ secrets.KEY_PROPERTIES }}" > android/key.properties
+      - run: echo "${{ secrets.KEY_JKS }}" | base64 --decode > android/app/store.jks
+      - run: flutter pub get
+      - run: flutter build apk --release --target-platform android-arm,android-arm64 --split-per-abi --flavor dev
+      
