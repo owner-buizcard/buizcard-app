@@ -84,21 +84,18 @@ android {
     productFlavors {
         dev {
             dimension 'flavor'
-            resValue "string", "app_name", "Dev Grameya"
+            resValue "string", "app_name", "Dev Bizcard"
             resValue "string", "app_link_main", "main.d1vmf33px3bds2.amplifyapp.com"
-            resValue "string", "deep_link_scheme", "grameya"
         }
         staging {
             dimension 'flavor'
-            resValue "string", "app_name", "Dev Grameya"
+            resValue "string", "app_name", "Staging Bizcard"
             resValue "string", "app_link_main", "main.d1vmf33px3bds2.amplifyapp.com"
-            resValue "string", "deep_link_scheme", "grameya"
         }
         prod {
             dimension 'flavor'
-            resValue "string", "app_name", "Grameya"
+            resValue "string", "app_name", "Bizcard"
             resValue "string", "app_link_main", "jobs.grameya.com"
-            resValue "string", "deep_link_scheme", "grameya"
         }
     }
 }
