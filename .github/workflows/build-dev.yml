@@ -1,5 +1,7 @@
 name: Flutter APK - Dev release
 
+# Controls when the action will run. Triggers the workflow on push events
+# but only for the main branch
 on:
   push:
     branches: 
@@ -36,5 +38,5 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: "Dev Build APK release ${{ env.current_date_time }}"
-          document: build/app/outputs/flutter-apk/app-arm64-v8a-dev-release.apk
+          # document: build/app/outputs/flutter-apk/app-arm64-v8a-dev-release.apk
       
