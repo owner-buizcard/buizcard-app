@@ -12,8 +12,10 @@ import 'package:bizcard_app/pages/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Routes {
+import '../pages/authentication/bloc/auth_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+class Routes {
   Routes._();
 
   //welcome
@@ -30,11 +32,9 @@ class Routes {
   static const String resetPassword = "/reset-password";
   static const String authCallback = "/auth-callback";
   static const String login = "/login";
-
 }
 
 class RouteGenerator {
-
   final RouteSettings settings;
 
   RouteGenerator({required this.settings});
@@ -46,33 +46,60 @@ class RouteGenerator {
 
       case Routes.welcome:
         return getTransistionPage(const WelcomeView());
-      
+
       case Routes.login:
-        return getTransistionPage(const LoginView());
-      
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const LoginView(),
+        ));
+
       case Routes.name:
-        return getTransistionPage(const NameView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const NameView(),
+        ));
 
       case Routes.companyInfo:
-        return getTransistionPage(const CompanyView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const CompanyView(),
+        ));
 
       case Routes.contactInfo:
-        return getTransistionPage(const ContactView());
-      
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const ContactView(),
+        ));
+
       case Routes.create:
-        return getTransistionPage(const CreateView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const CreateView(),
+        ));
 
       case Routes.photo:
-        return getTransistionPage(const PhotoView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const PhotoView(),
+        ));
 
       case Routes.forgotPassword:
-        return getTransistionPage(const ForgotPasswordView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const ForgotPasswordView(),
+        ));
 
       case Routes.resetPassword:
-        return getTransistionPage(const ResetPasswordView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const ResetPasswordView(),
+        ));
 
       case Routes.authCallback:
-        return getTransistionPage(const CallbackView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const CallbackView(),
+        ));
 
       default:
         return unDefinedRoute();
@@ -96,5 +123,4 @@ class RouteGenerator {
       ),
     );
   }
-
 }

@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         BotToastNavigatorObserver(),
       ],
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.resetPassword,
+      initialRoute: Routes.splash,
       onGenerateRoute: (s) => RouteGenerator(settings: s).getRoute(),
       theme: ThemeConst.getApplicationTheme(),
     );

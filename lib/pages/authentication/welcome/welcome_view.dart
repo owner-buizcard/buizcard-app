@@ -1,4 +1,5 @@
 import 'package:bizcard_app/pages/widgets/gap.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeView extends StatefulWidget {
@@ -28,14 +29,14 @@ class _WelcomeViewState extends State<WelcomeView> {
             child: Column(
               children: [
                 ElevatedButton(
-                  onPressed: (){}, 
+                  onPressed: ()=>Navigator.pushNamed(context, Routes.name), 
                   child: const Text('Create Your Account')
                 ),
 
                 const Gap(size: 16),
 
                 TextButton(
-                  onPressed: (){}, 
+                  onPressed: ()=>Navigator.pushNamed(context, Routes.login), 
                   child: const Text('Already have an account ? Login'))
               ],
             ),

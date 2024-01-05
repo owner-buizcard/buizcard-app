@@ -6,6 +6,8 @@ import 'package:bizcard_app/pages/widgets/social_login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../routes/app_routes.dart';
+
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
@@ -48,7 +50,7 @@ class _LoginViewState extends State<LoginView> {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: (){}, 
+              onPressed: ()=>Navigator.pushNamed(context, Routes.forgotPassword), 
               child: const Text('Forgot Password ?')
             ),
           ),

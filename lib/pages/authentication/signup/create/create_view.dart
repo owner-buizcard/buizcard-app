@@ -7,6 +7,8 @@ import 'package:bizcard_app/pages/widgets/social_login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../routes/app_routes.dart';
+
 class CreateView extends StatefulWidget {
   const CreateView({super.key});
 
@@ -46,8 +48,8 @@ class _CreateViewState extends State<CreateView> {
           const Gap(size: 32),
 
           ElevatedButton(
-            onPressed: (){}, 
-            child: const Text('Login')
+            onPressed: ()=>Navigator.pushNamed(context, Routes.photo), 
+            child: const Text('Continue')
           ),
 
           const Gap(size: 20),

@@ -1,5 +1,6 @@
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -46,14 +47,14 @@ class _CompanyViewState extends State<CompanyView> {
           const Gap(size: 32),
 
           ElevatedButton(
-            onPressed: (){}, 
+            onPressed: ()=>Navigator.pushNamed(context, Routes.contactInfo),
             child: const Text('Continue')
           ),
 
           const Gap(size: 24),
 
           TextButton(
-            onPressed: (){}, 
+            onPressed: ()=>Navigator.pushNamed(context, Routes.contactInfo),
             child: const Text('Skip'))
         ],
       ),
