@@ -1,5 +1,6 @@
 import 'package:bizcard_app/constants/theme_const.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -12,6 +13,10 @@ class App extends StatelessWidget {
 
   getMaterialApp(String title, BuildContext context) {
     return MaterialApp(
+      builder: BotToastInit(),
+      navigatorObservers: [
+        BotToastNavigatorObserver(),
+      ],
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.resetPassword,
       onGenerateRoute: (s) => RouteGenerator(settings: s).getRoute(),
