@@ -2,6 +2,7 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/pages/widgets/divider_text.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field.dart';
+import 'package:bizcard_app/pages/widgets/password_field.dart';
 import 'package:bizcard_app/pages/widgets/social_login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +38,7 @@ class _CreateViewState extends State<CreateView> {
 
           const Gap(size: 20),
 
-          const InputField(
+          const PasswordField(
             label: 'Password',
             prefixIcon: AntIcons.lockOutlined,    
           ),

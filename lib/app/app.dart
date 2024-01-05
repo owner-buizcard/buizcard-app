@@ -13,7 +13,7 @@ class App extends StatelessWidget {
   getMaterialApp(String title, BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.welcome,
+      initialRoute: Routes.resetPassword,
       onGenerateRoute: (s) => RouteGenerator(settings: s).getRoute(),
       theme: ThemeConst.getApplicationTheme(),
     );
