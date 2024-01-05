@@ -2,11 +2,9 @@ import 'package:bizcard_app/pages/authentication/callback/callback_view.dart';
 import 'package:bizcard_app/pages/authentication/login/login_view.dart';
 import 'package:bizcard_app/pages/authentication/password/forgot/forgot_password_view.dart';
 import 'package:bizcard_app/pages/authentication/password/reset/reset_password_view.dart';
-import 'package:bizcard_app/pages/authentication/signup/company/company_view.dart';
-import 'package:bizcard_app/pages/authentication/signup/contact/contact_view.dart';
-import 'package:bizcard_app/pages/authentication/signup/create/create_view.dart';
-import 'package:bizcard_app/pages/authentication/signup/name/name_view.dart';
-import 'package:bizcard_app/pages/authentication/signup/photo/photo_view.dart';
+import 'package:bizcard_app/pages/authentication/signup/cubit/page_cubit.dart';
+import 'package:bizcard_app/pages/authentication/photo/photo_view.dart';
+import 'package:bizcard_app/pages/authentication/signup/signup_view.dart';
 import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -23,15 +21,12 @@ class Routes {
   static const String welcome = "/welcome";
 
   //welcome
-  static const String name = "/name";
-  static const String companyInfo = "/company-info";
-  static const String contactInfo = "/contact-info";
   static const String photo = "/photo";
-  static const String create = "/create";
   static const String forgotPassword = "/forgot-password";
   static const String resetPassword = "/reset-password";
   static const String authCallback = "/auth-callback";
   static const String login = "/login";
+  static const String signup = "/signup";
 }
 
 class RouteGenerator {
@@ -47,34 +42,23 @@ class RouteGenerator {
       case Routes.welcome:
         return getTransistionPage(const WelcomeView());
 
+      case Routes.signup:
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AuthBloc(),
+            ),
+            BlocProvider(
+              create: (context) => PageCubit(),
+            ),
+          ],
+          child: const SignupView(),
+        ));
+
       case Routes.login:
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
           child: const LoginView(),
-        ));
-
-      case Routes.name:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const NameView(),
-        ));
-
-      case Routes.companyInfo:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const CompanyView(),
-        ));
-
-      case Routes.contactInfo:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const ContactView(),
-        ));
-
-      case Routes.create:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const CreateView(),
         ));
 
       case Routes.photo:

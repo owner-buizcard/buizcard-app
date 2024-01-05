@@ -13,39 +13,21 @@ class LoginEvent extends AuthEvent {
   });
 }
 
-class NameEvent extends AuthEvent {
-  final String name;
-
-  NameEvent({
-    required this.name
-  });
-}
-
-class CompanyInfoEvent extends AuthEvent {
-  final String jobTitle;
-  final String companyName;
-
-  CompanyInfoEvent({
-    required this.jobTitle,
-    required this.companyName
-  });
-}
-
-class ContactEvent extends AuthEvent {
-  final String phoneNumber;
-
-  ContactEvent({
-    required this.phoneNumber
-  });
-}
-
 class SignupEvent extends AuthEvent {
   final String email;
   final String password;
+  final String jobTitle;
+  final String companyName;
+  final String phoneNumber;
+  final String name;
 
   SignupEvent({
     required this.email,
-    required this.password
+    required this.password,
+    required this.jobTitle,
+    required this.companyName,
+    required this.phoneNumber,
+    required this.name
   });
 }
 

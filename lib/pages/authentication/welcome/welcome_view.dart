@@ -29,7 +29,7 @@ class _WelcomeViewState extends State<WelcomeView> {
             child: Column(
               children: [
                 ElevatedButton(
-                  onPressed: ()=>Navigator.pushNamed(context, Routes.name), 
+                  onPressed: ()=>Navigator.pushNamed(context, Routes.signup), 
                   child: const Text('Create Your Account')
                 ),
 

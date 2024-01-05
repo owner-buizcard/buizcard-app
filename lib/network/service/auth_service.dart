@@ -4,7 +4,12 @@ class AuthService {
 
   Future<String> login({required String email, required String password})async{
     ApiClient client = ApiClient('/auth/login');
-    var data = await client.post({'email': email, 'password': password});
+    return await client.post({'email': email, 'password': password});
+  }
+
+  Future<String> signup({required datamap})async{
+    ApiClient client = ApiClient('/auth/signup');
+    var data = await client.post(datamap);
     return data;
   }
 

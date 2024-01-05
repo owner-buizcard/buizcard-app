@@ -27,7 +27,8 @@ class InputField extends StatelessWidget {
         TextFormField(
           controller: controller,
           decoration: InputDecoration(
-            prefixIcon: Icon(prefixIcon),
+            prefixIcon: prefixIcon!=null 
+              ? Icon(prefixIcon) : null,
             errorMaxLines: 2
           ),
           validator: (val){

@@ -21,6 +21,7 @@ class LoginViewModel extends BaseViewModel {
     if(!formKey.currentState!.validate()){
       return;
     }
+    FocusScope.of(context).unfocus();
     context.read<AuthBloc>().add(
       LoginEvent(
         email: emailController.trim(), password: passwordController.trim())

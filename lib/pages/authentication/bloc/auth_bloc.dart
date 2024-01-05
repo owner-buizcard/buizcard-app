@@ -6,7 +6,6 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  
 
   AuthBloc() : super(AuthInitial()) {
     on<LoginEvent>(_onLogin);
@@ -15,7 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onLogin(LoginEvent event, Emitter emit)async{
     try{  
-      var data = await AuthService().login(email: event.email, password: event.password);
+      await AuthService().login(email: event.email, password: event.password);
 
       emit(Success());
     }catch(err){
@@ -25,6 +24,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSignup(SignupEvent event, Emitter emit)async{
     try{
+
+      List names = event.name.split(' ');
+
+      var data = await AuthService().signup(
+        datamap: {
+          'email': event.email, 
+          'password': event.password,
+          'companyName': event.companyName,
+          'jobTitle': event.jobTitle,
+          'phoneNumber': event.phoneNumber,
+          'firstName': names[0],
+          'lastName': names.length>1 ? names[1]: '',
+        });
+
+      print(data);
 
       emit(Success());
     }catch(err){
