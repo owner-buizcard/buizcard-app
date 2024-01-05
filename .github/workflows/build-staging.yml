@@ -30,7 +30,7 @@ jobs:
       - run: echo "${{ secrets.KEY_PROPERTIES }}" > android/key.properties
       - run: echo "${{ secrets.KEY_JKS }}" | base64 --decode > android/app/store.jks
       - run: flutter pub get
-      - run: flutter build apk --release --target-platform android-arm,android-arm64 --split-per-abi --flavor staging
+      - run: flutter build apk --release --target-platform android-arm,android-arm64 --split-per-abi --flavor dev
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
         with:
