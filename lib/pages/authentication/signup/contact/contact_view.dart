@@ -34,7 +34,8 @@ class _ContactViewState extends State<ContactView> {
 
           const Gap(size: 20),
           
-          const InputField(
+          InputField(
+            controller: TextEditingController(),
             label: 'Phone Number'  
           ),
 

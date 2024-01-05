@@ -34,13 +34,15 @@ class _CompanyViewState extends State<CompanyView> {
 
           const Gap(size: 20),
           
-          const InputField(
+          InputField(
+            controller: TextEditingController(),
             label: 'Job title'  
           ),
 
           const Gap(size: 10),
 
-          const InputField(
+          InputField(
+            controller: TextEditingController(),
             label: 'Company Name'  
           ),
 

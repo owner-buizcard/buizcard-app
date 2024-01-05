@@ -34,8 +34,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
           const Gap(size: 20),
           
-          const InputField(
+          InputField(
             label: 'Email Address',
+            controller: TextEditingController(),
             prefixIcon: AntIcons.mailOutlined,  
           ),
 

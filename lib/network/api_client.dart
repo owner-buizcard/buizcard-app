@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import '../constants/urls_const.dart';
 import '../utils/toast.dart';
@@ -15,6 +16,7 @@ class ApiClient {
   ApiClient(this.path, {this.loader=true, this.errToast=true,this.additionalHeaders}){
     dio = Dio();
     dio.options.baseUrl = UrlsConst.apiHost;
+    dio.options.contentType = 'application/json'; 
     dio.interceptors.add(ApiInterceptors(
       dio: dio, 
       additionalHeaders: additionalHeaders,
@@ -28,7 +30,9 @@ class ApiClient {
   }
 
   Future<dynamic> post([dynamic data = const {}, Map<String, dynamic>? query]) async {
-    return _process(await dio.post<Map>(path, data: data));
+    var data1 = await dio.post<Map>(path, data: data);
+    debugPrint(data1.toString());
+    // return _process();
   }
 
   Future<dynamic> put([dynamic data = const {}, Map<String, dynamic>? query]) async {
@@ -40,6 +44,7 @@ class ApiClient {
   }
 
   _process(Response response){
+    debugPrint(response.data);
     return response.data['data'];
   }
 }
@@ -59,6 +64,12 @@ class ApiInterceptors extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async{
+    print(options.baseUrl);
+    print(options.path);
+    print(options.data);
+    print(options.headers);
+    print(options.method);
+
     if (loader) showLoader();
 
     // if(FirebaseAuth.instance.currentUser==null){
@@ -82,6 +93,8 @@ class ApiInterceptors extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async{
     if (loader) hideLoader();
+
+    print(err);
 
     if (err.response?.data is Map && err.response!.data.containsKey('message')) {
       if (errToast) toast(err.response?.data['message'], success: false);

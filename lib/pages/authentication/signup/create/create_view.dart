@@ -33,15 +33,17 @@ class _CreateViewState extends State<CreateView> {
 
           const Gap(size: 20),
           
-          const InputField(
+          InputField(
             label: 'Email Address',
+            controller: TextEditingController(),
             prefixIcon: AntIcons.mailOutlined,  
           ),
 
           const Gap(size: 20),
 
-          const PasswordField(
+          PasswordField(
             label: 'Password',
+            controller: TextEditingController(),
             prefixIcon: AntIcons.lockOutlined,    
           ),
 

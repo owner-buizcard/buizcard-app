@@ -2,14 +2,16 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/strength_indicator.dart';
 import 'package:bizcard_app/utils/password_strength.dart';
+import 'package:bizcard_app/utils/validator.dart';
 import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
   final String label;
   final IconData? prefixIcon;
   final bool showIndicator;
+  final TextEditingController controller;
   const PasswordField({
-    super.key, required this.label, this.prefixIcon, this.showIndicator = true});
+    super.key, required this.label, required this.controller, this.prefixIcon, this.showIndicator = true});
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +23,28 @@ class PasswordField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label),
+        Text('$label *'),
         const Gap(size: 10),
         ValueListenableBuilder<bool>(
           valueListenable: notifier,
           builder: (_, value, ___){
             return TextFormField(
               obscureText: value,
+              controller: controller,
               onChanged: (value) {
                 strengthNotifier.value = strengthIndicator(value);
               },
               decoration: InputDecoration(
+                errorMaxLines: 3,
                 prefixIcon: Icon(prefixIcon),
                 suffixIcon: IconButton(
                   onPressed: () => notifier.value=!value, 
                   icon: Icon(
                     value ? AntIcons.eyeFilled: AntIcons.eyeOutlined))
               ),
+              validator: (val){
+                return Validator.validatePassword(val);
+              },
             );
           },
         ),

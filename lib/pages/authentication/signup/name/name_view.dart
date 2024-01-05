@@ -34,7 +34,8 @@ class _NameViewState extends State<NameView> {
 
           const Gap(size: 20),
           
-          const InputField(
+          InputField(
+            controller: TextEditingController(),
             label: 'Enter your name'  
           ),
 

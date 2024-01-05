@@ -34,15 +34,17 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
 
           const Gap(size: 20),
 
-          const PasswordField(
+          PasswordField(
             label: 'Password',
+            controller: TextEditingController(),
             prefixIcon: AntIcons.lockOutlined,    
           ),
 
           const Gap(size: 20),
 
-          const PasswordField(
+          PasswordField(
             label: 'Confirm Password',
+            controller: TextEditingController(),
             prefixIcon: AntIcons.lockOutlined,  
             showIndicator: false  
           ),
