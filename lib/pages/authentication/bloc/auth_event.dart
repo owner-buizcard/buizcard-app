@@ -31,6 +31,14 @@ class SignupEvent extends AuthEvent {
   });
 }
 
+class ForgotPasswordEvent extends AuthEvent {
+  final String email;
+
+  ForgotPasswordEvent({
+    required this.email
+  });
+}
+
 class UploadPictureEvent extends AuthEvent {
   final String picture;
 

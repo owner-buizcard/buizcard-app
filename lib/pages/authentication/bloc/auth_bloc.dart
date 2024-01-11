@@ -10,6 +10,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<LoginEvent>(_onLogin);
     on<SignupEvent>(_onSignup);
+    on<ForgotPasswordEvent>(_onForgotPassword);
   }
 
   void _onLogin(LoginEvent event, Emitter emit)async{
@@ -39,6 +40,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         });
 
       print(data);
+
+      emit(Success());
+    }catch(err){
+      emit(Error());
+    }
+  }
+
+  void _onForgotPassword(ForgotPasswordEvent event, Emitter emit)async{
+    try{
+
+      await AuthService().forgotPassword(email: event.email);
 
       emit(Success());
     }catch(err){

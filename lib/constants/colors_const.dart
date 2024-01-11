@@ -5,7 +5,7 @@ class ColorsConst {
   ColorsConst._();
 
 
-  static const primary = Color(0xFF1677FF);
+  static const primary = Color(0xFF2550E7);
   static const primaryLight = Color(0x4D008080);
   static const accent = Color(0xFFE2751C);
 

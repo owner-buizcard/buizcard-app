@@ -6,6 +6,7 @@ import 'package:bizcard_app/pages/authentication/signup/cubit/page_cubit.dart';
 import 'package:bizcard_app/pages/authentication/photo/photo_view.dart';
 import 'package:bizcard_app/pages/authentication/signup/signup_view.dart';
 import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
+import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -27,6 +28,10 @@ class Routes {
   static const String authCallback = "/auth-callback";
   static const String login = "/login";
   static const String signup = "/signup";
+
+  //cards
+  static const String cardBuilder = "/card-builder";
+
 }
 
 class RouteGenerator {
@@ -83,6 +88,12 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
           child: const CallbackView(),
+        ));
+
+      case Routes.cardBuilder:
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const CardBuilderView(),
         ));
 
       default:

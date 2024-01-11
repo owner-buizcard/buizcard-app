@@ -1,5 +1,5 @@
 import 'package:bizcard_app/pages/widgets/gap.dart';
-import 'package:bizcard_app/pages/widgets/input_field.dart';
+import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +37,7 @@ class ContactFragment extends StatelessWidget {
       
             const Gap(size: 20),
             
-            InputField(
+            InputFieldWL(
               controller: viewModel.phoneNumberController,
               label: 'Phone Number'  
             ),

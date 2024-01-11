@@ -2,7 +2,7 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/pages/authentication/login/login_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/divider_text.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
-import 'package:bizcard_app/pages/widgets/input_field.dart';
+import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
 import 'package:bizcard_app/pages/widgets/password_field.dart';
 import 'package:bizcard_app/pages/widgets/social_login.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
                   style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w700, fontSize: 28)),
               const Gap(size: 20),
-              InputField(
+              InputFieldWL(
                 label: 'Email Address',
                 controller: _viewModel.emailController,
                 prefixIcon: AntIcons.mailOutlined,

@@ -9,7 +9,12 @@ class AuthService {
 
   Future<String> signup({required datamap})async{
     ApiClient client = ApiClient('/auth/signup');
-    var data = await client.post(datamap);
+    return await client.post(datamap);
+  }
+
+  Future<bool?> forgotPassword({required String email})async{
+    ApiClient client = ApiClient('/auth/password/forgot');
+    var data = await client.post({'email': email});
     return data;
   }
 

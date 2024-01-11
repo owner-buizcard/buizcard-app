@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import '../constants/urls_const.dart';
 import '../utils/toast.dart';
@@ -30,9 +29,8 @@ class ApiClient {
   }
 
   Future<dynamic> post([dynamic data = const {}, Map<String, dynamic>? query]) async {
-    var data1 = await dio.post<Map>(path, data: data);
-    debugPrint(data1.toString());
-    // return _process();
+    var result = await dio.post<Map>(path, data: data);
+    return _process(result);
   }
 
   Future<dynamic> put([dynamic data = const {}, Map<String, dynamic>? query]) async {
@@ -44,7 +42,6 @@ class ApiClient {
   }
 
   _process(Response response){
-    debugPrint(response.data);
     return response.data['data'];
   }
 }
