@@ -1,4 +1,6 @@
 
+import 'package:bizcard_app/pages/widgets/avatar_ph.dart';
+import 'package:bizcard_app/pages/widgets/banner_ph.dart';
 import 'package:bizcard_app/pages/widgets/input_field.dart';
 import 'package:bizcard_app/pages/widgets/row_expanded.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,23 @@ class AboutFragment extends StatelessWidget {
             style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w700, fontSize: 28)),
         const Gap(size: 20),
+        
+        const SizedBox(
+          height: 200,
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              BannerPH(),
+              Positioned(
+                bottom: 0,
+                child: AvatarPH()
+              ),
+            ],
+          ),
+        ),
+
+        const Gap(size: 16),
+
         RowExpanded(
           gap: 16,
           children: [
@@ -103,8 +122,6 @@ class AboutFragment extends StatelessWidget {
             ),
           ],
         ),
-
-
       ],
     );
   }

@@ -1,3 +1,5 @@
+import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/pages/widgets/avatar_ph.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,6 +21,15 @@ class BusinessFragment extends StatelessWidget {
             style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w700, fontSize: 28)),
         const Gap(size: 20),
+
+        Container(
+          alignment: Alignment.centerLeft,
+          child: const AvatarPH(
+            icon: AntIcons.pictureOutlined,
+          )
+        ),
+
+        const Gap(size: 16),
         RowExpanded(
           gap: 16,
           children: [
