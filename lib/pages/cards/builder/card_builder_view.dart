@@ -28,6 +28,7 @@ class _CardBuilderViewState extends State<CardBuilderView> {
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 30,
         title: const Text("Business Card"),
         actions: [
           TextButton(onPressed: (){}, child: const Text("Save")),

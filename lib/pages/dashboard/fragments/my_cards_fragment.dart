@@ -15,34 +15,20 @@ class MyCardsFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 44),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text('My Cards', style: Theme.of(context).textTheme.titleMedium),
-              InkWell(
-                onTap: ()=>Navigator.pushNamed(context, Routes.cardBuilder),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: ColorsConst.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(4)
-                  ),
-                  child: Text('Create', style: GoogleFonts.roboto(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: ColorsConst.primary
-                  )),
-                ),
-              ),
+              TextButton(onPressed: (){}, child: const Text('View All'))
             ],
           ),
 
-          const Gap(size: 20),
+          const Gap(size: 10),
 
           Expanded(
             child: Container(
@@ -91,39 +77,56 @@ class MyCardsFragment extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 4,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: 'Jack Ferros'.titletext(context),
-                          subtitle: 'Flutter developer'.bltext(context),
-                          trailing: InkWell(
-                            onTap: ()=>viewModel.openCardOptions(context),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: const Color(0x268c8c8c),
-                                borderRadius: BorderRadius.circular(6)
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: 'Jack Ferros'.titletext(context),
+                            subtitle: 'Flutter developer'.bltext(context),
+                            trailing: InkWell(
+                              onTap: ()=>viewModel.openCardOptions(context),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: const Color(0x55D6D6D6),
+                                  borderRadius: BorderRadius.circular(6)
+                                ),
+                                child: const Icon(Icons.more_vert, color: Color(0xFF797272),),
                               ),
-                              child: const Icon(Icons.more_vert, color: Color(0xFF797272),),
                             ),
                           ),
-                        ),
-                    
-                        const Gap(size: 8),
-                    
-                        Expanded(
-                          child: QrImageView(
-                            padding: const EdgeInsets.all(0),
-                            data: 'data'
+                      
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                QrImageView(
+                                  size: 160,
+                                  data: 'data'
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                    
-                        ListTile(
-                          subtitle: 'Updated 1 hour ago'.btext(context),
-                          trailing: const Chip(label: Text('Basic Card'))
-                        ),
-                    
-                      ],
+                      
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              'Updated 1 hour ago'.btext(context),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: const Color(0x241677FF),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text('Basic Card', style: Theme.of(context).textTheme.bodySmall),
+                              )
+                            ],
+                          ),
+                      
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -131,9 +134,9 @@ class MyCardsFragment extends StatelessWidget {
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8, top: 8),
-            child: TextButton(onPressed: (){}, child: const Text('View All')))
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 8, top: 8),
+          //   child: )
         ],
       ),
     );

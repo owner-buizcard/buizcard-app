@@ -3,6 +3,7 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,16 +34,18 @@ class _DashboardViewState extends State<DashboardView> {
       builder: (context, bottomNavIndex) {
         return Scaffold(
           appBar: AppBar(
+            
             leading: IconButton(
                 onPressed: () {}, icon: const Icon(AntIcons.menuOutlined)),
             actions: bottomNavIndex == 0 
               ? [
+                const Gap(size: 16),
                 const CircleAvatar(
                   backgroundImage: NetworkImage(
                       'https://firebasestorage.googleapis.com/v0/b/bizcard-spiderlingz.appspot.com/o/test%2Fimage.jpeg?alt=media&token=1542a472-5059-4127-962f-c39c02985d00'),
                 ),
                 const Gap(size: 16)
-            ] 
+              ] 
               : [
                 IconButton(
                   icon: const Icon(AntIcons.exportOutlined),
@@ -66,10 +69,10 @@ class _DashboardViewState extends State<DashboardView> {
           ),
           floatingActionButton: bottomNavIndex == 0
               ? FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: ()=>Navigator.pushNamed(context, Routes.cardBuilder),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100)),
-                  child: const Icon(Icons.send),
+                  child: const Icon(Icons.add, size: 30),
                 )
               : null,
           floatingActionButtonLocation:

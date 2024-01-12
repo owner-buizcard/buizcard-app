@@ -16,6 +16,7 @@ class EditLinkSheet extends StatelessWidget {
       child: ListView(
         children: [  
           AppBar(
+            leadingWidth: 30,
             title: const Text("Linkedin"),
             centerTitle: true,
             leading: IconButton(onPressed: ()=>Navigator.pop(context), 

@@ -49,8 +49,8 @@ class ThemeConst {
           color: text
         ),
         titleTextStyle: GoogleFonts.roboto(
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
+          fontSize: 19,
+          fontWeight: FontWeight.w600,
           color: Colors.black
         ),
       ),
@@ -83,11 +83,13 @@ class ThemeConst {
       textTheme: TextTheme(
         titleSmall: GoogleFonts.roboto(
           fontSize: 20,
-          fontWeight: FontWeight.w700
+          fontWeight: FontWeight.w600,
+          color: const Color(0xFF343434)
         ),
         titleMedium: GoogleFonts.roboto(
           fontWeight: FontWeight.w700, 
-          fontSize: 28
+          fontSize: 26,
+          color: const Color(0xff232323)
         ),
         labelLarge: GoogleFonts.roboto(
           fontSize: 22,
@@ -99,14 +101,19 @@ class ThemeConst {
           color: const Color(0xFF797272)
         ),
         bodyLarge: GoogleFonts.roboto(
-          fontWeight: FontWeight.w500, 
-          fontSize: 16,
+          fontWeight: FontWeight.w400, 
+          fontSize: 15,
           color: const Color(0xFFB0B0B0)
         ),
         bodyMedium: GoogleFonts.roboto(
           fontWeight: FontWeight.w400, 
           fontSize: 14,
           color: const Color(0xFFB0B0B0)
+        ),
+        bodySmall: GoogleFonts.roboto(
+          fontWeight: FontWeight.w600, 
+          fontSize: 12,
+          color: ColorsConst.primary,
         )
       ),
 
@@ -118,9 +125,11 @@ class ThemeConst {
         side: const BorderSide(
           color: Color(0x291677FF)
         ),
-        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+        
+        padding: EdgeInsets.zero,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 4),
         labelStyle: GoogleFonts.roboto(
-          fontSize: 14,
+          fontSize: 12,
           color: ColorsConst.primary,
           fontWeight: FontWeight.w500
         )
@@ -136,7 +145,7 @@ class ThemeConst {
           foregroundColor: const MaterialStatePropertyAll(Color(0xFF2550E7)),
           textStyle: MaterialStatePropertyAll(
             GoogleFonts.roboto(
-              fontSize: 18,
+              fontSize: 14,
               fontWeight: FontWeight.w600
             )
           )

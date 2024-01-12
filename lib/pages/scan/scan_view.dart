@@ -26,6 +26,7 @@ class _ScanViewState extends State<ScanView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scan'),
+        leadingWidth: 30,
       ),
       body: Column(
         children: [

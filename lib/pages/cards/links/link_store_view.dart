@@ -27,6 +27,7 @@ class _LinkStoreViewState extends State<LinkStoreView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 30,
         title: const Text("Link Store"),
         actions: [
           TextButton(onPressed: (){}, child: const Text("Save")),
