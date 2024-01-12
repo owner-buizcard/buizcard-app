@@ -20,10 +20,7 @@ class LinkItemAdd extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Text('Linkedin', style: GoogleFonts.roboto(
-                fontSize: 16,
-                fontWeight: FontWeight.w600
-              )),
+              child: 'Linkedin'.bltext(context, color: 'darker'),
             ),
           ),
           InkWell(

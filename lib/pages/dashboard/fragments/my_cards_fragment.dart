@@ -94,15 +94,8 @@ class MyCardsFragment extends StatelessWidget {
                     child: Column(
                       children: [
                         ListTile(
-                          title: Text('Jack Ferros', style: GoogleFonts.roboto(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600
-                          )),
-                          subtitle: Text('Flutter developer', style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            color: const Color(0xFFB0B0B0),
-                            fontWeight: FontWeight.w400
-                          )),
+                          title: 'Jack Ferros'.titletext(context),
+                          subtitle: 'Flutter developer'.bltext(context),
                           trailing: InkWell(
                             onTap: ()=>viewModel.openCardOptions(context),
                             child: Container(

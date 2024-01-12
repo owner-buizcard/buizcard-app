@@ -1,4 +1,5 @@
 
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/avatar_ph.dart';
 import 'package:bizcard_app/pages/widgets/banner_ph.dart';
 import 'package:bizcard_app/pages/widgets/input_field.dart';
@@ -71,7 +72,7 @@ class AboutFragment extends StatelessWidget {
           controller: viewModel.bioController,
         ),
         const Gap(size: 20),
-        Text('Contact', style: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w400)),
+        'Contact'.bltext(context, color: 'darker'),
         const Gap(size: 20),
         RowExpanded(
           gap: 16,

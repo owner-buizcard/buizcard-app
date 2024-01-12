@@ -1,3 +1,4 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +22,9 @@ class ContactItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Dhana Sekaran', style: GoogleFonts.roboto(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800
-                )),
+                'Dhana Sekaran'.titletext(context),
                 const Gap(size: 2),
-                Text('Flutter developer', style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  color: const Color(0xFFB0B0B0),
-                  fontWeight: FontWeight.w400
-                ))
+                'Flutter developer'.bltext(context)
               ],
             ),
           ),

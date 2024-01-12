@@ -1,3 +1,4 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/settings/settings_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:flutter/material.dart';
@@ -75,13 +76,7 @@ class _SettingsViewState extends State<SettingsView> {
                 } else {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(
-                      e["title"],
-                      style: GoogleFonts.roboto(
-                        color: const Color(0xFF797272),
-                        fontSize: 16,
-                      ),
-                    ),
+                    child: '${e["title"]}'.bltext(context, color: 'dark'),
                   );
                 }
               }).toList(),
@@ -100,11 +95,7 @@ class _SettingsViewState extends State<SettingsView> {
                     color: const Color(0x268c8c8c),
                     borderRadius: BorderRadius.circular(8)
                   ),
-                  child: Text('Signout', style: GoogleFonts.roboto(
-                    color: const Color(0xff000000),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400
-                  )),
+                  child: 'Signout'.bltext(context, color: 'darker'),
                 ),
 
                 const Gap(size: 16,),
