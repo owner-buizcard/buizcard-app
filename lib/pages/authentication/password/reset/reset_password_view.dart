@@ -1,8 +1,8 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/password_field.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ResetPasswordView extends StatefulWidget {
   const ResetPasswordView({super.key});
@@ -22,12 +22,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
         children: [
           Text(
             'Reset Password', style: Theme.of(context).textTheme.titleMedium),
-          Text(
-            'Please choose your new password', style: GoogleFonts.roboto(
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-              color: const Color(0xFFB0B0B0)
-            )),
+          'Please choose your new password'.btext(context),
 
           const Gap(size: 20),
 

@@ -1,3 +1,4 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,7 @@ class ContactFragment extends StatelessWidget {
           children: [
             Text(
               'Contact', style: Theme.of(context).textTheme.titleMedium),
-            Text(
-              'You can get a lead via text or call', style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: const Color(0xFFB0B0B0)
-              )),
+            'You can get a lead via text or call'.btext(context),
       
             const Gap(size: 20),
             

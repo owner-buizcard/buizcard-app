@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
@@ -37,11 +38,7 @@ class LinkItemEdit extends StatelessWidget {
                 color: const Color(0x268c8c8c),
                 borderRadius: BorderRadius.circular(5)
               ),
-              child: Text('Edit', style: GoogleFonts.roboto(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF797272)
-              ),),
+              child: 'Edit'.btext(context, color: 'dark')
             ),
           )
         ],

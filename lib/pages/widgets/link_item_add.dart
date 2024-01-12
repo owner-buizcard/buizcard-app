@@ -1,3 +1,4 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,11 +34,7 @@ class LinkItemAdd extends StatelessWidget {
                 color: const Color(0x268c8c8c),
                 borderRadius: BorderRadius.circular(5)
               ),
-              child: Text('Add', style: GoogleFonts.roboto(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF797272)
-              ),),
+              child: 'Add'.btext(context, color: 'dark')
             ),
           )
         ],

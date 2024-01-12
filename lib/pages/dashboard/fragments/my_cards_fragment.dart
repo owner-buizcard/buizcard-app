@@ -1,3 +1,4 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -125,11 +126,7 @@ class MyCardsFragment extends StatelessWidget {
                         ),
                     
                         ListTile(
-                          subtitle: Text('Updated 1 hour ago', style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            color: const Color(0xFFB0B0B0),
-                            fontWeight: FontWeight.w400
-                          )),
+                          subtitle: 'Updated 1 hour ago'.btext(context),
                           trailing: const Chip(label: Text('Basic Card'))
                         ),
                     

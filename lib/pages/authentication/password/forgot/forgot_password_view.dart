@@ -1,10 +1,10 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/authentication/password/forgot/forgot_password_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../bloc/auth_bloc.dart';
 
@@ -30,7 +30,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       appBar: AppBar(),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          print(state);
           if(state is Success){
             _viewModel.successSheet(context);
           }
@@ -41,12 +40,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               Text('Forgot Password?', style: Theme.of(context).textTheme.titleMedium),
-              Text(
-                  'You will receive a password reset link via registered email',
-                  style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: const Color(0xFFB0B0B0))),
+              'You will receive a password reset link via registered email'.btext(context),
               const Gap(size: 20),
               InputFieldWL(
                 label: 'Email Address',

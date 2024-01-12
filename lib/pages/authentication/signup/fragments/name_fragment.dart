@@ -1,4 +1,5 @@
 
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/authentication/signup/cubit/page_cubit.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
@@ -20,11 +21,7 @@ class NameFragment extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
           Text('Let’s get started', style: Theme.of(context).textTheme.titleMedium),
-          Text('Hello, Introduce yourself',
-              style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                  color: const Color(0xFFB0B0B0))),
+          'Hello, Introduce yourself'.btext(context),
           const Gap(size: 20),
           InputFieldWL(
               controller: viewModel.nameController,

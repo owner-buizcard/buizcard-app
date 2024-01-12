@@ -1,3 +1,4 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +25,7 @@ class CompanyFragment extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           children: [
             Text('Company Info', style: Theme.of(context).textTheme.titleMedium),
-            Text('Tell us your company details',
-                style: GoogleFonts.roboto(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: const Color(0xFFB0B0B0))),
+            'Tell us your company details'.btext(context),
             const Gap(size: 20),
             InputFieldWL(controller: viewModel.jobTitleController, label: 'Job title'),
             const Gap(size: 10),

@@ -89,6 +89,11 @@ class ThemeConst {
         titleMedium: GoogleFonts.roboto(
           fontWeight: FontWeight.w700, 
           fontSize: 28
+        ),
+        bodyMedium: GoogleFonts.roboto(
+          fontWeight: FontWeight.w400, 
+          fontSize: 14,
+          color: const Color(0xFFB0B0B0)
         )
       ),
 
