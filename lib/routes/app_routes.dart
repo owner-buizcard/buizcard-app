@@ -7,6 +7,7 @@ import 'package:bizcard_app/pages/authentication/photo/photo_view.dart';
 import 'package:bizcard_app/pages/authentication/signup/signup_view.dart';
 import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
+import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -31,6 +32,7 @@ class Routes {
 
   //cards
   static const String cardBuilder = "/card-builder";
+  static const String linkStore = "/link-store";
 
 }
 
@@ -94,6 +96,12 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
           child: const CardBuilderView(),
+        ));
+      
+      case Routes.linkStore:
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const LinkStoreView(),
         ));
 
       default:

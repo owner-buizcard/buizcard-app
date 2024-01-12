@@ -1,4 +1,5 @@
 import 'package:bizcard_app/base/base_viewmodel.dart';
+import 'package:bizcard_app/pages/cards/builder/bottomsheets/edit_link.dart';
 import 'package:flutter/material.dart';
 
 class CardBuilderViewModel extends BaseViewModel {
@@ -23,6 +24,19 @@ class CardBuilderViewModel extends BaseViewModel {
   late TextEditingController departmentController;
   late TextEditingController companyWebsiteController;
   late TextEditingController aboutController;
+
+  editLink(BuildContext context){
+    showModalBottomSheet(
+      context: context, 
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
+      shape: const RoundedRectangleBorder(),
+      backgroundColor: Colors.white,
+      builder: (_){
+        return const EditLinkSheet();
+    });
+  }
 
   CardBuilderViewModel(){
     fNameController = TextEditingController();
