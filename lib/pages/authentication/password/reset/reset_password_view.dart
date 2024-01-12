@@ -21,10 +21,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
           Text(
-            'Reset Password', style: GoogleFonts.roboto(
-              fontWeight: FontWeight.w700,
-              fontSize: 28
-            )),
+            'Reset Password', style: Theme.of(context).textTheme.titleMedium),
           Text(
             'Please choose your new password', style: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,

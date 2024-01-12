@@ -23,9 +23,7 @@ class CompanyFragment extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           children: [
-            Text('Company Info',
-                style: GoogleFonts.roboto(
-                    fontWeight: FontWeight.w700, fontSize: 28)),
+            Text('Company Info', style: Theme.of(context).textTheme.titleMedium),
             Text('Tell us your company details',
                 style: GoogleFonts.roboto(
                     fontWeight: FontWeight.w400,

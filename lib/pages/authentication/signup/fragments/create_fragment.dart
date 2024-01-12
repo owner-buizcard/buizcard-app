@@ -28,10 +28,7 @@ class CreateFragment extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           children: [
             Text(
-              'Create your account', style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w700,
-                fontSize: 28
-              )),
+              'Create your account', style: Theme.of(context).textTheme.titleMedium),
       
             const Gap(size: 20),
             

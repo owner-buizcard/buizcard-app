@@ -18,10 +18,7 @@ class MyContactsFragment extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('My Contacts', style: GoogleFonts.roboto(
-            fontSize: 28,
-            fontWeight: FontWeight.w700
-          )),
+          Text('My Contacts', style: Theme.of(context).textTheme.titleMedium),
           const Gap(size: 16),
           InputField(
             hint: 'Search contacts...', 

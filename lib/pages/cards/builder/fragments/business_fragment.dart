@@ -1,7 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/pages/widgets/avatar_ph.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../widgets/gap.dart';
 import '../../../widgets/input_field.dart';
@@ -17,9 +16,7 @@ class BusinessFragment extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.only(bottom: 45),
       children: [
-        Text('Business Details',
-            style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w700, fontSize: 28)),
+        Text('Business Details', style: Theme.of(context).textTheme.titleMedium),
         const Gap(size: 20),
 
         Container(

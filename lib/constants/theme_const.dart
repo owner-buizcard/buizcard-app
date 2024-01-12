@@ -53,7 +53,6 @@ class ThemeConst {
           fontWeight: FontWeight.w700,
           color: Colors.black
         ),
-        titleSpacing: 16
       ),
 
       tabBarTheme: TabBarTheme(
@@ -81,11 +80,15 @@ class ThemeConst {
         error: ColorsConst.red,
       ),
 
-      textTheme: const TextTheme(
-        titleSmall: TextStyle(
+      textTheme: TextTheme(
+        titleSmall: GoogleFonts.roboto(
           fontSize: 24,
           fontWeight: FontWeight.w400,
           color: ColorsConst.green
+        ),
+        titleMedium: GoogleFonts.roboto(
+          fontWeight: FontWeight.w700, 
+          fontSize: 28
         )
       ),
 

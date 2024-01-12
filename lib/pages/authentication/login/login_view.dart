@@ -42,9 +42,7 @@ class _LoginViewState extends State<LoginView> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
-              Text('Login',
-                  style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.w700, fontSize: 28)),
+              Text('Login', style: Theme.of(context).textTheme.titleMedium),
               const Gap(size: 20),
               InputFieldWL(
                 label: 'Email Address',

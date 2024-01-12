@@ -19,9 +19,7 @@ class NameFragment extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
-          Text('Let’s get started',
-              style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.w700, fontSize: 28)),
+          Text('Let’s get started', style: Theme.of(context).textTheme.titleMedium),
           Text('Hello, Introduce yourself',
               style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w400,

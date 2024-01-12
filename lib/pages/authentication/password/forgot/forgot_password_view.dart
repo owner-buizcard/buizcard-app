@@ -40,9 +40,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
-              Text('Forgot Password?',
-                  style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.w700, fontSize: 28)),
+              Text('Forgot Password?', style: Theme.of(context).textTheme.titleMedium),
               Text(
                   'You will receive a password reset link via registered email',
                   style: GoogleFonts.roboto(

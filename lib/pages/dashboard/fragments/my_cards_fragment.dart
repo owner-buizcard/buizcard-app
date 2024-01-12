@@ -22,10 +22,7 @@ class MyCardsFragment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('My Cards', style: GoogleFonts.roboto(
-                fontSize: 28,
-                fontWeight: FontWeight.w700
-              )),
+              Text('My Cards', style: Theme.of(context).textTheme.titleMedium),
               InkWell(
                 onTap: ()=>Navigator.pushNamed(context, Routes.cardBuilder),
                 child: Container(

@@ -1,6 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ContactOptionsSheet extends StatelessWidget {
   const ContactOptionsSheet({super.key});
@@ -36,21 +36,7 @@ class ContactOptionsSheet extends StatelessWidget {
                 ),
               ),
               ...options.map((opt)=>
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: ListTile(
-                    onTap: (){},
-                    leading: Icon(opt['icon'], color: opt['label']=='Delete' ? Colors.red : null),
-                    title: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(opt['label'], style: GoogleFonts.roboto(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: opt['label']=='Delete' ? Colors.red : null,
-                      )),
-                    ),
-                  ),
-                )
+                ListItem(item: opt, onClick: (v){})
               ).toList()
             ]
           ),

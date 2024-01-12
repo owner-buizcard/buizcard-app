@@ -18,9 +18,7 @@ class AboutFragment extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.only(bottom: 45),
       children: [
-        Text('Personal Details',
-            style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w700, fontSize: 28)),
+        Text('Personal Details', style: Theme.of(context).textTheme.titleMedium),
         const Gap(size: 20),
         
         const SizedBox(

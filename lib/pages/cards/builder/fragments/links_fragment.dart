@@ -18,9 +18,7 @@ class LinksFragment extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Added Links',
-              style: GoogleFonts.roboto(
-              fontWeight: FontWeight.w700, fontSize: 28)),
+            Text('Added Links', style: Theme.of(context).textTheme.titleMedium),
             InkWell(
               onTap: ()=>Navigator.pushNamed(context, Routes.linkStore),
               child: Padding(

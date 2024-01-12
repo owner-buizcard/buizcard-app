@@ -14,10 +14,7 @@ class SuccessSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Check your email !', style: GoogleFonts.roboto(
-              fontWeight: FontWeight.w700,
-              fontSize: 28
-            )),
+            'Check your email !', style: Theme.of(context).textTheme.titleMedium),
       
           const Gap(size: 16),
           Text(

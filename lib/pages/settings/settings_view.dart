@@ -1,4 +1,5 @@
 import 'package:bizcard_app/pages/settings/settings_viewmodel.dart';
+import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -70,24 +71,7 @@ class _SettingsViewState extends State<SettingsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: _viewModel.options.map((e) {
                 if (e["title"] == null) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: ListTile(
-                      onTap: () {},
-                      leading: Icon(e["icon"], color: e["color"]),
-                      title: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Text(
-                          e["label"],
-                          style: GoogleFonts.roboto(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: e["color"]
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
+                  return ListItem(item: e, onClick: (v)=>{});
                 } else {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),

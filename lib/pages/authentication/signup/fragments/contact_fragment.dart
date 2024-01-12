@@ -24,10 +24,7 @@ class ContactFragment extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           children: [
             Text(
-              'Contact', style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w700,
-                fontSize: 28
-              )),
+              'Contact', style: Theme.of(context).textTheme.titleMedium),
             Text(
               'You can get a lead via text or call', style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w400,

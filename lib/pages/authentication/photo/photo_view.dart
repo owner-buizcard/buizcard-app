@@ -20,10 +20,7 @@ class _PhotoViewState extends State<PhotoView> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
           Text(
-            'Set your photo', style: GoogleFonts.roboto(
-              fontWeight: FontWeight.w700,
-              fontSize: 28
-            )),
+            'Set your photo', style: Theme.of(context).textTheme.titleMedium),
           Text(
             'Make your profile more engaging', style: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
