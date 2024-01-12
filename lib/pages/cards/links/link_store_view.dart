@@ -42,10 +42,7 @@ class _LinkStoreViewState extends State<LinkStoreView> {
             controller: TextEditingController()
           ),
           const Gap(size: 16),
-          Text('Recommended', style: GoogleFonts.roboto(
-            color: const Color(0xFF797272),
-            fontSize: 15,
-          )),
+          Text('Recommended', style: Theme.of(context).textTheme.labelSmall),
           const Gap(size: 16),
           LinkItemAdd(onAdd: (v)=>_viewModel.addLink(context))
         ],

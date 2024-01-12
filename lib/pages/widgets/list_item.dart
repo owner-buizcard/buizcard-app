@@ -1,5 +1,5 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ListItem extends StatelessWidget {
   final Map item;
@@ -15,14 +15,7 @@ class ListItem extends StatelessWidget {
         leading: Icon(item["icon"], color: item["color"]),
         title: Padding(
           padding: const EdgeInsets.only(left: 8),
-          child: Text(
-            item["label"],
-            style: GoogleFonts.roboto(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: item["color"]
-            ),
-          ),
+          child: '${item["label"]}'.bltext(context, color: 'darker')
         ),
       ),
     );

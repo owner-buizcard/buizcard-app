@@ -89,6 +89,15 @@ class ThemeConst {
           fontWeight: FontWeight.w700, 
           fontSize: 28
         ),
+        labelLarge: GoogleFonts.roboto(
+          fontSize: 22,
+          fontWeight: FontWeight.w700
+        ),
+        labelSmall: GoogleFonts.roboto(
+          fontSize: 17,
+          fontWeight: FontWeight.w500,
+          color: const Color(0xFF797272)
+        ),
         bodyLarge: GoogleFonts.roboto(
           fontWeight: FontWeight.w500, 
           fontSize: 16,

@@ -43,10 +43,7 @@ class EditLinkSheet extends StatelessWidget {
                         height: 100
                       ),
           
-                      Text('@agamagilan', style: GoogleFonts.roboto(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700
-                      ))
+                      Text('@agamagilan', style: Theme.of(context).textTheme.labelLarge)
                     ],
                   )
                 ),

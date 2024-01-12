@@ -76,7 +76,7 @@ class _SettingsViewState extends State<SettingsView> {
                 } else {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
-                    child: '${e["title"]}'.bltext(context, color: 'dark'),
+                    child: Text('${e["title"]}', style: Theme.of(context).textTheme.labelSmall),
                   );
                 }
               }).toList(),
