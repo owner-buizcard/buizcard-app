@@ -1,0 +1,154 @@
+import 'package:bizcard_app/pages/dashboard/dashboard_viewmodel.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
+import '../../../constants/colors_const.dart';
+import '../../../routes/app_routes.dart';
+import '../../widgets/gap.dart';
+
+class MyCardsFragment extends StatelessWidget {
+  final DashboardViewModel viewModel;
+  const MyCardsFragment({super.key, required this.viewModel});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('My Cards', style: GoogleFonts.roboto(
+                fontSize: 28,
+                fontWeight: FontWeight.w700
+              )),
+              InkWell(
+                onTap: ()=>Navigator.pushNamed(context, Routes.cardBuilder),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: ColorsConst.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(4)
+                  ),
+                  child: Text('Create', style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: ColorsConst.primary
+                  )),
+                ),
+              ),
+            ],
+          ),
+
+          const Gap(size: 20),
+
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(color: Color(0x268c8c8c), blurRadius: 8)
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(6)
+              ),
+              child: Column(
+                children: [
+
+                  Expanded(
+                    flex: 2,
+                    child: Stack(
+                      children: [
+                        FractionallySizedBox(
+                          heightFactor: 0.75,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/bizcard-spiderlingz.appspot.com/o/test%2Fcolor6.jpg?alt=media&token=391cb770-4500-459d-825e-21d4bb8a48bd')),
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(6)
+                              )
+                            ),
+                          ),
+                        ),
+                    
+                        const Align(
+                          alignment: Alignment.bottomCenter,
+                          child: CircleAvatar(
+                            radius: 42,
+                            backgroundColor: Colors.white,
+                            child: CircleAvatar(
+                              radius: 40,
+                              backgroundImage: NetworkImage('https://firebasestorage.googleapis.com/v0/b/bizcard-spiderlingz.appspot.com/o/test%2Fdownload.jpeg?alt=media&token=9c3c77de-2bfa-4dab-a8e6-043cefd96871'),
+                            ),
+                          ),
+                        )
+                    
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text('Jack Ferros', style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600
+                          )),
+                          subtitle: Text('Flutter developer', style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            color: const Color(0xFFB0B0B0),
+                            fontWeight: FontWeight.w400
+                          )),
+                          trailing: InkWell(
+                            onTap: ()=>viewModel.openCardOptions(context),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: const Color(0x268c8c8c),
+                                borderRadius: BorderRadius.circular(6)
+                              ),
+                              child: const Icon(Icons.more_vert, color: Color(0xFF797272),),
+                            ),
+                          ),
+                        ),
+                    
+                        const Gap(size: 8),
+                    
+                        Expanded(
+                          child: QrImageView(
+                            padding: const EdgeInsets.all(0),
+                            data: 'data'
+                          ),
+                        ),
+                    
+                        ListTile(
+                          subtitle: Text('Updated 1 hour ago', style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            color: const Color(0xFFB0B0B0),
+                            fontWeight: FontWeight.w400
+                          )),
+                          trailing: const Chip(label: Text('Basic Card'))
+                        ),
+                    
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8, top: 8),
+            child: TextButton(onPressed: (){}, child: const Text('View All')))
+        ],
+      ),
+    );
+  }
+}

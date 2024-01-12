@@ -15,7 +15,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
 
     Future.delayed(const Duration(seconds: 3), (){
-      Navigator.pushNamedAndRemoveUntil(context, Routes.cardBuilder, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
     });
 
     super.initState();

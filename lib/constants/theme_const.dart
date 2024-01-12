@@ -90,12 +90,17 @@ class ThemeConst {
       ),
 
       chipTheme: ChipThemeData(
+        backgroundColor: const Color(0x241677FF),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(16),
         ),
-        labelPadding: const EdgeInsets.symmetric(horizontal: 12),
+        side: const BorderSide(
+          color: Color(0x291677FF)
+        ),
+        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
         labelStyle: GoogleFonts.roboto(
           fontSize: 14,
+          color: ColorsConst.primary,
           fontWeight: FontWeight.w500
         )
       ),

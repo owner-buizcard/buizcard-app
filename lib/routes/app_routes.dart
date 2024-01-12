@@ -8,6 +8,10 @@ import 'package:bizcard_app/pages/authentication/signup/signup_view.dart';
 import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
 import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
+import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
+import 'package:bizcard_app/pages/dashboard/dashboard_view.dart';
+import 'package:bizcard_app/pages/scan/scan_view.dart';
+import 'package:bizcard_app/pages/settings/settings_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -29,6 +33,11 @@ class Routes {
   static const String authCallback = "/auth-callback";
   static const String login = "/login";
   static const String signup = "/signup";
+
+  //dashboard
+  static const String home = "/home";
+  static const String settings = "/settings";
+  static const String scan = "/scan";
 
   //cards
   static const String cardBuilder = "/card-builder";
@@ -103,6 +112,18 @@ class RouteGenerator {
           create: (context) => AuthBloc(),
           child: const LinkStoreView(),
         ));
+
+      case Routes.home:
+        return getTransistionPage(BlocProvider(
+          create: (context) => HomePageCubit(),
+          child: const DashboardView(),
+        ));
+
+      case Routes.settings:
+        return getTransistionPage(const SettingsView());
+
+      case Routes.scan:
+        return getTransistionPage(const ScanView());
 
       default:
         return unDefinedRoute();

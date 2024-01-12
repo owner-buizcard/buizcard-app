@@ -1,0 +1,151 @@
+import 'package:bizcard_app/pages/settings/settings_viewmodel.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../widgets/gap.dart';
+
+class SettingsView extends StatefulWidget {
+  const SettingsView({super.key});
+
+  @override
+  State<SettingsView> createState() => _SettingsViewState();
+}
+
+class _SettingsViewState extends State<SettingsView> {
+  late SettingsViewModel _viewModel;
+
+  @override
+  void initState() {
+    _viewModel = SettingsViewModel();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFFAFAFA),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: const Text('Settings'),
+      ),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 120,
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 80,
+                    decoration: const BoxDecoration(
+                      boxShadow: [BoxShadow(
+                        color: Color(0x268c8c8c),
+                        blurRadius: 8,
+                        offset: Offset(0, -2)
+                      )],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(24)
+                      )
+                    ),
+                  ),
+                ),
+                const CircleAvatar( 
+                  radius: 50,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 42,
+                    backgroundImage: NetworkImage('https://firebasestorage.googleapis.com/v0/b/bizcard-spiderlingz.appspot.com/o/test%2Fimage.jpeg?alt=media&token=1542a472-5059-4127-962f-c39c02985d00'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _viewModel.options.map((e) {
+                if (e["title"] == null) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: ListTile(
+                      onTap: () {},
+                      leading: Icon(e["icon"], color: e["color"]),
+                      title: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Text(
+                          e["label"],
+                          style: GoogleFonts.roboto(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: e["color"]
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      e["title"],
+                      style: GoogleFonts.roboto(
+                        color: const Color(0xFF797272),
+                        fontSize: 16,
+                      ),
+                    ),
+                  );
+                }
+              }).toList(),
+            ),
+          ),
+
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.only(bottom: 32),
+            child: Column(
+              children: [
+
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0x268c8c8c),
+                    borderRadius: BorderRadius.circular(8)
+                  ),
+                  child: Text('Signout', style: GoogleFonts.roboto(
+                    color: const Color(0xff000000),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400
+                  )),
+                ),
+
+                const Gap(size: 16,),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Version 1.0.0 -', style: GoogleFonts.roboto(
+                      color: const Color(0xff000000),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400
+                    )),
+                    Text('Terms & Privacy', style: GoogleFonts.roboto(
+                      color: const Color(0xff000000),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600
+                    ))
+                  ],
+                )
+
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
