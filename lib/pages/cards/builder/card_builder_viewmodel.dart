@@ -81,7 +81,7 @@ class CardBuilderViewModel extends BaseViewModel {
   }
 
   CardBuilderViewModel(String cardId){
-    card = Global.cards.firstWhere((element) => element.id==cardId);
+    card = Global.cards.value.firstWhere((element) => element.id==cardId);
 
     fNameController = TextEditingController();
     lNameController = TextEditingController();

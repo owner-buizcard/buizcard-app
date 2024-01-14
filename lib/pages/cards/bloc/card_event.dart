@@ -10,6 +10,12 @@ class SaveCardEvent extends CardEvent {
   SaveCardEvent(this.cardId, this.data);
 }
 
+class DeleteCardEvent extends CardEvent {
+  final String cardId;
+
+  DeleteCardEvent(this.cardId);
+}
+
 class CreateCardEvent extends CardEvent {
   final String cardName;
   final bool isPublic;

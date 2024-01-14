@@ -113,7 +113,7 @@ class ApiInterceptors extends Interceptor {
       if(response.data['status']=='success'){
         var data = response.data['data'];
 
-        if(data!=null && data['token']!=null){
+        if(data!=null && data is Map && data['token']!=null){
           LocalDB.saveToken(data['token']);
         }
 

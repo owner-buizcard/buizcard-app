@@ -35,18 +35,23 @@ class MyCardsFragment extends StatelessWidget {
           const Gap(size: 10),
       
           Expanded(
-            child: CarouselSlider.builder(
-              options: CarouselOptions(
-                height: double.infinity,
-                enableInfiniteScroll: false,
-                viewportFraction: 0.94  
-              ),
-              itemCount: cards.length,
-              itemBuilder: (context, index, realIndex) {
-                var card = cards[index];
-                return CardItem(
-                  card: card,
-                  onOptionClick: ()=>viewModel.openCardOptions(card.id, context),  
+            child: ValueListenableBuilder(
+              valueListenable: cards,
+              builder: (_, value, __) {
+                return CarouselSlider.builder(
+                  options: CarouselOptions(
+                    height: double.infinity,
+                    enableInfiniteScroll: false,
+                    viewportFraction: 0.94  
+                  ),
+                  itemCount: value.length,
+                  itemBuilder: (context, index, realIndex) {
+                    var card = value[index];
+                    return CardItem(
+                      card: card,
+                      onOptionClick: ()=>viewModel.openCardOptions(card.id, context),  
+                    );
+                  }
                 );
               }
             ),

@@ -11,6 +11,7 @@ class CardBloc extends Bloc<CardEvent, CardState> {
   CardBloc() : super(CardInitial()) {
     on<SaveCardEvent>(_onSaveCard);
     on<CreateCardEvent>(_onCreateCard);
+    on<DeleteCardEvent>(_onDeleteCard);
   }
 
   _onSaveCard(SaveCardEvent event, Emitter emit)async{
@@ -34,4 +35,17 @@ class CardBloc extends Bloc<CardEvent, CardState> {
       emit(Error());
     }
   }
+
+  _onDeleteCard(DeleteCardEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      await CardService().deleteCard(event.cardId);
+      Global.removeCard(event.cardId);
+      emit(Deleted());
+    }catch(error){
+      emit(Error());
+    }
+  }
+
+
 }
