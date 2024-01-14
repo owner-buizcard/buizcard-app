@@ -61,11 +61,6 @@ class ApiInterceptors extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async{
-    print(options.baseUrl);
-    print(options.path);
-    print(options.data);
-    print(options.headers);
-    print(options.method);
 
     if (loader) showLoader();
 
@@ -75,7 +70,7 @@ class ApiInterceptors extends Interceptor {
     
     // var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
 
-    // if (idToken != null) options.headers["Authorization"] = "Bearer $idToken";
+    options.headers["Authorization"] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTdmNDBhOTRiNjM2ZDQzNDRiNDcwNzYiLCJpYXQiOjE3MDUyNDYwODEsImV4cCI6MTcwNTg1MDg4MX0.W1rq4b0sbzWpQKaF4PzPRPSD8h_OFii-JW2ek5piKZM";
     options.headers["Content-Type"] = "application/json";
 
     if (additionalHeaders != null){

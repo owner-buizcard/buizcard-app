@@ -1,6 +1,9 @@
 import 'package:bizcard_app/base/base_viewmodel.dart';
+import 'package:bizcard_app/extensions/string_ext.dart';
+import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/bottomsheets/edit_link.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardBuilderViewModel extends BaseViewModel {
 
@@ -36,6 +39,41 @@ class CardBuilderViewModel extends BaseViewModel {
       builder: (_){
         return const EditLinkSheet();
     });
+  }
+
+  onSave(BuildContext context){
+
+    FocusScope.of(context).unfocus();
+
+    var cardData = {
+      'cardName': 'test card',
+      'name': {
+        'firstName': fNameController.trim(),
+        'lastName': lNameController.trim(),
+        'middleName': mNameController.trim(),
+        'prefix': prefixController.trim()
+      },
+      'bio': bioController.trim(),
+      'phoneNumber': phoneController.trim(),
+      'email': emailController.trim(),
+      'address': {
+        'addressLine1': addressController.trim(),
+        'city': cityController.trim(),
+        'state': stateController.trim(),
+        'country': countryController.trim(),
+        'pincode': pincodeController.trim()
+      },
+      'company': {
+        'title': titleController.trim(),
+        'department': departmentController.trim(),
+        'companyName': companyNameController.trim(),
+        'companyWebsite': companyWebsiteController.trim(),
+        'companyDescription': aboutController.trim(),
+      },
+      'fields': []
+    };
+
+    context.read<CardBloc>().add(SaveCardEvent('659d1fe31e7c56e7e70246f4', cardData));
   }
 
   CardBuilderViewModel(){
