@@ -1,7 +1,10 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/base/base_viewmodel.dart';
+import 'package:bizcard_app/extensions/string_ext.dart';
+import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/contact_options_sheet.dart';
+import 'package:bizcard_app/pages/dashboard/bottomsheets/create_card_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/fragments/my_cards_fragment.dart';
 import 'package:bizcard_app/pages/dashboard/fragments/my_contacts_fragment.dart';
@@ -31,9 +34,13 @@ class DashboardViewModel extends BaseViewModel {
   ];
 
   late PageController controller;
+  late TextEditingController cardnameController;
+
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   DashboardViewModel(){
     controller = PageController();
+    cardnameController = TextEditingController();
   }
 
   getPages(DashboardViewModel viewModel){
@@ -52,12 +59,19 @@ class DashboardViewModel extends BaseViewModel {
     }
   }
   
-  openCardOptions(BuildContext context){
+  openCardOptions(String cardId, BuildContext context){
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
       builder: (_){
-        return const CardOptionsSheet();
+        return CardOptionsSheet(
+          onClick: (v){
+            Navigator.pop(context);
+            if(v=='Edit'){
+              Navigator.of(context).pushNamed(Routes.cardBuilder, arguments: cardId);
+            }
+          },
+        );
     });
   }
 
@@ -70,6 +84,27 @@ class DashboardViewModel extends BaseViewModel {
     });
   }
 
+  openCreateSheet(BuildContext context, viewModel){
+   showModalBottomSheet(
+      context: context, 
+      backgroundColor: Colors.white,
+      builder: (_){
+        return CreateCardSheet(
+          viewModel: viewModel,
+          onCreate: ()=>createCard(context)
+        );
+    });
+  }
+
+  createCard(BuildContext context){
+    FocusScope.of(context).unfocus();
+    if(!formKey.currentState!.validate()){
+      return;
+    }
+    Navigator.pop(context);
+    context.read<CardBloc>().add(
+      CreateCardEvent(cardnameController.trim(), false));
+  }
 
   @override
   void dispose() {

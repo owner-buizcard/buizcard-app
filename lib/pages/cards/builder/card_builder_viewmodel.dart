@@ -2,10 +2,14 @@ import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/bottomsheets/edit_link.dart';
+import 'package:bizcard_app/models/card.dart' as bizcard;
+import 'package:bizcard_app/utils/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardBuilderViewModel extends BaseViewModel {
+
+  late bizcard.Card card;
 
   //about 
   late TextEditingController fNameController;
@@ -73,10 +77,12 @@ class CardBuilderViewModel extends BaseViewModel {
       'fields': []
     };
 
-    context.read<CardBloc>().add(SaveCardEvent('659d1fe31e7c56e7e70246f4', cardData));
+    context.read<CardBloc>().add(SaveCardEvent(card.id, cardData));
   }
 
-  CardBuilderViewModel(){
+  CardBuilderViewModel(String cardId){
+    card = Global.cards.firstWhere((element) => element.id==cardId);
+
     fNameController = TextEditingController();
     lNameController = TextEditingController();
     mNameController = TextEditingController();

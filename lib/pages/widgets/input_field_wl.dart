@@ -1,3 +1,4 @@
+import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/utils/validator.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class InputFieldWL extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$label ${isRequired ? '*' : ''}'),
+        '$label ${isRequired ? '*' : ''}'.btext(context, color: 'dark'),
         const Gap(size: 10),
         TextFormField(
           controller: controller,

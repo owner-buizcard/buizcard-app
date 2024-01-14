@@ -43,7 +43,6 @@ class Routes {
   //cards
   static const String cardBuilder = "/card-builder";
   static const String linkStore = "/link-store";
-
 }
 
 class RouteGenerator {
@@ -105,9 +104,9 @@ class RouteGenerator {
       case Routes.cardBuilder:
         return getTransistionPage(BlocProvider(
           create: (context) => CardBloc(),
-          child: const CardBuilderView(),
+          child: CardBuilderView(cardId: settings.arguments as String),
         ));
-      
+
       case Routes.linkStore:
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
@@ -115,8 +114,15 @@ class RouteGenerator {
         ));
 
       case Routes.home:
-        return getTransistionPage(BlocProvider(
-          create: (context) => HomePageCubit(),
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => HomePageCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CardBloc(),
+            ),
+          ],
           child: const DashboardView(),
         ));
 

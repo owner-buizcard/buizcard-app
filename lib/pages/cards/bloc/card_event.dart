@@ -9,3 +9,10 @@ class SaveCardEvent extends CardEvent {
 
   SaveCardEvent(this.cardId, this.data);
 }
+
+class CreateCardEvent extends CardEvent {
+  final String cardName;
+  final bool isPublic;
+
+  CreateCardEvent(this.cardName, this.isPublic);
+}

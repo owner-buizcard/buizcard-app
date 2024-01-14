@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ListItem extends StatelessWidget {
   final Map item;
-  final Function(Map) onClick;
+  final Function(String) onClick;
   const ListItem({super.key, required this.item, required this.onClick});
 
   @override
@@ -11,7 +11,7 @@ class ListItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        onTap: () {},
+        onTap: ()=>onClick(item["label"]),
         leading: Icon(item["icon"], color: item["color"]),
         title: Padding(
           padding: const EdgeInsets.only(left: 8),

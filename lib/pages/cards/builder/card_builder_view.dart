@@ -2,7 +2,7 @@ import 'package:bizcard_app/pages/cards/builder/fragments/about_fragment.dart';
 import 'package:bizcard_app/pages/cards/builder/fragments/business_fragment.dart';
 import 'package:bizcard_app/pages/cards/builder/fragments/links_fragment.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
-import 'package:bizcard_app/utils/toast.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +10,8 @@ import '../bloc/card_bloc.dart';
 import 'card_builder_viewmodel.dart';
 
 class CardBuilderView extends StatefulWidget {
-  const CardBuilderView({super.key});
+  final String cardId;
+  const CardBuilderView({super.key, required this.cardId});
 
   @override
   State<CardBuilderView> createState() => _CardBuilderViewState();
@@ -21,7 +22,8 @@ class _CardBuilderViewState extends State<CardBuilderView> {
 
   @override
   void initState() {
-    _viewModel = CardBuilderViewModel();
+    _viewModel = CardBuilderViewModel(widget.cardId);
+
     super.initState();
   }
 
@@ -30,13 +32,13 @@ class _CardBuilderViewState extends State<CardBuilderView> {
     return BlocListener<CardBloc, CardState>(
       listener: (context, state) {
         if(state is Success){
-          toast('Success');
+          Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
         }
       },
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 30,
-          title: const Text("Business Card"),
+          title: Text(_viewModel.card.cardName),
           actions: [
             TextButton(
               onPressed: ()=>_viewModel.onSave(context), 

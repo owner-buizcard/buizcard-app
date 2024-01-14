@@ -15,4 +15,19 @@ class Global {
     fieldTypes = data['config']['fieldTypes'];
   }
 
+  static addCard(Card card){
+    cards.add(card);
+  }
+
+  static updateCard(Card card){
+    int index = cards.indexWhere((element) => element.id == card.id);
+    if (index != -1) {
+      cards[index] = card;
+    }
+  }
+
+  static removeCard(String cardId){
+    cards.removeWhere((element) => element.id==cardId);
+  }
+
 }

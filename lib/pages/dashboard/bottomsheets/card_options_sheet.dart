@@ -3,7 +3,8 @@ import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 
 class CardOptionsSheet extends StatelessWidget {
-  const CardOptionsSheet({super.key});
+  final Function(String) onClick;
+  const CardOptionsSheet({super.key, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class CardOptionsSheet extends StatelessWidget {
                 ),
               ),
               ...options.map((opt)=>
-                ListItem(item: opt, onClick: (v){})
+                ListItem(item: opt, onClick: (v)=>onClick(v))
               ).toList()
             ]
           ),

@@ -2,6 +2,7 @@ import 'package:bizcard_app/models/name.dart';
 import 'package:equatable/equatable.dart';
 
 class Card extends Equatable {
+  final String id;
   final String cardName;
   final Name? name;
   final String? bio;
@@ -29,6 +30,7 @@ class Card extends Equatable {
   final DateTime? deleted;
   
   const Card({
+    required this.id,
     required this.cardName,
     this.name,
     this.bio,
@@ -58,6 +60,7 @@ class Card extends Equatable {
 
   factory Card.fromJson(Map<String, dynamic> json) {
     return Card(
+      id: json['_id'] as String,
       cardName: json['cardName'] as String,
       name: json['name']!=null ? Name.fromJson(json['name']) : null,
       bio: json['bio'] as String?,
