@@ -1,3 +1,4 @@
+import 'package:bizcard_app/database/local_db.dart';
 import 'package:dio/dio.dart';
 
 import '../constants/urls_const.dart';
@@ -25,7 +26,8 @@ class ApiClient {
   }
 
   Future<dynamic> gets([Map<String, dynamic>? query]) async {
-    return _process(await dio.get<Map>(path, queryParameters: query));
+    var result = await dio.get<Map>(path);
+    return _process(result);
   }
 
   Future<dynamic> post([dynamic data = const {}, Map<String, dynamic>? query]) async {
@@ -70,7 +72,11 @@ class ApiInterceptors extends Interceptor {
     
     // var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
 
-    options.headers["Authorization"] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTdmNDBhOTRiNjM2ZDQzNDRiNDcwNzYiLCJpYXQiOjE3MDUyNDYwODEsImV4cCI6MTcwNTg1MDg4MX0.W1rq4b0sbzWpQKaF4PzPRPSD8h_OFii-JW2ek5piKZM";
+    var accessToken = LocalDB.getAccessToken();
+
+    print(accessToken);
+
+    options.headers["Authorization"] = "Bearer $accessToken";
     options.headers["Content-Type"] = "application/json";
 
     if (additionalHeaders != null){
@@ -105,6 +111,12 @@ class ApiInterceptors extends Interceptor {
 
     if(response.data!=null){
       if(response.data['status']=='success'){
+        var data = response.data['data'];
+
+        if(data!=null && data['token']!=null){
+          LocalDB.saveToken(data['token']);
+        }
+
         return handler.next(response);
       }
     }

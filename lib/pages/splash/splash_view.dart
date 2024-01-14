@@ -1,4 +1,4 @@
-import 'package:bizcard_app/routes/app_routes.dart';
+import 'package:bizcard_app/pages/splash/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,11 +13,7 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   void initState() {
-
-    Future.delayed(const Duration(seconds: 3), (){
-      Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
-    });
-
+    SplashViewModel().init(context);
     super.initState();
   }
 

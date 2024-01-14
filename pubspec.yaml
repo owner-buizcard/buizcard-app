@@ -29,6 +29,7 @@ dependencies:
   #network
   connectivity_plus: ^5.0.2
   dio: ^5.4.0
+  equatable: ^2.0.5
 
   #SML
   bloc: ^8.1.2

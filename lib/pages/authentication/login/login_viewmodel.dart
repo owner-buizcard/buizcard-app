@@ -12,8 +12,8 @@ class LoginViewModel extends BaseViewModel {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   LoginViewModel(){
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    emailController = TextEditingController(text: 'owner.bizcard@gmail.com');
+    passwordController = TextEditingController(text: 'Owner@123');
   }
 
   onLoginClick(BuildContext context){
