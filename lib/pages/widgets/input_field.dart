@@ -1,5 +1,6 @@
 import 'package:bizcard_app/utils/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InputField extends StatelessWidget {
   final String? label;
@@ -27,6 +28,10 @@ class InputField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       maxLines: maxLines,
+      style: GoogleFonts.roboto(
+        fontSize: 16,
+        color: Colors.black
+      ),
       decoration: InputDecoration(
         prefixIcon: prefixIcon!=null 
           ? Icon(prefixIcon) : null,

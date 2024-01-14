@@ -102,7 +102,7 @@ class ThemeConst {
         ),
         bodyLarge: GoogleFonts.roboto(
           fontWeight: FontWeight.w400, 
-          fontSize: 15,
+          fontSize: 16,
           color: const Color(0xFFB0B0B0)
         ),
         bodyMedium: GoogleFonts.roboto(

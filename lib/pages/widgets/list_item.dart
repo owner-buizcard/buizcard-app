@@ -15,7 +15,7 @@ class ListItem extends StatelessWidget {
         leading: Icon(item["icon"], color: item["color"]),
         title: Padding(
           padding: const EdgeInsets.only(left: 8),
-          child: '${item["label"]}'.bltext(context, color: 'darker')
+          child: '${item["label"]}'.bltext(context, color:  item["color"]!=null ? 'red' : 'darker')
         ),
       ),
     );

@@ -8,7 +8,7 @@ extension TextEditingControllerTrim on String {
   ));
 
   bltext(context, {String? color, String? weight})=>Text(this, style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-    color: color=="dark" ? const Color(0xFF797272) : color=="darker" ? Colors.black : null,
+    color: color=="dark" ? const Color(0xFF797272) : color=="darker" ? Colors.black : color=='red' ? Colors.red : null,
   ));
 
   titletext(context)=>Text(this, style: Theme.of(context).textTheme.titleSmall);

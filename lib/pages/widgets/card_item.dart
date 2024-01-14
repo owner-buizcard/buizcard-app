@@ -1,5 +1,7 @@
+import 'package:bizcard_app/constants/colors_const.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/models/card.dart' as bizcard;
+import 'package:bizcard_app/pages/widgets/banner_ph.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -30,11 +32,13 @@ class CardItem extends StatelessWidget {
               children: [
                 FractionallySizedBox(
                   heightFactor: 0.75,
-                  child: Container(
+                  child: card.banner==null
+                  ? const BannerPH()
+                  : Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(card.banner??'')),
+                        image: NetworkImage(card.banner!)),
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(6)
                       )
@@ -49,7 +53,9 @@ class CardItem extends StatelessWidget {
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                       radius: 40,
-                      backgroundImage: NetworkImage(card.picture??''),
+                      backgroundColor: ColorsConst.border,
+                      backgroundImage:card.picture!=null ? NetworkImage(card.picture!) : null,
+                      child: card.picture==null ? const Icon(Icons.person, size: 54) : null,
                     ),
                   ),
                 )

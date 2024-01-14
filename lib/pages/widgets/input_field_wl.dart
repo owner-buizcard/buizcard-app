@@ -2,6 +2,7 @@ import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/utils/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InputFieldWL extends StatelessWidget {
   final String label;
@@ -27,6 +28,10 @@ class InputFieldWL extends StatelessWidget {
         const Gap(size: 10),
         TextFormField(
           controller: controller,
+          style: GoogleFonts.roboto(
+            fontSize: 16,
+            color: Colors.black
+          ),
           decoration: InputDecoration(
             prefixIcon: prefixIcon!=null 
               ? Icon(prefixIcon) : null,
