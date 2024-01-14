@@ -2,7 +2,6 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/contact_item.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/gap.dart';
 import '../../widgets/input_field.dart';

@@ -2,7 +2,6 @@ import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ContactItem extends StatelessWidget {
   final Function(String) onOptionsClick;

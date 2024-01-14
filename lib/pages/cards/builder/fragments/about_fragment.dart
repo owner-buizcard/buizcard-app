@@ -5,7 +5,6 @@ import 'package:bizcard_app/pages/widgets/banner_ph.dart';
 import 'package:bizcard_app/pages/widgets/input_field.dart';
 import 'package:bizcard_app/pages/widgets/row_expanded.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../widgets/gap.dart';
 import '../card_builder_viewmodel.dart';

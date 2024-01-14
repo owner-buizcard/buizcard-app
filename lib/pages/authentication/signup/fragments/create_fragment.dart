@@ -6,7 +6,6 @@ import 'package:bizcard_app/pages/widgets/password_field.dart';
 import 'package:bizcard_app/pages/widgets/social_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../cubit/page_cubit.dart';
 import '../signup_viewmodel.dart';

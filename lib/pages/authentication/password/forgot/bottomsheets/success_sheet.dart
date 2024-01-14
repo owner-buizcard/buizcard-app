@@ -1,7 +1,6 @@
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SuccessSheet extends StatelessWidget {
   const SuccessSheet({super.key});

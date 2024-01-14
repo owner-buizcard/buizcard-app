@@ -2,7 +2,6 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PhotoView extends StatefulWidget {
   const PhotoView({super.key});
