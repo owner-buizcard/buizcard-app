@@ -22,3 +22,12 @@ class CreateCardEvent extends CardEvent {
 
   CreateCardEvent(this.cardName, this.isPublic);
 }
+
+class AddLinkEvent extends CardEvent {
+  final String link;
+  final String icon;
+  final String title;
+  final String cardId;
+
+  AddLinkEvent(this.link, this.icon, this.title, this.cardId);
+}

@@ -1,25 +1,28 @@
 import 'package:bizcard_app/extensions/text_ext.dart';
+import 'package:bizcard_app/models/field.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
 
 class LinkItemAdd extends StatelessWidget {
   final Function(String) onAdd;
-  const LinkItemAdd({super.key, required this.onAdd});
+  final Field field;
+  const LinkItemAdd({super.key, required this.onAdd, required this.field});
 
   @override
   Widget build(BuildContext context) {
     return MainCard(
+      margin: const EdgeInsets.only(bottom: 16),
       child: Row(
         children: [
           Image.network(
-            'https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/cardbuilder%2Ficons%2Fsocial%2Flinkedin.png?alt=media&token=ff7f47d2-4397-4ce3-aa26-068e4429cf5d',
+            'https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${field.icon}',
             width: 36,
             height: 36  
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: 'Linkedin'.bltext(context, color: 'darker'),
+              child: field.label.bltext(context, color: 'darker'),
             ),
           ),
           InkWell(

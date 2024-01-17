@@ -1,5 +1,6 @@
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
+import 'package:bizcard_app/models/field_value.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/bottomsheets/edit_link.dart';
 import 'package:bizcard_app/models/card.dart' as bizcard;
@@ -38,7 +39,18 @@ class CardBuilderViewModel extends BaseViewModel {
   late ValueNotifier<String?> banner;
   late ValueNotifier<String?> logo;
 
-  editLink(BuildContext context){
+  //fields
+  late ValueNotifier<List<FieldValue>> fields;
+
+  //link editor
+  String selectedId = '';
+  late TextEditingController linkController;
+  late TextEditingController linkTitleController;
+  late TextEditingController linkDescController;
+  final GlobalKey<FormState> linkKey = GlobalKey();
+  bool linkHighlight = false;
+
+  openSheet(BuildContext context, FieldValue value, CardBuilderViewModel viewModel){
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
@@ -47,8 +59,40 @@ class CardBuilderViewModel extends BaseViewModel {
       shape: const RoundedRectangleBorder(),
       backgroundColor: Colors.white,
       builder: (_){
-        return const EditLinkSheet();
+        selectedId = value.id;
+        linkController.text = value.link;
+        linkTitleController.text = value.title;
+        return EditLinkSheet(value: value, viewModel: viewModel);
     });
+  }
+
+  removeLink(BuildContext context){
+    var updated =  fields.value.where((e) => e.id!=selectedId).toList();
+    fields.value = [...updated];
+    Navigator.pop(context);
+  }
+
+  editLink(BuildContext context){
+    if(!linkKey.currentState!.validate()){
+      return;
+    }
+
+    var updated =  fields.value.map((element) { 
+      if(element.id==selectedId){
+        return FieldValue(
+          id: '${fields.value.length+1}', 
+          title: linkTitleController.trim(), 
+          link: linkController.trim(), 
+          icon: element.icon, 
+          highlight: linkHighlight
+        );
+      }
+      return element;
+    }).toList();
+
+    fields.value = [...updated];
+
+    Navigator.pop(context);
   }
 
   onSave(BuildContext context){
@@ -83,7 +127,7 @@ class CardBuilderViewModel extends BaseViewModel {
         'companyWebsite': companyWebsiteController.trim(),
         'companyDescription': aboutController.trim(),
       },
-      'fields': []
+      'fields': fields.value.map((e) => e.toJson()).toList()
     };
 
     context.read<CardBloc>().add(SaveCardEvent(card.id, cardData));
@@ -110,6 +154,12 @@ class CardBuilderViewModel extends BaseViewModel {
     departmentController = TextEditingController(text: card.company?.department);
     companyWebsiteController = TextEditingController(text: card.company?.companyWebsite);
     aboutController = TextEditingController(text: card.company?.companyDescription);
+
+    fields = ValueNotifier(card.fields);
+
+    linkController = TextEditingController();
+    linkTitleController = TextEditingController();
+    linkDescController = TextEditingController();
 
     picture = ValueNotifier(card.picture);
     banner = ValueNotifier(card.banner);

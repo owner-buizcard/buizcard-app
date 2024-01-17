@@ -1,5 +1,6 @@
 import 'package:bizcard_app/models/address.dart';
 import 'package:bizcard_app/models/company.dart';
+import 'package:bizcard_app/models/field_value.dart';
 import 'package:bizcard_app/models/name.dart';
 import 'package:equatable/equatable.dart';
 
@@ -19,7 +20,7 @@ class Card extends Equatable {
   final String theme;
   final String status;
   final List badges;
-  final List fields;
+  final List<FieldValue> fields;
   final Map? qr;
   final String? cardLink;
   final String? linkPreviewImage;
@@ -77,7 +78,7 @@ class Card extends Equatable {
       theme: json['theme'] as String,
       status: json['status'] as String,
       badges: List.from(json['badges'] as List),
-      fields: List.from(json['fields'] as List),
+      fields: json['fields']!=null ? (json['fields'] as List).map((e) => FieldValue.fromJson(e)).toList(): [],
       qr: json['qr'] as Map?,
       cardLink: json['cardLink'] as String?,
       linkPreviewImage: json['linkPreviewImage'] as String?,

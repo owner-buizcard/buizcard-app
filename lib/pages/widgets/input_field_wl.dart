@@ -9,10 +9,12 @@ class InputFieldWL extends StatelessWidget {
   final IconData? prefixIcon;
   final bool isRequired;
   final String? validationType;
+  final String? hint;
   final TextEditingController controller;
   const InputFieldWL({
     super.key, 
     required this.label, 
+    this.hint,
     required this.controller,
     this.isRequired = false,
     this.validationType,
@@ -35,7 +37,8 @@ class InputFieldWL extends StatelessWidget {
           decoration: InputDecoration(
             prefixIcon: prefixIcon!=null 
               ? Icon(prefixIcon) : null,
-            errorMaxLines: 2
+            errorMaxLines: 2,
+            hintText: hint
           ),
           validator: (val){
             if(validationType=='email'){

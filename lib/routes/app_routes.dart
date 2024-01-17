@@ -118,8 +118,8 @@ class RouteGenerator {
 
       case Routes.linkStore:
         return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const LinkStoreView(),
+          create: (context) => CardBloc(),
+          child: LinkStoreView(cardId: settings.arguments as String,),
         ));
 
       case Routes.home:
