@@ -16,7 +16,7 @@ class AboutFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(bottom: 45),
+      padding: const EdgeInsets.fromLTRB(16,0,16,45),
       children: [
         Text('Personal Details', style: Theme.of(context).textTheme.titleMedium),
         const Gap(size: 20),

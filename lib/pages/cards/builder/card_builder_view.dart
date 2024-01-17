@@ -45,6 +45,8 @@ class _CardBuilderViewState extends State<CardBuilderView> {
                 _viewModel.picture.value = state.link;
               }else if(state.type=='banner'){
                 _viewModel.banner.value = state.link;
+              }else if(state.type=='logo'){
+                _viewModel.logo.value = state.link;
               }
             }
           },
@@ -61,33 +63,31 @@ class _CardBuilderViewState extends State<CardBuilderView> {
             const Gap(size: 8)
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: DefaultTabController(
-            length: 3,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color(0x268c8c8c),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: const TabBar(tabs: [
-                    Tab(text: "About"),
-                    Tab(text: "Business"),
-                    Tab(text: "Links")
-                  ]),
-                ),
-                const Gap(size: 16),
-                Expanded(
-                    child: TabBarView(
-                  children: [
-                    AboutFragment(viewModel: _viewModel),
-                    BusinessFragment(viewModel: _viewModel),
-                    LinksFragment(viewModel: _viewModel)
-                  ],
-                ))
-              ],
-            ),
+        body: DefaultTabController(
+          length: 3,
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                    color: const Color(0x268c8c8c),
+                    borderRadius: BorderRadius.circular(8)),
+                child: const TabBar(tabs: [
+                  Tab(text: "About"),
+                  Tab(text: "Business"),
+                  Tab(text: "Links")
+                ]),
+              ),
+              const Gap(size: 16),
+              Expanded(
+                  child: TabBarView(
+                children: [
+                  AboutFragment(viewModel: _viewModel),
+                  BusinessFragment(viewModel: _viewModel),
+                  LinksFragment(viewModel: _viewModel)
+                ],
+              ))
+            ],
           ),
         ),
       ),

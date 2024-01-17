@@ -14,16 +14,26 @@ class BusinessFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(bottom: 45),
+      padding: const EdgeInsets.fromLTRB(16,0,16,45),
       children: [
         Text('Business Details', style: Theme.of(context).textTheme.titleMedium),
         const Gap(size: 20),
 
-        Container(
-          alignment: Alignment.centerLeft,
-          child: const AvatarPH(
-            icon: AntIcons.pictureOutlined,
-          )
+        ValueListenableBuilder(
+          valueListenable: viewModel.logo,
+          builder: (_, value, __) {
+            return Container(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(32),
+                onTap: ()async =>await viewModel.pickImage(context, 'logo'),
+                child: AvatarPH(
+                  image: value,
+                  icon: AntIcons.pictureOutlined,
+                ),
+              )
+            );
+          }     
         ),
 
         const Gap(size: 16),
