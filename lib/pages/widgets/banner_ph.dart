@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BannerPH extends StatelessWidget {
-  const BannerPH({super.key});
+  final String? image;
+  const BannerPH({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +11,15 @@ class BannerPH extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: const Color(0xFFD9D9D9),
-        borderRadius: BorderRadius.circular(8)
+        borderRadius: BorderRadius.circular(8),
+        image: image!=null
+          ? DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(image!)): null
       ),
       padding: const EdgeInsets.only(right: 60),
-      child: Stack(
+      child: image==null
+      ? Stack(
         alignment: Alignment.centerRight,
         children: [
           Container(
@@ -30,7 +36,7 @@ class BannerPH extends StatelessWidget {
             ),
           )
         ],
-      ),
+      ) : null,
     );
   }
 }

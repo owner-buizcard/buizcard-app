@@ -3,6 +3,7 @@ import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/bottomsheets/edit_link.dart';
 import 'package:bizcard_app/models/card.dart' as bizcard;
+import 'package:bizcard_app/pages/common/image/image_bloc.dart';
 import 'package:bizcard_app/utils/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,11 @@ class CardBuilderViewModel extends BaseViewModel {
   late TextEditingController companyWebsiteController;
   late TextEditingController aboutController;
 
+  //images
+  late ValueNotifier<String?> picture;
+  late ValueNotifier<String?> banner;
+  late ValueNotifier<String?> logo;
+
   editLink(BuildContext context){
     showModalBottomSheet(
       context: context, 
@@ -57,6 +63,9 @@ class CardBuilderViewModel extends BaseViewModel {
         'middleName': mNameController.trim(),
         'prefix': prefixController.trim()
       },
+      'picture': picture.value,
+      'banner': banner.value,
+      'logo': logo.value,
       'bio': bioController.trim(),
       'phoneNumber': phoneController.trim(),
       'email': emailController.trim(),
@@ -101,9 +110,16 @@ class CardBuilderViewModel extends BaseViewModel {
     departmentController = TextEditingController(text: card.company?.department);
     companyWebsiteController = TextEditingController(text: card.company?.companyWebsite);
     aboutController = TextEditingController(text: card.company?.companyDescription);
+
+    picture = ValueNotifier(card.picture);
+    banner = ValueNotifier(card.banner);
+    logo = ValueNotifier(card.logo);
   }
 
-
+  pickImage(BuildContext context, String type){
+    context.read<ImageBloc>().add(
+      UploadCImageEvent(cardId: card.id, path: type, croptype: type=='banner'? 'rect': 'square'));
+  }
   
   @override
   void dispose() {

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class AvatarPH extends StatelessWidget {
   final IconData? icon;
-  const AvatarPH({super.key, this.icon});
+  final String? image;
+  const AvatarPH({super.key, this.icon, this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +14,13 @@ class AvatarPH extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFD9D9D9),
         border: Border.all(color: Colors.white, width: 2),
-        borderRadius: BorderRadius.circular(32)
+        borderRadius: BorderRadius.circular(32),
+        image: image!=null
+          ? DecorationImage(image: NetworkImage(image!)): null
       ),
-      child: Icon(icon ?? AntIcons.userOutlined, color: Colors.black, size: 34),
+      child: image==null
+        ? Icon(icon ?? AntIcons.userOutlined, color: Colors.black, size: 34)
+        : null,
     );
   }
 }

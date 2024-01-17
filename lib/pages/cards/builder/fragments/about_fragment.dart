@@ -21,15 +21,33 @@ class AboutFragment extends StatelessWidget {
         Text('Personal Details', style: Theme.of(context).textTheme.titleMedium),
         const Gap(size: 20),
         
-        const SizedBox(
+        SizedBox(
           height: 200,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
-              BannerPH(),
-              Positioned(
-                bottom: 0,
-                child: AvatarPH()
+              ValueListenableBuilder(
+                valueListenable: viewModel.banner,
+                builder: (_, value, __) {
+                  return InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: ()async =>await viewModel.pickImage(context, 'banner'),
+                    child: BannerPH(image: value));
+                }
+              ),
+              ValueListenableBuilder(
+                valueListenable: viewModel.picture,
+                builder: (_, value, __) {
+                  return Positioned(
+                    bottom: 0,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(32),
+                      onTap: ()async =>await viewModel.pickImage(context, 'picture'),
+                      child: AvatarPH(
+                        image: value,
+                      ))
+                  );
+                }
               ),
             ],
           ),
