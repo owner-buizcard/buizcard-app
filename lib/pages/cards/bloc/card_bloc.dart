@@ -30,6 +30,7 @@ class CardBloc extends Bloc<CardEvent, CardState> {
     emit(Loading());
     try{
       var card = await CardService().createCard(cardName: event.cardName, isPublic: event.isPublic);
+      Global.addCard(bizcard.Card.fromJson(card));
       emit(Created(cardId: card['_id']));
     }catch(error){
       emit(Error());

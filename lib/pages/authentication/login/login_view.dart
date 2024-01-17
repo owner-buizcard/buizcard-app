@@ -49,7 +49,7 @@ class _LoginViewState extends State<LoginView> {
                 prefixIcon: AntIcons.mailOutlined,
                 isRequired: true,
                 validationType: 'email'
-              ),
+              ),      
               const Gap(size: 20),
               PasswordField(
                 label: 'Password',

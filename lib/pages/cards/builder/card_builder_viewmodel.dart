@@ -83,24 +83,24 @@ class CardBuilderViewModel extends BaseViewModel {
   CardBuilderViewModel(String cardId){
     card = Global.cards.value.firstWhere((element) => element.id==cardId);
 
-    fNameController = TextEditingController();
-    lNameController = TextEditingController();
-    mNameController = TextEditingController();
-    prefixController = TextEditingController();
-    bioController = TextEditingController();
-    emailController = TextEditingController();
-    phoneController = TextEditingController();
-    addressController = TextEditingController();
-    cityController = TextEditingController();
-    stateController = TextEditingController();
-    countryController = TextEditingController();
-    pincodeController = TextEditingController();
+    fNameController = TextEditingController(text: card.name?.firstName);
+    lNameController = TextEditingController(text: card.name?.lastName);
+    mNameController = TextEditingController(text: card.name?.middleName);
+    prefixController = TextEditingController(text: card.name?.prefix);
+    bioController = TextEditingController(text: card.name?.firstName);
+    emailController = TextEditingController(text: card.email);
+    phoneController = TextEditingController(text: card.phoneNumber);
+    addressController = TextEditingController(text: card.address?.addressLine1);
+    cityController = TextEditingController(text: card.address?.city);
+    stateController = TextEditingController(text: card.address?.state);
+    countryController = TextEditingController(text: card.address?.country);
+    pincodeController = TextEditingController(text: card.address?.pincode);
 
-    titleController = TextEditingController();
-    companyNameController = TextEditingController();
-    departmentController = TextEditingController();
-    companyWebsiteController = TextEditingController();
-    aboutController = TextEditingController();
+    titleController = TextEditingController(text: card.company?.title);
+    companyNameController = TextEditingController(text: card.company?.companyName);
+    departmentController = TextEditingController(text: card.company?.department);
+    companyWebsiteController = TextEditingController(text: card.company?.companyWebsite);
+    aboutController = TextEditingController(text: card.company?.companyDescription);
   }
 
 

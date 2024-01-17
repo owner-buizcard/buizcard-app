@@ -1,3 +1,5 @@
+import 'package:bizcard_app/models/address.dart';
+import 'package:bizcard_app/models/company.dart';
 import 'package:bizcard_app/models/name.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,8 +10,8 @@ class Card extends Equatable {
   final String? bio;
   final String? phoneNumber;
   final String? email;
-  final Map? address;
-  final Map? company;
+  final Address? address;
+  final Company? company;
   final String? picture;
   final String? logo;
   final String? banner;
@@ -66,8 +68,8 @@ class Card extends Equatable {
       bio: json['bio'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       email: json['email'] as String?,
-      address: json['address'] as Map?,
-      company: json['company'] as Map?,
+      address: json['address']!=null ? Address.fromJson(json['address']) : null,
+      company: json['company']!=null ? Company.fromJson(json['company']) : null,
       picture: json['picture'] as String?,
       logo: json['logo'] as String?,
       banner: json['banner'] as String?,
