@@ -1,9 +1,11 @@
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/settings/settings_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/list_item.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../database/local_db.dart';
 import '../widgets/gap.dart';
 
 class SettingsView extends StatefulWidget {
@@ -90,13 +92,20 @@ class _SettingsViewState extends State<SettingsView> {
             child: Column(
               children: [
 
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: const Color(0x268c8c8c),
-                    borderRadius: BorderRadius.circular(8)
+                InkWell(
+                  onTap: ()async{
+                    await LocalDB.clearDB().then(
+                      (_) => Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false));
+                  },
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0x268c8c8c),
+                      borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: 'Signout'.bltext(context, color: 'darker'),
                   ),
-                  child: 'Signout'.bltext(context, color: 'darker'),
                 ),
 
                 const Gap(size: 16,),

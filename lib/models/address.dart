@@ -36,6 +36,18 @@ class Address extends Equatable {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'addressLine1': addressLine1,
+      'addressLine2': addressLine2,
+      'city': city,
+      'state': state,
+      'country': country,
+      'pincode': pincode,
+    };
+  }
+
+
   @override
   bool get stringify => true;
 }

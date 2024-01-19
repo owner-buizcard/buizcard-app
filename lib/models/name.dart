@@ -23,6 +23,15 @@ class Name extends Equatable {
     );
   }
   
+  Map<String, dynamic> toJson() {
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'middleName': middleName,
+      'prefix': prefix,
+    };
+  }
+
   @override
   List<Object?> get props => throw UnimplementedError();
 }

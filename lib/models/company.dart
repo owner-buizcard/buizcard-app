@@ -25,6 +25,17 @@ class Company extends Equatable {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'department': department,
+      'companyName': companyName,
+      'companyWebsite': companyWebsite,
+      'companyDescription': companyDescription,
+    };
+  }
+
+
   @override
   List<Object> get props {
     return [];

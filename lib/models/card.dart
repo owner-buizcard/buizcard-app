@@ -61,6 +61,37 @@ class Card extends Equatable {
     this.deleted,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'cardName': cardName,
+      'name': name?.toJson(),
+      'bio': bio,
+      'phoneNumber': phoneNumber,
+      'email': email,
+      'address': address?.toJson(),
+      'company': company?.toJson(),
+      'picture': picture,
+      'logo': logo,
+      'banner': banner,
+      'design': design,
+      'theme': theme,
+      'status': status,
+      'badges': List<dynamic>.from(badges),
+      'fields': List<dynamic>.from(fields.map((e) => e.toJson())),
+      'qr': qr,
+      'cardLink': cardLink,
+      'linkPreviewImage': linkPreviewImage,
+      'qrVisible': qrVisible,
+      'qrWithLogo': qrWithLogo,
+      'isPublic': isPublic,
+      'createdBy': createdBy,
+      'created': created.toIso8601String(),
+      'updated': updated.toIso8601String(),
+    };
+  }
+
+
   factory Card.fromJson(Map<String, dynamic> json) {
     return Card(
       id: json['_id'] as String,

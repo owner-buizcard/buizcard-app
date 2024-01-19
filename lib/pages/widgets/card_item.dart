@@ -61,7 +61,7 @@ class CardItem extends StatelessWidget {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     title: '${card.name?.firstName} ${card.name?.lastName}'.titletext(context),
-                    subtitle: '${card.bio}'.bltext(context),
+                    subtitle: '${card.email}'.bltext(context),
                     trailing: InkWell(
                       onTap: onOptionClick,
                       child: Container(
