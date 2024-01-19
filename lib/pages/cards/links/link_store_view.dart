@@ -31,44 +31,53 @@ class _LinkStoreViewState extends State<LinkStoreView> {
   Widget build(BuildContext context) {
     return BlocListener<CardBloc, CardState>(
       listener: (context, state) {
-        if(state is Success){
+        if(state is LinkAdded){
+          _viewModel.fields.add(state.field);
           Navigator.pop(context);
           toast('Link added successfully!', success: true);
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-          leadingWidth: 30,
-          title: const Text("Link Store"),
-          // actions: [
-          //   // TextButton(onPressed: () {}, child: const Text("Save")),
-          //   const Gap(size: 8)
-          // ],
-        ),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          children: [
-            InputField(
-                hint: 'Search links...',
-                suffixIcon: AntIcons.searchOutlined,
-                controller: TextEditingController()),
-            const Gap(size: 16),
-            ...Global.groupedFields.keys
-                .map((e) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(e,
-                              style: Theme.of(context).textTheme.labelSmall),
-                          const Gap(size: 16),
-                          ...Global.groupedFields[e]!
-                              .map((e) => LinkItemAdd(
-                                  field: e,
-                                  onAdd: (v) => _viewModel.openSheet(
-                                      context, e, _viewModel)))
-                              .toList()
-                        ]))
-                .toList()
-          ],
+      child: PopScope(
+        canPop: true,
+        onPopInvoked: (v){
+          Navigator.pop(context);
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leadingWidth: 30,
+            title: const Text("Link Store"),
+            actions: [
+              TextButton(onPressed: ()=>{
+                Navigator.pop(context)
+              }, child: const Text("Save")),
+              const Gap(size: 8)
+            ],
+          ),
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            children: [
+              InputField(
+                  hint: 'Search links...',
+                  suffixIcon: AntIcons.searchOutlined,
+                  controller: TextEditingController()),
+              const Gap(size: 16),
+              ...Global.groupedFields.keys
+                  .map((e) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(e,
+                                style: Theme.of(context).textTheme.labelSmall),
+                            const Gap(size: 16),
+                            ...Global.groupedFields[e]!
+                                .map((e) => LinkItemAdd(
+                                    field: e,
+                                    onAdd: (v) => _viewModel.openSheet(
+                                        context, e, _viewModel)))
+                                .toList()
+                          ]))
+                  .toList()
+            ],
+          ),
         ),
       ),
     );

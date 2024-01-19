@@ -12,7 +12,8 @@ class SplashViewModel extends BaseViewModel {
     var accessToken = LocalDB.getAccessToken();
 
     if(accessToken==null){
-      Navigator.pushNamed(context, Routes.login);
+      Future.delayed(Duration.zero, ()=>Navigator.pushNamed(context, Routes.login));
+      return;
     }
 
     MainService().fetchMainData().then(

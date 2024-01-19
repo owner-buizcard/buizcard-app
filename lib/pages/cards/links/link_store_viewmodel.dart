@@ -1,10 +1,13 @@
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/models/field.dart';
+import 'package:bizcard_app/models/field_value.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/links/bottomsheets/add_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../utils/global.dart';
 
 class LinkStoreViewModel extends BaseViewModel {
 
@@ -12,11 +15,14 @@ class LinkStoreViewModel extends BaseViewModel {
 
   late TextEditingController linkController;
   late String cardId;
+  late List<FieldValue> fields;
 
 
   LinkStoreViewModel(String cId){
     linkController = TextEditingController();
     cardId = cId;
+    var found = Global.cards.value.firstWhere((element) => element.id==cId);
+    fields = found.fields;
   }  
 
   addLink(BuildContext _, BuildContext context, Field field){

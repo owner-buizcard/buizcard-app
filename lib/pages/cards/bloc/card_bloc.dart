@@ -1,3 +1,4 @@
+import 'package:bizcard_app/models/field_value.dart';
 import 'package:bizcard_app/network/service/card_service.dart';
 import 'package:bizcard_app/utils/global.dart';
 import 'package:bizcard_app/models/card.dart' as bizcard;
@@ -19,10 +20,11 @@ class CardBloc extends Bloc<CardEvent, CardState> {
     emit(Loading());
     try{
       var found = Global.cards.value.firstWhere((element) => element.id==event.cardId);
-      var data = {'fields': [...found.fields.map((e) => e.toJson()).toList(), {'icon': event.icon, 'link': event.link, 'title': event.title}]};
+      var value = FieldValue(id: '${found.fields.length}', title: event.title, link: event.link, icon: event.icon, highlight: false);
+      var data = {'fields': [...found.fields.map((e) => e.toJson()).toList(), value.toJson()]};
       var card = await CardService().saveCard(cardId: event.cardId, data: data);
       Global.updateCard(bizcard.Card.fromJson(card));
-      emit(Success());
+      emit(LinkAdded(field: value));
     }catch(error){
       emit(Error());
     }

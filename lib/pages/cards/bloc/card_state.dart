@@ -9,6 +9,11 @@ class Loading extends CardState {}
 
 class Success extends CardState {}
 
+class LinkAdded extends CardState {
+  final FieldValue field;
+  LinkAdded({required this.field});
+}
+
 class Deleted extends CardState {}
 
 class Created extends CardState {

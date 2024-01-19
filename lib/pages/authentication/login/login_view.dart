@@ -32,7 +32,9 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-
+        if(state is Success){
+          Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
+        }
       },
       child: Scaffold(
         appBar: AppBar(),

@@ -2,6 +2,9 @@ import 'package:bizcard_app/network/service/auth_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../network/service/main_service.dart';
+import '../../../utils/global.dart';
+
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -16,7 +19,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onLogin(LoginEvent event, Emitter emit)async{
     try{  
       await AuthService().login(email: event.email, password: event.password);
-
+      var value = await MainService().fetchMainData();
+      Global.init(value);
       emit(Success());
     }catch(err){
       emit(Error());

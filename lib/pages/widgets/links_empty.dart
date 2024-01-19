@@ -17,7 +17,10 @@ class LinksEmpty extends StatelessWidget {
             maxWidth: 180
           ),
           child: OutlinedButton(
-            onPressed: ()=>Navigator.pushNamed(context, Routes.linkStore,  arguments: cardId), 
+            onPressed: ()async{
+              Navigator.pushNamed(context, Routes.linkStore,  arguments: cardId).then(
+                (value) => print(value));
+            }, 
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

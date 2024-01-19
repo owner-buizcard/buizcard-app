@@ -15,46 +15,49 @@ class LinksFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: viewModel.fields, 
-        builder: (_, value, __){
-          if(value.isEmpty){
-            return LinksEmpty(cardId: viewModel.card.id,);
+        valueListenable: viewModel.fields,
+        builder: (_, value, __) {
+          if (value.isEmpty) {
+            return LinksEmpty(cardId: viewModel.card.id);
           }
 
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(16,0,16,45),
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Added Links', style: Theme.of(context).textTheme.titleMedium),
-                InkWell(
-                  onTap: ()=>Navigator.pushNamed(context, Routes.linkStore, arguments: viewModel.card.id),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Text("Add New", style: GoogleFonts.roboto(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: ColorsConst.primary
-                    )),
-                  ),
-                )
-              ],
-            ),
-            const Gap(size: 20),
-        
-            Column(
-              children: [
-                ...value.map((e) => LinkItemEdit(
-                  field: e,
-                  onEdit: (v)=>viewModel.openSheet(context, e, viewModel),
-                )).toList()
-              ],
-            )
-        
-          ],
-        );
-      }
-    );
+          return ListView(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 45),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Added Links',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.linkStore, arguments: viewModel.card.id);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Text("Add New",
+                          style: GoogleFonts.roboto(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: ColorsConst.primary)),
+                    ),
+                  )
+                ],
+              ),
+              const Gap(size: 20),
+              Column(
+                children: [
+                  ...value
+                      .map((e) => LinkItemEdit(
+                            field: e,
+                            onEdit: (v) =>
+                                viewModel.openSheet(context, e, viewModel),
+                          ))
+                      .toList()
+                ],
+              )
+            ],
+          );
+        });
   }
 }
