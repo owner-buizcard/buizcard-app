@@ -1,6 +1,7 @@
 import 'package:bizcard_app/models/card.dart' as bizcard;
 import 'package:bizcard_app/models/field.dart';
 import 'package:bizcard_app/models/user.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import '../models/contact.dart';
@@ -12,6 +13,9 @@ class Global {
   static List contacts = [];
   static List<Field> fieldTypes = [];
   static Map<String, List<Field>> groupedFields = {};
+
+  static final List<CameraDescription> cameras = [];
+
 
   static init(data){
     user = User.fromJson(data['user']);

@@ -9,6 +9,7 @@ import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
 import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
+import 'package:bizcard_app/pages/contacts/extracter/extracter_view.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_view.dart';
 import 'package:bizcard_app/pages/preview/bizcard_preview.dart';
@@ -22,6 +23,7 @@ import '../pages/authentication/bloc/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../pages/common/image/image_bloc.dart';
+import '../pages/contacts/bloc/contacts_bloc.dart';
 
 class Routes {
   Routes._();
@@ -42,6 +44,9 @@ class Routes {
   static const String home = "/home";
   static const String settings = "/settings";
   static const String scan = "/scan";
+
+  //contacts
+  static const String extracter = "/extracter";
 
   //cards
   static const String cardBuilder = "/card-builder";
@@ -121,7 +126,9 @@ class RouteGenerator {
       case Routes.linkStore:
         return getTransistionPage(BlocProvider(
           create: (context) => CardBloc(),
-          child: LinkStoreView(cardId: settings.arguments as String,),
+          child: LinkStoreView(
+            cardId: settings.arguments as String,
+          ),
         ));
 
       case Routes.home:
@@ -143,8 +150,15 @@ class RouteGenerator {
       case Routes.scan:
         return getTransistionPage(const ScanView());
 
+      case Routes.extracter:
+        return getTransistionPage(BlocProvider(
+          create: (context) => ContactsBloc(),
+          child: ExtracterView(text: settings.arguments as String),
+        ));
+
       case Routes.preview:
-        return getTransistionPage(BizcardPreview(cardId: settings.arguments as String));
+        return getTransistionPage(
+            BizcardPreview(cardId: settings.arguments as String));
 
       default:
         return unDefinedRoute();

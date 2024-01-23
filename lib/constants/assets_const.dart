@@ -5,6 +5,7 @@ class AssetsConst {
   static const _imagesFolder = 'res/images/';
   static const _iconsFolder = 'res/icons/';
   static const _gifsFolder = 'res/gifs/';
+  static const _lottieFolder = 'res/lottie/';
 
   static const appLogo = '${_imagesFolder}welcome_1.png';
 
@@ -14,4 +15,7 @@ class AssetsConst {
 
   static const loader = '${_gifsFolder}loading.gif';
   static const thumbp = '${_gifsFolder}thumb_print.gif';
+
+  static const relaxing = '${_lottieFolder}relax.json';
+  static const loading = '${_lottieFolder}loader.json';
 }
