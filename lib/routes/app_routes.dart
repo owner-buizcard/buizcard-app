@@ -11,6 +11,7 @@ import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
 import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_view.dart';
+import 'package:bizcard_app/pages/preview/bizcard_preview.dart';
 import 'package:bizcard_app/pages/scan/scan_view.dart';
 import 'package:bizcard_app/pages/settings/settings_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
@@ -45,6 +46,7 @@ class Routes {
   //cards
   static const String cardBuilder = "/card-builder";
   static const String linkStore = "/link-store";
+  static const String preview = "/preview";
 }
 
 class RouteGenerator {
@@ -140,6 +142,9 @@ class RouteGenerator {
 
       case Routes.scan:
         return getTransistionPage(const ScanView());
+
+      case Routes.preview:
+        return getTransistionPage(BizcardPreview(cardId: settings.arguments as String));
 
       default:
         return unDefinedRoute();

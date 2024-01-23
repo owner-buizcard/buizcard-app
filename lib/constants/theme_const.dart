@@ -135,7 +135,7 @@ class ThemeConst {
         )
       ),
 
-      dividerColor: ColorsConst.border,
+      dividerColor: const Color(0xFFB0B0B0),
 
       fontFamily: GoogleFonts.roboto().fontFamily,
 

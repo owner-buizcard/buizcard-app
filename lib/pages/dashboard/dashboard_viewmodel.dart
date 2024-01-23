@@ -71,6 +71,8 @@ class DashboardViewModel extends BaseViewModel {
               Navigator.of(context).pushNamed(Routes.cardBuilder, arguments: cardId);
             }else if(v=='Delete'){
               context.read<CardBloc>().add(DeleteCardEvent(cardId));
+            }else if(v=='Preview'){
+              Navigator.of(context).pushNamed(Routes.preview, arguments: cardId);
             }
           },
         );

@@ -36,6 +36,20 @@ class Address extends Equatable {
     );
   }
 
+  String string() {
+    List<String> components = [
+      if (addressLine1 != null) '$addressLine1, ',
+      if (addressLine2 != null) '$addressLine2, ',
+      if (city != null) '$city, ',
+      if (state != null) '$state, ',
+      if (country != null) '$country, ',
+      if (pincode != null) '$pincode, ',
+    ];
+
+    return components.join();
+  }
+
+
   Map<String, dynamic> toJson() {
     return {
       'addressLine1': addressLine1,
