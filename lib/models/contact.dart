@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 
 import 'package:bizcard_app/models/card.dart';
 
+import 'contact_info.dart';
+
 class Contact extends Equatable {
 
   final String id;
@@ -9,6 +11,7 @@ class Contact extends Equatable {
   final String type;
   final String status;
   final Card? card;
+  final ContactInfo? details;
 
   const Contact({
     required this.id,
@@ -16,6 +19,7 @@ class Contact extends Equatable {
     required this.type,
     required this.status,
     this.card,
+    this.details
   });
 
   Map<String, dynamic> toMap() {
@@ -25,6 +29,7 @@ class Contact extends Equatable {
       'type': type,
       'status': status,
       'card': card?.toJson(),
+      'info': details?.toJson()
     };
   }
 
@@ -35,6 +40,7 @@ class Contact extends Equatable {
       type: map['type'] as String,
       status: map['status'] as String,
       card: map['card'] != null ? Card.fromJson(map['card'] as Map<String,dynamic>) : null,
+      details: map['details'] != null ? ContactInfo.fromJson(map['details'] as Map<String,dynamic>) : null,
     );
   }
 

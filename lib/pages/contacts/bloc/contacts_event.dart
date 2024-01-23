@@ -6,3 +6,9 @@ sealed class ContactsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class CreateContactEvent extends ContactsEvent {
+  final ContactInfo info;
+
+  const CreateContactEvent(this.info);
+}

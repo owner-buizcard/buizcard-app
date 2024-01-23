@@ -145,7 +145,7 @@ class ThemeConst {
           foregroundColor: const MaterialStatePropertyAll(Color(0xFF2550E7)),
           textStyle: MaterialStatePropertyAll(
             GoogleFonts.roboto(
-              fontSize: 14,
+              fontSize: 16,
               fontWeight: FontWeight.w600
             )
           )

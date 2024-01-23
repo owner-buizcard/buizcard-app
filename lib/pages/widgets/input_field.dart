@@ -9,7 +9,7 @@ class InputField extends StatelessWidget {
   final IconData? suffixIcon;
   final bool isRequired;
   final String? validationType;
-  final int? maxLines;
+  final int maxLines;
   final TextEditingController controller;
   const InputField({
     super.key, 
@@ -18,7 +18,7 @@ class InputField extends StatelessWidget {
     required this.controller,
     this.isRequired = false,
     this.validationType,
-    this.maxLines,
+    this.maxLines = 1,
     this.prefixIcon,
     this.suffixIcon
   });

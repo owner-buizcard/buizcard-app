@@ -61,6 +61,7 @@ class ScanViewModel extends BaseViewModel {
       final results = await textRecognizer.processImage(inputImage);
       textBlocks = results.blocks;
       var extracted = textBlocks.map((e) => e.text.toString()).toList().join(' ');
+      isExtracting.value = false;
       return extracted;
     } catch (e) {
       isExtracting.value = false;
