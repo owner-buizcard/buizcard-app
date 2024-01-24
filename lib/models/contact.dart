@@ -11,7 +11,13 @@ class Contact extends Equatable {
   final String type;
   final String status;
   final Card? card;
+  final bool isFavourite;
   final ContactInfo? details;
+  final List tags;
+  final String notes;
+  final DateTime connectedAt;
+  final String? connectedBy;
+
 
   const Contact({
     required this.id,
@@ -19,7 +25,12 @@ class Contact extends Equatable {
     required this.type,
     required this.status,
     this.card,
-    this.details
+    this.details,
+    this.isFavourite = false,
+    this.tags = const [],
+    this.notes = '',
+    required this.connectedAt,
+    this.connectedBy
   });
 
   Map<String, dynamic> toMap() {
@@ -29,7 +40,12 @@ class Contact extends Equatable {
       'type': type,
       'status': status,
       'card': card?.toJson(),
-      'info': details?.toJson()
+      'info': details?.toJson(),
+      'isFavourite': isFavourite,
+      'notes': notes,
+      'tags': tags,
+      'connectedAt': connectedAt.toIso8601String(),
+      'connectedBy': connectedBy,
     };
   }
 
@@ -41,6 +57,11 @@ class Contact extends Equatable {
       status: map['status'] as String,
       card: map['card'] != null ? Card.fromJson(map['card'] as Map<String,dynamic>) : null,
       details: map['details'] != null ? ContactInfo.fromJson(map['details'] as Map<String,dynamic>) : null,
+      isFavourite: map['isFavourite'],
+      tags: map['tags'],
+      connectedBy: map['connectedBy'] as String,
+      notes: map['notes'] as String,
+      connectedAt: DateTime.parse(map['connectedAt'] as String),
     );
   }
 

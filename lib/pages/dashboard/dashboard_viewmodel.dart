@@ -1,6 +1,7 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
+import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bloc/contacts_bloc.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_options_sheet.dart';
@@ -80,7 +81,7 @@ class DashboardViewModel extends BaseViewModel {
     });
   }
 
-  openContactOptions(String contactId, BuildContext context){
+  openContactOptions(Contact contact, BuildContext context){
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
@@ -89,7 +90,23 @@ class DashboardViewModel extends BaseViewModel {
           onClick: (v){
             Navigator.pop(context);
             if(v=='Delete'){
-              context.read<ContactsBloc>().add(DeleteContactEvent(contactId: contactId));
+              context.read<ContactsBloc>().add(DeleteContactEvent(contactId: contact.id));
+            }else if(v=='Make Favourite'){
+
+            }else if(v=='Remove From Favourite'){
+
+            }else if(v=='Add Notes'){
+
+            }else if(v=='Add Tags'){
+
+            }else if(v=='Save as Contact'){
+
+            }else if(v=='Export'){
+
+            }else if(v=='Share'){
+
+            }else if(v=='Edit'){
+
             }
           },
         );

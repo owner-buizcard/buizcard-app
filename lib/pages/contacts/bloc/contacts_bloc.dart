@@ -13,6 +13,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   ContactsBloc() : super(ContactsInitial()) {
     on<CreateContactEvent>(_onCreateContact);
     on<DeleteContactEvent>(_onDeleteContact);
+    on<UpdateContactEvent>(_onUpdateContact);
   }
 
   var service = ContactService();
@@ -34,6 +35,26 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
       var contact = await service.saveContactDetails(details: event.info);
       Global.contacts.add(Contact.fromJson(contact));
       emit(ContactCreated());
+    }catch(error){
+      emit(Failure());
+    }
+  }
+
+  _onUpdateContact(UpdateContactEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      var result = await service.updateContactDetails(contactId: event.contactId, data: event.data);
+      var contact = Contact.fromJson(result);
+      var updated = Global.contacts.map((e){
+        if(e.id==contact.id){
+          return contact;
+        }
+        return e;
+      }).toList();
+
+      Global.contacts = updated;
+      
+      emit(ContactUpdated());
     }catch(error){
       emit(Failure());
     }

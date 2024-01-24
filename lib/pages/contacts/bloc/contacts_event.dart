@@ -20,3 +20,13 @@ class DeleteContactEvent extends ContactsEvent {
     required this.contactId
   });
 }
+
+class UpdateContactEvent extends ContactsEvent {
+  final String contactId;
+  final Map data;
+
+  const UpdateContactEvent({
+    required this.contactId,
+    required this.data
+  });
+}

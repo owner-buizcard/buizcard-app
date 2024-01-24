@@ -11,8 +11,12 @@ final class ContactsInitial extends ContactsState {}
 
 class Loading extends ContactsState {}
 
+class Updating extends ContactsState {}
+
 class ContactCreated extends ContactsState {}
 
 class ContactDeleted extends ContactsState {}
+
+class ContactUpdated extends ContactsState {}
 
 class Failure extends ContactsState {}
