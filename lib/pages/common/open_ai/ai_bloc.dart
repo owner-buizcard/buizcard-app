@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:bizcard_app/constants/credentials.dart';
 import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/utils/global.dart';
 import 'package:bloc/bloc.dart';
