@@ -12,16 +12,28 @@ part 'contacts_state.dart';
 class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   ContactsBloc() : super(ContactsInitial()) {
     on<CreateContactEvent>(_onCreateContact);
+    on<DeleteContactEvent>(_onDeleteContact);
+  }
+
+  var service = ContactService();
+
+  _onDeleteContact(DeleteContactEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      await service.deleteContact(contactId: event.contactId);
+      Global.contacts.removeWhere((element) => element.id==event.contactId);
+      emit(ContactDeleted());
+    }catch(error){
+      emit(Failure());
+    }
   }
 
   _onCreateContact(CreateContactEvent event, Emitter emit)async{
     emit(Loading());
     try{
-
-      var service = ContactService();
       var contact = await service.saveContactDetails(details: event.info);
       Global.contacts.add(Contact.fromJson(contact));
-
+      emit(ContactCreated());
     }catch(error){
       emit(Failure());
     }

@@ -30,7 +30,7 @@ class MyContactsFragment extends StatelessWidget {
             children: Global.contacts.map(
               (e) => ContactItem(
                 contact: e,
-                onOptionsClick: (v)=>viewModel.openContactOptions(context),
+                onOptionsClick: (v)=>viewModel.openContactOptions(e.id, context),
               )).toList()
           ))
         ])

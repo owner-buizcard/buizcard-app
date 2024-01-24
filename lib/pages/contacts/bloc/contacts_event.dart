@@ -12,3 +12,11 @@ class CreateContactEvent extends ContactsEvent {
 
   const CreateContactEvent(this.info);
 }
+
+class DeleteContactEvent extends ContactsEvent {
+  final String contactId;
+
+  const DeleteContactEvent({
+    required this.contactId
+  });
+}

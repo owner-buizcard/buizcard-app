@@ -2,6 +2,7 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
+import 'package:bizcard_app/pages/contacts/bloc/contacts_bloc.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/contact_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/create_card_sheet.dart';
@@ -79,12 +80,19 @@ class DashboardViewModel extends BaseViewModel {
     });
   }
 
-  openContactOptions(BuildContext context){
+  openContactOptions(String contactId, BuildContext context){
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
       builder: (_){
-        return const ContactOptionsSheet();
+        return ContactOptionsSheet(
+          onClick: (v){
+            Navigator.pop(context);
+            if(v=='Delete'){
+              context.read<ContactsBloc>().add(DeleteContactEvent(contactId: contactId));
+            }
+          },
+        );
     });
   }
 

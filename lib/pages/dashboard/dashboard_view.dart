@@ -69,7 +69,7 @@ class _DashboardViewState extends State<DashboardView> {
                         ),
                         IconButton(
                           icon: const Icon(AntIcons.userAddOutlined),
-                          onPressed: () {},
+                          onPressed: ()=>Navigator.pushNamed(context, Routes.createContact),
                         ),
                         const Gap(size: 16)
                       ]),

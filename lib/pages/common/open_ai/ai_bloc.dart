@@ -18,7 +18,7 @@ _onExtractContactEvent(ExtractContactEvent event, Emitter emit) async {
 
   try {
     final dio = Dio();
-
+    
     final response = await dio.post(
       'https://api.openai.com/v1/completions',
       options: Options(

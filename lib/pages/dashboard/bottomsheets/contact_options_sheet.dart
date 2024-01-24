@@ -3,7 +3,8 @@ import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 
 class ContactOptionsSheet extends StatelessWidget {
-  const ContactOptionsSheet({super.key});
+  final Function(String) onClick;
+  const ContactOptionsSheet({super.key, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +14,10 @@ class ContactOptionsSheet extends StatelessWidget {
       { 'icon': AntIcons.paperClipOutlined, 'label': 'Add Tags' },
       { 'icon': AntIcons.bookOutlined, 'label': 'Add Notes' },
       { 'icon': AntIcons.starOutlined, 'label': 'Make Favourite' },
-      { 'icon': AntIcons.downloadOutlined, 'label': 'Save ad Contact' },
+      { 'icon': AntIcons.downloadOutlined, 'label': 'Save as Contact' },
       { 'icon': AntIcons.shareAltOutlined, 'label': 'Share' },
       { 'icon': AntIcons.exportOutlined, 'label': 'Export' },
-      { 'icon': AntIcons.deleteOutlined, 'label': 'Delete' }
+      { 'icon': AntIcons.deleteOutlined, 'label': 'Delete', 'color': Colors.red }
     ];
 
     return Wrap(
@@ -36,7 +37,7 @@ class ContactOptionsSheet extends StatelessWidget {
                 ),
               ),
               ...options.map((opt)=>
-                ListItem(item: opt, onClick: (v){})
+                ListItem(item: opt, onClick: (v)=>onClick(v))
               ).toList()
             ]
           ),

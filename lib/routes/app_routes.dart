@@ -144,6 +144,9 @@ class RouteGenerator {
             BlocProvider(
               create: (context) => CardBloc(),
             ),
+            BlocProvider(
+              create: (context) => ContactsBloc(),
+            ),
           ],
           child: const DashboardView(),
         ));

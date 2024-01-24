@@ -13,23 +13,25 @@ class ContactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MainCard(
+      margin: const EdgeInsets.only(bottom: 16),
       child: Row(
         children: [
           CircleAvatar(
             radius: 24,
             backgroundColor: ColorsConst.border,
-            backgroundImage:contact.card?.picture!=null ? NetworkImage(contact.card!.picture!) : null,
-            child: contact.card?.picture==null ? const Icon(Icons.person, size: 54) : null,
+            backgroundImage: (contact.card?.picture!=null) ? NetworkImage(contact.card!.picture!) : null,
+            child: contact.card?.picture==null ? const Icon(Icons.person, size: 34) : null,
           ),
           const Gap(size: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                '${contact.card?.name?.firstName} ${contact.card?.name?.lastName}'.titletext(context),
+                (contact.card!=null? '${contact.card?.name?.firstName} ${contact.card?.name?.lastName}': contact.details?.name??'').titletext(context),
                 const Gap(size: 2),
-                '${contact.card?.phoneNumber??contact.card?.email}'.bltext(context)
+                (contact.card!=null? '${contact.card?.phoneNumber??contact.card?.email}': contact.details?.phone??contact.details?.email??'').bltext(context)
               ],
             ),
           ),
