@@ -57,10 +57,10 @@ class Contact extends Equatable {
       status: map['status'] as String,
       card: map['card'] != null ? Card.fromJson(map['card'] as Map<String,dynamic>) : null,
       details: map['details'] != null ? ContactInfo.fromJson(map['details'] as Map<String,dynamic>) : null,
-      isFavourite: map['isFavourite'],
-      tags: map['tags'],
-      connectedBy: map['connectedBy'] as String,
-      notes: map['notes'] as String,
+      isFavourite: map['isFavourite'] ?? false,
+      tags: map['tags'] ?? [],
+      connectedBy: map['connectedBy'],
+      notes: map['notes'] ?? '',
       connectedAt: DateTime.parse(map['connectedAt'] as String),
     );
   }

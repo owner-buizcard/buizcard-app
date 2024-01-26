@@ -75,7 +75,11 @@ class _SettingsViewState extends State<SettingsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: _viewModel.options.map((e) {
                 if (e["title"] == null) {
-                  return ListItem(item: e, onClick: (v)=>{});
+                  return ListItem(item: e, onClick: (v){
+                    if(v=="Integrations"){
+                      Navigator.pushNamed(context, Routes.integrations);
+                    }
+                  });
                 } else {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),

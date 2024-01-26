@@ -10,6 +10,7 @@ class SettingsViewModel extends BaseViewModel {
     {'icon': AntIcons.crownOutlined, 'label': 'Upgrade to Pro', 'color': null},
     {'icon': AntIcons.lineChartOutlined, 'label': 'My Analytics', 'color': null},
     {'title': 'Features'},
+    {'icon': AntIcons.apiOutlined, 'label': 'Integrations', 'color': null},
     {'icon': AntIcons.editOutlined, 'label': 'Create email signature', 'color': null},
     {'icon': AntIcons.pictureOutlined, 'label': 'Create virtual background', 'color': null},
     {'icon': AntIcons.mailOutlined, 'label': 'Follow up email', 'color': null},

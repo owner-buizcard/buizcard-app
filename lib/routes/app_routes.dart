@@ -16,6 +16,7 @@ import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_view.dart';
 import 'package:bizcard_app/pages/preview/bizcard_preview.dart';
 import 'package:bizcard_app/pages/scan/scan_view.dart';
+import 'package:bizcard_app/pages/settings/integrations/integration_view.dart';
 import 'package:bizcard_app/pages/settings/settings_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,8 @@ class Routes {
   static const String login = "/login";
   static const String signup = "/signup";
 
+  static const String zohoCallback = "/i/zoho/callback";
+
   //dashboard
   static const String home = "/home";
   static const String settings = "/settings";
@@ -56,6 +59,10 @@ class Routes {
   static const String cardBuilder = "/card-builder";
   static const String linkStore = "/link-store";
   static const String preview = "/preview";
+
+  //settings
+  static const String integrations = "/integrations";
+
 }
 
 class RouteGenerator {
@@ -153,8 +160,14 @@ class RouteGenerator {
 
       case Routes.settings:
         return getTransistionPage(const SettingsView());
+      
+      case Routes.integrations:
+        return getTransistionPage(const IntegrationView());
 
       case Routes.scan:
+        return getTransistionPage(const ScanView());
+
+      case Routes.zohoCallback:
         return getTransistionPage(const ScanView());
 
       case Routes.createContact:

@@ -1,5 +1,6 @@
 import 'package:bizcard_app/models/card.dart' as bizcard;
 import 'package:bizcard_app/models/field.dart';
+import 'package:bizcard_app/models/integration.dart';
 import 'package:bizcard_app/models/user.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class Global {
   static ValueNotifier<List<bizcard.Card>> cards = ValueNotifier([]);
   static List<Contact> contacts = [];
   static List<Field> fieldTypes = [];
+  static List<Integration> integrations = [];
   static Map<String, List<Field>> groupedFields = {};
 
   static final List<CameraDescription> cameras = [];
@@ -34,9 +36,11 @@ class Global {
       for (var config in configs) {
         if (config["key"] == "OPEN_AI_KEY") {
           openAiKey = config["value"];
-          break; // Stop searching once found
+        }else if(config["key"] == "Integrations") {
+          integrations = (config["value"] as List).map((e) => Integration.fromJson(e)).toList();
         }
       }
+
     } catch (e) {
       print('Error initializing Global: $e');
     }

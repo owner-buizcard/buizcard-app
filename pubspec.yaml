@@ -33,8 +33,10 @@ dependencies:
   #network
   connectivity_plus: ^5.0.2
   dio: ^5.4.0
-  http_parser: ^4.0.2
   equatable: ^2.0.5
+  http_parser: ^4.0.2
+  uni_links: ^0.5.1
+  url_launcher: ^6.2.4
 
   #SML
   bloc: ^8.1.2
