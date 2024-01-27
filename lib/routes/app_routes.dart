@@ -10,12 +10,15 @@ import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
 import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
+import 'package:bizcard_app/pages/common/callback/connect_view.dart';
+import 'package:bizcard_app/pages/common/web/launch_view.dart';
 import 'package:bizcard_app/pages/contacts/create/create_contact_view.dart';
 import 'package:bizcard_app/pages/contacts/extracter/extracter_view.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_view.dart';
 import 'package:bizcard_app/pages/preview/bizcard_preview.dart';
 import 'package:bizcard_app/pages/scan/scan_view.dart';
+import 'package:bizcard_app/pages/settings/bloc/settings_bloc.dart';
 import 'package:bizcard_app/pages/settings/integrations/integration_view.dart';
 import 'package:bizcard_app/pages/settings/settings_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
@@ -62,7 +65,9 @@ class Routes {
 
   //settings
   static const String integrations = "/integrations";
+  static const String callback = "/callback";
 
+  static const String launchView = "/launch-view";
 }
 
 class RouteGenerator {
@@ -160,9 +165,19 @@ class RouteGenerator {
 
       case Routes.settings:
         return getTransistionPage(const SettingsView());
-      
+
+      case Routes.launchView:
+        return getTransistionPage(
+            LaunchView(url: settings.arguments as String));
+
       case Routes.integrations:
         return getTransistionPage(const IntegrationView());
+
+      case Routes.callback:
+        return getTransistionPage(BlocProvider(
+          create: (context) => SettingsBloc(),
+          child: ConnectView(url: settings.arguments as String),
+        ));
 
       case Routes.scan:
         return getTransistionPage(const ScanView());

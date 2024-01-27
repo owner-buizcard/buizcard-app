@@ -1,9 +1,10 @@
+import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:bizcard_app/utils/global.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class IntegrationView extends StatefulWidget {
   const IntegrationView({super.key});
@@ -22,7 +23,11 @@ class _IntegrationViewState extends State<IntegrationView> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: Global.integrations.map(
-          (e) => MainCard(
+          (e){
+
+            bool isConnected = Global.user!.integrations.contains(e.id);
+
+            return MainCard(
             margin: const EdgeInsets.only(bottom: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,16 +37,22 @@ class _IntegrationViewState extends State<IntegrationView> {
                   children: [
                     Image.network(e.image, width: 44),
                     const Gap(size: 16),
-                    SizedBox(
+                    Visibility(
+                      visible: !isConnected,
+                      replacement: const Icon(AntIcons.checkCircleFilled, color: Colors.green, size: 32),
+                      child: SizedBox(
                       width: 100,
                       height: 40,
                       child: ElevatedButton(
-                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                          padding: const MaterialStatePropertyAll(EdgeInsets.all(0))
-                        ),
-                        onPressed: ()async{
-                          await launchUrlString(e.authLink);
-                        }, child: const Text('Connect')))
+                        style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                            padding: const MaterialStatePropertyAll(EdgeInsets.all(0)),
+                          ),
+                        onPressed: isConnected ? null: ()async{
+                          Navigator.pushNamed(context, Routes.launchView, arguments: e.authLink);
+                        }, 
+                        child: Text(isConnected ? 'Connected': 'Connect'))
+                      ),  
+                    )
                   ],
                 ),
                 const Gap(size: 16),
@@ -51,7 +62,8 @@ class _IntegrationViewState extends State<IntegrationView> {
               ],
             )
             
-            )).toList(),
+            );
+          }).toList(),
       ),
     );
   }

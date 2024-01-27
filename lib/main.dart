@@ -9,7 +9,7 @@ void main() async{
   
   WidgetsFlutterBinding.ensureInitialized();
   await LocalDB.init();
-  handleDeepLink();
+  await handleDeepLink();
 
   Global.cameras.addAll(await availableCameras());
 
@@ -19,7 +19,7 @@ void main() async{
 
 }
 
-void handleDeepLink() async {
+handleDeepLink() async {
   try{
     Uri? initialUri;
     final initialLink = await getInitialLink();
