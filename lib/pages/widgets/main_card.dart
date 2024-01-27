@@ -4,7 +4,8 @@ class MainCard extends StatelessWidget {
   final Widget child;
   final double? width;
   final EdgeInsets? margin;
-  const MainCard({super.key, required this.child, this.width, this.margin});
+  final Color? color;
+  const MainCard({super.key, required this.child, this.width, this.margin, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class MainCard extends StatelessWidget {
       margin: margin,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
+        color: color,
         border: Border.all(color: const Color(0x268c8c8c)),
         borderRadius: BorderRadius.circular(6)
       ),

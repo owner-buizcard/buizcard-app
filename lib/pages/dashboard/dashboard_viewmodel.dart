@@ -4,6 +4,7 @@ import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bloc/contacts_bloc.dart';
+import 'package:bizcard_app/pages/contacts/bottomsheets/export_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/contact_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/create_card_sheet.dart';
@@ -102,7 +103,7 @@ class DashboardViewModel extends BaseViewModel {
             }else if(v=='Save as Contact'){
 
             }else if(v=='Export'){
-
+              openExportSheet(context, contact);
             }else if(v=='Share'){
 
             }else if(v=='Edit'){
@@ -121,6 +122,22 @@ class DashboardViewModel extends BaseViewModel {
         return CreateCardSheet(
           viewModel: viewModel,
           onCreate: ()=>createCard(context)
+        );
+    });
+  }
+
+  openExportSheet(BuildContext context, Contact contact){
+   showModalBottomSheet(
+      context: context, 
+      backgroundColor: Colors.white,
+      isScrollControlled: true,
+      builder: (_){
+        return ExportSheet(
+          onClick: (v){
+            Navigator.pop(context);
+            context.read<ContactsBloc>().add(
+              ExportContactsEvent(exportId: v, ids: [contact.id]));
+          }
         );
     });
   }

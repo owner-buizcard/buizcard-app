@@ -17,6 +17,8 @@ class ContactCreated extends ContactsState {}
 
 class ContactDeleted extends ContactsState {}
 
+class Exported extends ContactsState {}
+
 class ContactUpdated extends ContactsState {}
 
 class Failure extends ContactsState {}

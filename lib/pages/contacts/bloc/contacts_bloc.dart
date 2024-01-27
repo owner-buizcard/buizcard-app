@@ -14,9 +14,20 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     on<CreateContactEvent>(_onCreateContact);
     on<DeleteContactEvent>(_onDeleteContact);
     on<UpdateContactEvent>(_onUpdateContact);
+    on<ExportContactsEvent>(_onExportContacts);
   }
 
   var service = ContactService();
+
+  _onExportContacts(ExportContactsEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      await service.exportToZohoCRM(ids: event.ids);
+      emit(Exported());
+    }catch(error){
+      emit(Failure());
+    }
+  }
 
   _onDeleteContact(DeleteContactEvent event, Emitter emit)async{
     emit(Loading());
