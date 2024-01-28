@@ -9,6 +9,13 @@ class Loading extends CardState {}
 
 class Success extends CardState {}
 
+class CardDetailsFetched extends CardState {
+  final bizcard.Card card;
+  final bool ownCard;
+
+  CardDetailsFetched({required this.card, required this.ownCard});
+}
+
 class LinkAdded extends CardState {
   final FieldValue field;
   LinkAdded({required this.field});

@@ -2,6 +2,10 @@ import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/network/api_client.dart';
 
 class ContactService {
+  Future<dynamic> saveContact({required String cardId})async{
+    ApiClient client = ApiClient('/contact', loader: false);
+    return await client.post({'cardId': cardId, 'type': 'Bizcard'});
+  }
 
   Future<dynamic> saveContactDetails({required ContactInfo details})async{
     ApiClient client = ApiClient('/contact-details');
@@ -20,7 +24,17 @@ class ContactService {
 
   Future<dynamic> exportToZohoCRM({required List ids})async{
     ApiClient client = ApiClient('/zoho/export');
-    return await client.post({'contactIds': ["65b54cd75222fda0fbac4318"]});
+    return await client.post({'contactIds': ids});
+  }
+
+  Future<dynamic> exportToHubspotCRM({required List ids})async{
+    ApiClient client = ApiClient('/hubspot/export');
+    return await client.post({'contactIds': ids});
+  }
+
+  Future<dynamic> exportToSpreadsheet({required List ids})async{
+    ApiClient client = ApiClient('/spreadsheet/export');
+    return await client.post({'contactIds': ids});
   }
 
 }

@@ -77,7 +77,6 @@ class RouteGenerator {
   RouteGenerator({required this.settings});
 
   Route<dynamic> getRoute() {
-
     String routeName = settings.name ?? "";
 
     if (routeName.contains("i/callback/")) {
@@ -225,8 +224,18 @@ class RouteGenerator {
         ));
 
       case Routes.preview:
-        return getTransistionPage(
-            BizcardPreview(cardId: settings.arguments as String));
+        var cardId = settings.arguments as String;
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CardBloc()..add(GetCardDetails(cardId)),
+            ),
+            BlocProvider(
+              create: (context) => ContactsBloc(),
+            ),
+          ],
+          child: BizcardPreview(cardId: cardId),
+        ));
 
       default:
         return unDefinedRoute();

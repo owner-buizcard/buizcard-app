@@ -10,10 +10,29 @@ part 'card_state.dart';
 
 class CardBloc extends Bloc<CardEvent, CardState> {
   CardBloc() : super(CardInitial()) {
+    on<GetCardDetails>(_onGetCardDetails);
     on<SaveCardEvent>(_onSaveCard);
     on<CreateCardEvent>(_onCreateCard);
     on<DeleteCardEvent>(_onDeleteCard);
     on<AddLinkEvent>(_onAddLink);
+  }
+
+  _onGetCardDetails(GetCardDetails event, Emitter emit)async{
+    emit(Loading());
+    try{
+      bizcard.Card card;
+      bool ownCard = true;
+      try{
+        card = Global.cards.value.firstWhere((element) => element.id==event.cardId);
+      }catch(error){
+        var data = await CardService().getCard(cardId: event.cardId);
+        card = bizcard.Card.fromJson(data);
+        ownCard = false;
+      }
+      emit(CardDetailsFetched(card: card, ownCard: ownCard));
+    }catch(error){
+      emit(Error());
+    }
   }
 
   _onAddLink(AddLinkEvent event, Emitter emit)async{

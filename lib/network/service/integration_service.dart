@@ -9,7 +9,7 @@ class IntegrationService {
 
   Future<dynamic> connectHubspot({required String code})async{
     ApiClient client = ApiClient('/hubspot/connect', loader: false);
-    return await client.put({'code': code});
+    return await client.post({'code': code});
   }
 
 }

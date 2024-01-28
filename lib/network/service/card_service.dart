@@ -7,6 +7,11 @@ class CardService {
     return await client.put(data);
   }
 
+  Future<dynamic> getCard({required String cardId})async{
+    ApiClient client = ApiClient('/card?cardId=$cardId');
+    return await client.gets();
+  }
+
   Future<dynamic> deleteCard(String cardId)async{
     ApiClient client = ApiClient('/card?cardId=$cardId');
     return await client.delete();

@@ -11,6 +11,7 @@ part 'contacts_state.dart';
 
 class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   ContactsBloc() : super(ContactsInitial()) {
+    on<SaveContactEvent>(_onSaveContact);
     on<CreateContactEvent>(_onCreateContact);
     on<DeleteContactEvent>(_onDeleteContact);
     on<UpdateContactEvent>(_onUpdateContact);
@@ -22,7 +23,14 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   _onExportContacts(ExportContactsEvent event, Emitter emit)async{
     emit(Loading());
     try{
-      await service.exportToZohoCRM(ids: event.ids);
+      if(event.exportId=='zoho_crm'){
+        await service.exportToZohoCRM(ids: event.ids);
+      }else if(event.exportId=='hubspot_crm'){
+        await service.exportToHubspotCRM(ids: event.ids);
+      }else if(event.exportId=='spreadsheet'){
+        await service.exportToSpreadsheet(ids: event.ids);
+      }
+      
       emit(Exported());
     }catch(error){
       emit(Failure());
@@ -44,6 +52,17 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     emit(Loading());
     try{
       var contact = await service.saveContactDetails(details: event.info);
+      Global.contacts.add(Contact.fromJson(contact));
+      emit(ContactCreated());
+    }catch(error){
+      emit(Failure());
+    }
+  }
+
+  _onSaveContact(SaveContactEvent event, Emitter emit)async{
+    emit(Creating());
+    try{
+      var contact = await service.saveContact(cardId: event.cardId);
       Global.contacts.add(Contact.fromJson(contact));
       emit(ContactCreated());
     }catch(error){

@@ -13,6 +13,8 @@ class Loading extends ContactsState {}
 
 class Updating extends ContactsState {}
 
+class Creating extends ContactsState {}
+
 class ContactCreated extends ContactsState {}
 
 class ContactDeleted extends ContactsState {}

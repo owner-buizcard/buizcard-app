@@ -3,6 +3,12 @@ part of 'card_bloc.dart';
 @immutable
 sealed class CardEvent {}
 
+class GetCardDetails extends CardEvent {
+  final String cardId;
+
+  GetCardDetails(this.cardId);
+}
+
 class SaveCardEvent extends CardEvent {
   final String cardId;
   final Map data;

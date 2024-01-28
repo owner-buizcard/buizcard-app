@@ -38,7 +38,7 @@ class _IntegrationViewState extends State<IntegrationView> {
                     Image.network(e.image, width: 44),
                     const Gap(size: 16),
                     Visibility(
-                      visible: isConnected,
+                      visible: !isConnected,
                       replacement: const Icon(AntIcons.checkCircleFilled, color: Colors.green, size: 32),
                       child: SizedBox(
                       width: 100,
@@ -48,7 +48,11 @@ class _IntegrationViewState extends State<IntegrationView> {
                             padding: const MaterialStatePropertyAll(EdgeInsets.all(0)),
                           ),
                         onPressed: ()async{
-                          await launchUrlString(e.authLink);
+                          var link = e.authLink;
+                          if(e.authLink.contains('userId')){
+                            link = e.authLink.replaceAll('\${userId}', Global.user!.id);
+                          }
+                          await launchUrlString(link);
                         }, 
                         child: Text(isConnected ? 'Connected': 'Connect'))
                       ),  

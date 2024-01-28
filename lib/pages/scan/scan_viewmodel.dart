@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bizcard_app/base/base_viewmodel.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:bizcard_app/utils/global.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -73,10 +74,14 @@ class ScanViewModel extends BaseViewModel {
     return textBlocks.map((block) => block.text).join(' ');
   }
   
-  onQRViewCreated(QRViewController controller) {
+  onQRViewCreated(BuildContext context, QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-
+      var link = scanData.code;
+      if(link!=null && link.contains('/p/card')){
+        var cardId = link.split('/').last;
+        Navigator.pushNamed(context, Routes.preview, arguments: cardId);
+      }
     });
   }
   

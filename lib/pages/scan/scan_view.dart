@@ -54,7 +54,7 @@ class _ScanViewState extends State<ScanView> {
                   ),
                   child: QRView(
                     key: _viewModel.qrKey,
-                    onQRViewCreated: _viewModel.onQRViewCreated,
+                    onQRViewCreated: (v)=> _viewModel.onQRViewCreated(context, v),
                   )
                 )
               ),

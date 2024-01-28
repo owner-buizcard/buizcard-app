@@ -195,6 +195,13 @@ class ThemeConst {
           )
         )
       ),
+
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        extendedTextStyle: GoogleFonts.roboto(
+          fontSize: 17,
+          fontWeight: FontWeight.w500
+        )
+      ),
       
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: defaultBorder,

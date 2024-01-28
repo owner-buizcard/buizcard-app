@@ -13,6 +13,12 @@ class CreateContactEvent extends ContactsEvent {
   const CreateContactEvent(this.info);
 }
 
+class SaveContactEvent extends ContactsEvent {
+  final String cardId;
+
+  const SaveContactEvent(this.cardId);
+}
+
 class ExportContactsEvent extends ContactsEvent {
   final String exportId;
   final List ids;

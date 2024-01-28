@@ -7,14 +7,8 @@ sealed class SettingsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ConnectZohoCRMEvent extends SettingsEvent{
+class IntegrateEvent extends SettingsEvent{
   final String url;
 
-  const ConnectZohoCRMEvent({required this.url});
-}
-
-class ConnectHubspotEvent extends SettingsEvent{
-  final String url;
-
-  const ConnectHubspotEvent({required this.url});
+  const IntegrateEvent({required this.url});
 }
