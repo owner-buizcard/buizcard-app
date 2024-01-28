@@ -13,6 +13,7 @@ class CardOptionsSheet extends StatelessWidget {
       { 'icon': AntIcons.editOutlined, 'label': 'Edit' },
       { 'icon': AntIcons.eyeOutlined, 'label': 'Preview' },
       { 'icon': AntIcons.exportOutlined, 'label': 'Export' },
+      { 'icon': AntIcons.shareAltOutlined, 'label': 'Share' },
       { 'icon': AntIcons.deleteOutlined, 'label': 'Delete', 'color': Colors.red }
     ];
 

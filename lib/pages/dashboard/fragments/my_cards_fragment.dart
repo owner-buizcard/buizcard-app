@@ -49,7 +49,7 @@ class MyCardsFragment extends StatelessWidget {
                     var card = value[index];
                     return CardItem(
                       card: card,
-                      onOptionClick: ()=>viewModel.openCardOptions(card.id, context),  
+                      onOptionClick: ()=>viewModel.openCardOptions(card, context),  
                     );
                   }
                 );

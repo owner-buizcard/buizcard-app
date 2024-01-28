@@ -72,7 +72,7 @@ class _BizcardPreviewState extends State<BizcardPreview> {
               child: _viewModel.card.bio!.btext(context, color: 'dark', align: 'center')),
           ),
 
-          const Divider(height: 32, color: Colors.grey, indent: 50, endIndent: 50),
+          Divider(height: 32, color: Colors.grey[200], indent: 50, endIndent: 50),
 
           ListTile(
             leading: CircleAvatar(
@@ -81,12 +81,13 @@ class _BizcardPreviewState extends State<BizcardPreview> {
               child: _viewModel.card.logo==null ? const Icon(AntIcons.homeOutlined): null,
             ),
             title: Text(_viewModel.card.company?.companyName??'', style: Theme.of(context).textTheme.titleSmall,),
-            subtitle: Text(_viewModel.card.company?.department??''),
+            subtitle: (_viewModel.card.company?.department??'').btext(context, color: 'dark'),
           ),
 
           Visibility(
             visible: _viewModel.card.address!=null,
             child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
             leading: const Icon(AntIcons.pushpinOutlined),
             title: Text(_viewModel.card.address!.string()),
           )),
@@ -94,6 +95,7 @@ class _BizcardPreviewState extends State<BizcardPreview> {
           Visibility(
             visible: _viewModel.card.email!=null,
             child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
             leading: const Icon(AntIcons.mailOutlined),
             title: Text(_viewModel.card.email!),
           )),
@@ -101,6 +103,7 @@ class _BizcardPreviewState extends State<BizcardPreview> {
           Visibility(
             visible: _viewModel.card.phoneNumber!=null,
             child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
             leading: const Icon(AntIcons.phoneOutlined),
             title: Text(_viewModel.card.phoneNumber!),
           )),
@@ -108,6 +111,7 @@ class _BizcardPreviewState extends State<BizcardPreview> {
           Visibility(
             visible: _viewModel.card.company?.companyWebsite!=null,
             child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
             leading: const Icon(AntIcons.globalOutlined),
             title: Text(_viewModel.card.company!.companyWebsite!),
           )),

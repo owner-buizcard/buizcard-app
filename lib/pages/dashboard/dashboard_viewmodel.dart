@@ -2,6 +2,7 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/models/contact.dart';
+import 'package:bizcard_app/models/card.dart' as bizcard;
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bloc/contacts_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bottomsheets/export_sheet.dart';
@@ -14,6 +15,7 @@ import 'package:bizcard_app/pages/dashboard/fragments/my_contacts_fragment.dart'
 import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DashboardViewModel extends BaseViewModel {
 
@@ -62,7 +64,7 @@ class DashboardViewModel extends BaseViewModel {
     }
   }
   
-  openCardOptions(String cardId, BuildContext context){
+  openCardOptions(bizcard.Card card, BuildContext context){
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
@@ -71,11 +73,13 @@ class DashboardViewModel extends BaseViewModel {
           onClick: (v){
             Navigator.pop(context);
             if(v=='Edit'){
-              Navigator.of(context).pushNamed(Routes.cardBuilder, arguments: cardId);
+              Navigator.of(context).pushNamed(Routes.cardBuilder, arguments: card.id);
             }else if(v=='Delete'){
-              context.read<CardBloc>().add(DeleteCardEvent(cardId));
+              context.read<CardBloc>().add(DeleteCardEvent(card.id));
             }else if(v=='Preview'){
-              Navigator.of(context).pushNamed(Routes.preview, arguments: cardId);
+              Navigator.of(context).pushNamed(Routes.preview, arguments: card.id);
+            }else if(v=='Share'){
+              Share.shareUri(Uri.parse(card.cardLink!));
             }
           },
         );
