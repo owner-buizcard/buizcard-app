@@ -8,11 +8,7 @@ void main() async{
   
   WidgetsFlutterBinding.ensureInitialized();
   await LocalDB.init();
-
   Global.cameras.addAll(await availableCameras());
 
-  runApp(
-    const App()
-  );
-
+  runApp(App());
 }

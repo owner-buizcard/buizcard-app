@@ -2,9 +2,9 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
-import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:bizcard_app/utils/global.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class IntegrationView extends StatefulWidget {
   const IntegrationView({super.key});
@@ -38,7 +38,7 @@ class _IntegrationViewState extends State<IntegrationView> {
                     Image.network(e.image, width: 44),
                     const Gap(size: 16),
                     Visibility(
-                      visible: !isConnected,
+                      visible: isConnected,
                       replacement: const Icon(AntIcons.checkCircleFilled, color: Colors.green, size: 32),
                       child: SizedBox(
                       width: 100,
@@ -47,8 +47,8 @@ class _IntegrationViewState extends State<IntegrationView> {
                         style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                             padding: const MaterialStatePropertyAll(EdgeInsets.all(0)),
                           ),
-                        onPressed: isConnected ? null: ()async{
-                          Navigator.pushNamed(context, Routes.launchView, arguments: e.authLink);
+                        onPressed: ()async{
+                          await launchUrlString(e.authLink);
                         }, 
                         child: Text(isConnected ? 'Connected': 'Connect'))
                       ),  

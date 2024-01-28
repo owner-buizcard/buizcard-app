@@ -17,6 +17,9 @@ class ConnectView extends StatefulWidget {
 class _ConnectViewState extends State<ConnectView> {
   @override
   void initState() {
+
+    print(widget.url);
+
     context.read<SettingsBloc>().add(ConnectZohoCRMEvent(url: widget.url));
     super.initState();
   }
