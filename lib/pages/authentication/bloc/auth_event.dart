@@ -3,6 +3,12 @@ part of 'auth_bloc.dart';
 @immutable
 sealed class AuthEvent {}
 
+class SocialLoginEvent extends AuthEvent {
+  final String link;
+
+  SocialLoginEvent({required this.link});
+}
+
 class LoginEvent extends AuthEvent {
   final String email;
   final String password;

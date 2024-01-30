@@ -84,6 +84,11 @@ class RouteGenerator {
         create: (context) => SettingsBloc(),
         child: ConnectView(url: '${UrlsConst.domain}$routeName'),
       ));
+    }else if(routeName.contains("auth/callback")){
+      return getTransistionPage(BlocProvider(
+        create: (context) => AuthBloc(),
+        child: CallbackView(callbackUrl: '${UrlsConst.domain}$routeName'),
+      ));
     }
 
     switch (routeName) {
@@ -128,12 +133,6 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
           child: const ResetPasswordView(),
-        ));
-
-      case Routes.authCallback:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const CallbackView(),
         ));
 
       case Routes.cardBuilder:

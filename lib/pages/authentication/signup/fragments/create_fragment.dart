@@ -55,14 +55,9 @@ class CreateFragment extends StatelessWidget {
             ),
       
             const Gap(size: 20),
-      
             const DividerText(text: 'Or SignUp With'),
-      
             const Gap(size: 20),
-      
-            SocialLogin(
-              onClick: ()=>{},
-            )
+            const SocialLogin()
           ],
         ),
       ),

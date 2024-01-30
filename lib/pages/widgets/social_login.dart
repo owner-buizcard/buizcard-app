@@ -1,10 +1,11 @@
 import 'package:bizcard_app/constants/assets_const.dart';
+import 'package:bizcard_app/constants/urls_const.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class SocialLogin extends StatelessWidget {
-  final VoidCallback onClick;
-  const SocialLogin({super.key, required this.onClick});
+  const SocialLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +24,22 @@ class SocialLogin extends StatelessWidget {
 
         if (index % 2 == 0) {
           return Expanded(
-            child: Container(
-              height: 65,
-              decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFD6D6D6)),
-                  borderRadius: BorderRadius.circular(4)),
-              padding: const EdgeInsets.all(16),
-              child: Image.asset(e['icon']),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(4),
+              onTap: ()async{
+                var key = e['key'];
+                var authLink = key=='google'
+                  ? UrlsConst.googleAuth : key=='github' ? UrlsConst.githubAuth : UrlsConst.linkedinAuth;
+                await launchUrlString(authLink);
+              },
+              child: Container(
+                height: 65,
+                decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFFD6D6D6)),
+                    borderRadius: BorderRadius.circular(4)),
+                padding: const EdgeInsets.all(16),
+                child: Image.asset(e['icon']),
+              ),
             ),
           );
         } else {

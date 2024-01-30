@@ -54,7 +54,8 @@ class _DashboardViewState extends State<DashboardView> {
                               ? NetworkImage(Global.user!.picture!)
                               : null,
                           backgroundColor: ColorsConst.border,
-                          child: const Icon(AntIcons.userOutlined),
+                          child: Global.user!.picture != null
+                            ? null: const Icon(AntIcons.userOutlined),
                         ),
                         const Gap(size: 16)
                       ]

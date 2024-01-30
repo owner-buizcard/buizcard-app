@@ -2,6 +2,7 @@ import 'package:bizcard_app/network/service/auth_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../database/local_db.dart';
 import '../../../network/service/main_service.dart';
 import '../../../utils/global.dart';
 
@@ -13,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<LoginEvent>(_onLogin);
     on<SignupEvent>(_onSignup);
+    on<SocialLoginEvent>(_onSocialLogin);
     on<ForgotPasswordEvent>(_onForgotPassword);
   }
 
@@ -20,6 +22,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try{  
       await AuthService().login(email: event.email, password: event.password);
       var value = await MainService().fetchMainData();
+      Global.init(value);
+      emit(Success());
+    }catch(err){
+      emit(Error());
+    }
+  }
+
+  void _onSocialLogin(SocialLoginEvent event, Emitter emit)async{
+    try{  
+      Uri uri = Uri.parse(event.link);
+      String? token = uri.queryParameters['token'];
+      LocalDB.saveToken({'accessToken': token});
+      var value = await MainService().fetchMainData(loader: false);
       Global.init(value);
       emit(Success());
     }catch(err){

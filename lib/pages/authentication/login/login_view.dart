@@ -75,9 +75,7 @@ class _LoginViewState extends State<LoginView> {
               const Gap(size: 20),
               const DividerText(text: 'Or Signin With'),
               const Gap(size: 20),
-              SocialLogin(
-                onClick: () => {},
-              )
+              const SocialLogin()
             ],
           ),
         ),
