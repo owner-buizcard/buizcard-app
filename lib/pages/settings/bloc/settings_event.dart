@@ -12,3 +12,5 @@ class IntegrateEvent extends SettingsEvent{
 
   const IntegrateEvent({required this.url});
 }
+
+class DeleteAccountEvent extends SettingsEvent{}

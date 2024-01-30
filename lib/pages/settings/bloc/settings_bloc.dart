@@ -1,3 +1,4 @@
+import 'package:bizcard_app/network/service/auth_service.dart';
 import 'package:bizcard_app/network/service/integration_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -8,9 +9,19 @@ part 'settings_state.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(SettingsInitial()) {
     on<IntegrateEvent>(_onIntegrate);
+    on<DeleteAccountEvent>(_onDeleteAccount);
   }
 
   final service = IntegrationService();
+
+  _onDeleteAccount(DeleteAccountEvent event, Emitter emit)async{
+    try{
+      await AuthService().deleteAccount();
+      emit(AccountDeleted());
+    }catch(error){
+      emit(Failure());
+    }
+  }
 
   _onIntegrate(IntegrateEvent event, Emitter emit)async{
     try{

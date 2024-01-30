@@ -10,6 +10,7 @@ class InputField extends StatelessWidget {
   final bool isRequired;
   final String? validationType;
   final int maxLines;
+  final Function(String)? onChanged;
   final TextEditingController controller;
   const InputField({
     super.key, 
@@ -18,6 +19,7 @@ class InputField extends StatelessWidget {
     required this.controller,
     this.isRequired = false,
     this.validationType,
+    this.onChanged,
     this.maxLines = 1,
     this.prefixIcon,
     this.suffixIcon
@@ -32,6 +34,7 @@ class InputField extends StatelessWidget {
         fontSize: 16,
         color: Colors.black
       ),
+      onChanged: onChanged,
       decoration: InputDecoration(
         prefixIcon: prefixIcon!=null 
           ? Icon(prefixIcon) : null,

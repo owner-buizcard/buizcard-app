@@ -12,3 +12,5 @@ final class SettingsInitial extends SettingsState {}
 class Success extends SettingsState {}
 
 class Failure extends SettingsState {}
+
+class AccountDeleted extends SettingsState {}

@@ -24,4 +24,10 @@ class AuthService {
     return data;
   }
 
+  Future<dynamic> deleteAccount()async{
+    ApiClient client = ApiClient('/me');
+    var data = await client.delete();
+    return data;
+  }
+
 }

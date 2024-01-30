@@ -85,12 +85,12 @@ class RouteGenerator {
         create: (context) => SettingsBloc(),
         child: ConnectView(url: link),
       ));
-    }else if(routeName.contains("auth/callback")){
+    } else if (routeName.contains("auth/callback")) {
       return getTransistionPage(BlocProvider(
         create: (context) => AuthBloc(),
         child: CallbackView(callbackUrl: link),
       ));
-    }else if(routeName.contains("password/reset")){
+    } else if (routeName.contains("password/reset")) {
       return getTransistionPage(BlocProvider(
         create: (context) => AuthBloc(),
         child: ResetPasswordView(resetLink: link),
@@ -173,7 +173,10 @@ class RouteGenerator {
         ));
 
       case Routes.settings:
-        return getTransistionPage(const SettingsView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => SettingsBloc(),
+          child: const SettingsView(),
+        ));
 
       case Routes.launchView:
         return getTransistionPage(
