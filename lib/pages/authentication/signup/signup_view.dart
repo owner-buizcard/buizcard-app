@@ -1,5 +1,6 @@
 import 'package:bizcard_app/pages/authentication/signup/cubit/page_cubit.dart';
 import 'package:bizcard_app/pages/authentication/signup/signup_viewmodel.dart';
+import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +37,9 @@ class _SignupViewState extends State<SignupView> {
         ),
         BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
-
+            if(state is Success){
+              Navigator.pushNamedAndRemoveUntil(context, Routes.photo, (route) => false);
+            }
           },
         ),
       ],

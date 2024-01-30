@@ -1,4 +1,6 @@
+import 'package:bizcard_app/models/user.dart';
 import 'package:bizcard_app/network/service/auth_service.dart';
+import 'package:bizcard_app/network/service/user_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SocialLoginEvent>(_onSocialLogin);
     on<ForgotPasswordEvent>(_onForgotPassword);
     on<ResetPasswordEvent>(_onResetPassword);
+    on<UploadPictureEvent>(_onUploadPicture);
+    on<InitAppEvent>(_onInitApp);
+  }
+
+  void _onInitApp(InitAppEvent event, Emitter emit)async{
+    try{  
+      var value = await AuthService().init();
+      Global.init(value);
+      emit(PhotoSuccess());
+    }catch(err){
+      emit(Error());
+    }
+  }
+
+  void _onUploadPicture(UploadPictureEvent event, Emitter emit)async{
+    try{  
+      await UserService().update({'picture': event.picture});
+      var value = await AuthService().init();
+      Global.init(value);
+      emit(PhotoSuccess());
+    }catch(err){
+      emit(Error());
+    }
   }
 
   void _onLogin(LoginEvent event, Emitter emit)async{
@@ -59,8 +84,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           'lastName': names.length>1 ? names[1]: '',
         });
 
-      print(data);
-
+      Global.user = User.fromJson(data['createdUser']);
       emit(Success());
     }catch(err){
       emit(Error());

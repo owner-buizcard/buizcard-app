@@ -62,3 +62,5 @@ class UploadPictureEvent extends AuthEvent {
     required this.picture
   });
 }
+
+class InitAppEvent extends AuthEvent {}

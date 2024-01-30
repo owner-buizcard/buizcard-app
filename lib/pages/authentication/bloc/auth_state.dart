@@ -7,4 +7,6 @@ final class AuthInitial extends AuthState {}
 
 class Success extends AuthState {}
 
+class PhotoSuccess extends AuthState {}
+
 class Error extends AuthState {}

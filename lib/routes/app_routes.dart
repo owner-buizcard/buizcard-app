@@ -124,8 +124,15 @@ class RouteGenerator {
         ));
 
       case Routes.photo:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AuthBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ImageBloc(),
+            ),
+          ],
           child: const PhotoView(),
         ));
 

@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 class AvatarPH extends StatelessWidget {
   final IconData? icon;
   final String? image;
-  const AvatarPH({super.key, this.icon, this.image});
+  final double? radius;
+  const AvatarPH({super.key, this.icon, this.image, this.radius});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
+      width: radius!=null ? 2*radius! : 100,
+      height: radius!=null ? 2*radius! : 100,
       decoration: BoxDecoration(
         color: const Color(0xFFD9D9D9),
         border: Border.all(color: Colors.white, width: 2),

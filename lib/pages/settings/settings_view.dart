@@ -44,7 +44,7 @@ class _SettingsViewState extends State<SettingsView> {
           if(state is AccountDeleted){
             await LocalDB.clearDB().then((_) =>
               Navigator.pushNamedAndRemoveUntil(
-                  context, Routes.login, (route) => false));
+                  context, Routes.welcome, (route) => false));
           }
         },
         child: ListView(
@@ -122,7 +122,7 @@ class _SettingsViewState extends State<SettingsView> {
                     onTap: () async {
                       await LocalDB.clearDB().then((_) =>
                           Navigator.pushNamedAndRemoveUntil(
-                              context, Routes.login, (route) => false));
+                              context, Routes.welcome, (route) => false));
                     },
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
