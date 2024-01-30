@@ -1,5 +1,4 @@
 import 'package:bizcard_app/constants/theme_const.dart';
-import 'package:bizcard_app/network/deep_link_service.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    deepLinkService(context);
     return getMaterialApp('Cardbuk', context);
   }
 

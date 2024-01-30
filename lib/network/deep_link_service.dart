@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Future<void> deepLinkService(BuildContext context) async {
+Future<void> deepLinkService() async {
   try {
     final Uri? initialUri = await getInitialUri();
     if (initialUri != null) {
@@ -16,7 +16,7 @@ Future<void> deepLinkService(BuildContext context) async {
   try {
     uriLinkStream.listen((Uri? uri) {
       if (uri == null) return;
-      processAppLink(context, uri);
+      processAppLink(uri);
     });
   } catch (e) {
     debugPrint(e.toString());
@@ -25,7 +25,7 @@ Future<void> deepLinkService(BuildContext context) async {
 
 /// Func to process the deep link
 /// Eg. `https://gigavus.hydrameet.net/v/621c8d304c31e1001b6be8cb`
-void processAppLink(BuildContext context, Uri uri, {bool replace = false}) async {
+void processAppLink(Uri uri, {bool replace = false}) async {
   // var pathSegments = uri.pathSegments;
   // var queryParameters = uri.queryParameters;
   closeInAppWebView();
