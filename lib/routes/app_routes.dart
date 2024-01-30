@@ -78,16 +78,22 @@ class RouteGenerator {
 
   Route<dynamic> getRoute() {
     String routeName = settings.name ?? "";
+    var link = '${UrlsConst.domain}$routeName';
 
     if (routeName.contains("i/callback/")) {
       return getTransistionPage(BlocProvider(
         create: (context) => SettingsBloc(),
-        child: ConnectView(url: '${UrlsConst.domain}$routeName'),
+        child: ConnectView(url: link),
       ));
     }else if(routeName.contains("auth/callback")){
       return getTransistionPage(BlocProvider(
         create: (context) => AuthBloc(),
-        child: CallbackView(callbackUrl: '${UrlsConst.domain}$routeName'),
+        child: CallbackView(callbackUrl: link),
+      ));
+    }else if(routeName.contains("password/reset")){
+      return getTransistionPage(BlocProvider(
+        create: (context) => AuthBloc(),
+        child: ResetPasswordView(resetLink: link),
       ));
     }
 
@@ -127,12 +133,6 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
           child: const ForgotPasswordView(),
-        ));
-
-      case Routes.resetPassword:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const ResetPasswordView(),
         ));
 
       case Routes.cardBuilder:

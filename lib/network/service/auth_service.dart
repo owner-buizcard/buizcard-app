@@ -18,4 +18,10 @@ class AuthService {
     return data;
   }
 
+  Future<bool?> resetPassword({required String password})async{
+    ApiClient client = ApiClient('/auth/password/reset');
+    var data = await client.put({'newPassword': password});
+    return data;
+  }
+
 }

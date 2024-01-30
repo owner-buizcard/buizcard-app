@@ -13,7 +13,7 @@ class LoginViewModel extends BaseViewModel {
 
   LoginViewModel(){
     emailController = TextEditingController(text: '1dhana625@gmail.com');
-    passwordController = TextEditingController(text: 'Jeeva@123');
+    passwordController = TextEditingController(text: 'Dhana@123');
   }
 
   onLoginClick(BuildContext context){

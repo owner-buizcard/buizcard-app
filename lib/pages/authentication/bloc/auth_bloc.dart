@@ -16,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignupEvent>(_onSignup);
     on<SocialLoginEvent>(_onSocialLogin);
     on<ForgotPasswordEvent>(_onForgotPassword);
+    on<ResetPasswordEvent>(_onResetPassword);
   }
 
   void _onLogin(LoginEvent event, Emitter emit)async{
@@ -70,6 +71,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try{
 
       await AuthService().forgotPassword(email: event.email);
+
+      emit(Success());
+    }catch(err){
+      emit(Error());
+    }
+  }
+
+  void _onResetPassword(ResetPasswordEvent event, Emitter emit)async{
+    try{
+
+      Uri uri = Uri.parse(event.link);
+      String? token = uri.queryParameters['token'];
+      LocalDB.saveToken({'accessToken': token});
+      
+      await AuthService().resetPassword(password: event.password);
 
       emit(Success());
     }catch(err){

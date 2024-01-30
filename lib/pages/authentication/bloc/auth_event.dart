@@ -45,6 +45,16 @@ class ForgotPasswordEvent extends AuthEvent {
   });
 }
 
+class ResetPasswordEvent extends AuthEvent {
+  final String link;
+  final String password;
+
+  ResetPasswordEvent({
+    required this.link,
+    required this.password
+  });
+}
+
 class UploadPictureEvent extends AuthEvent {
   final String picture;
 
