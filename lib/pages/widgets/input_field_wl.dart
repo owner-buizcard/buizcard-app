@@ -10,11 +10,13 @@ class InputFieldWL extends StatelessWidget {
   final bool isRequired;
   final String? validationType;
   final String? hint;
+  final bool autofocus;
   final TextEditingController controller;
   const InputFieldWL({
     super.key, 
     required this.label, 
     this.hint,
+    this.autofocus = false,
     required this.controller,
     this.isRequired = false,
     this.validationType,
@@ -34,6 +36,7 @@ class InputFieldWL extends StatelessWidget {
             fontSize: 16,
             color: Colors.black
           ),
+          autofocus: autofocus,
           decoration: InputDecoration(
             prefixIcon: prefixIcon!=null 
               ? Icon(prefixIcon) : null,

@@ -16,9 +16,10 @@ class CreateCardSheet extends StatelessWidget {
     return Form(
       key: viewModel.formKey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        padding: MediaQuery.of(context).viewInsets,
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           children: [
             
             'Create Card'.titletext(context),
@@ -29,6 +30,7 @@ class CreateCardSheet extends StatelessWidget {
               label: 'Card Name', 
               controller: viewModel.cardnameController,
               isRequired: true,
+              autofocus: true,
             ),
             
             const Gap(size: 32),

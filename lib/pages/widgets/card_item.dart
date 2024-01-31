@@ -80,8 +80,8 @@ class CardItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         QrImageView(
-                          size: 120,
-                          data: 'data'
+                          size: 130,
+                          data: card.cardLink??''
                         )
                       ],
                     ),

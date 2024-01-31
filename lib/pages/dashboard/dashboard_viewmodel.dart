@@ -121,6 +121,7 @@ class DashboardViewModel extends BaseViewModel {
   openCreateSheet(BuildContext context, viewModel){
    showModalBottomSheet(
       context: context, 
+      isScrollControlled: true,
       backgroundColor: Colors.white,
       builder: (_){
         return CreateCardSheet(
