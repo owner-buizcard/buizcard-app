@@ -19,6 +19,14 @@ final class UploadedSuccess extends ImageState {
   });
 }
 
+final class PickedSuccess extends ImageState {
+  final String path;
+
+  const PickedSuccess({
+    required this.path
+  });
+}
+
 final class Failure extends ImageState {}
 
 class Uploading extends ImageState {}

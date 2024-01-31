@@ -18,6 +18,7 @@ import 'package:bizcard_app/pages/contacts/extracter/extracter_view.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_view.dart';
 import 'package:bizcard_app/pages/preview/bizcard_preview.dart';
+import 'package:bizcard_app/pages/qrcode/qrcode_theme_view.dart';
 import 'package:bizcard_app/pages/scan/scan_view.dart';
 import 'package:bizcard_app/pages/settings/bloc/settings_bloc.dart';
 import 'package:bizcard_app/pages/settings/integrations/integration_view.dart';
@@ -61,6 +62,7 @@ class Routes {
 
   //cards
   static const String cardBuilder = "/card-builder";
+  static const String qrTheme = "/qr-theme";
   static const String linkStore = "/link-store";
   static const String preview = "/preview";
 
@@ -203,6 +205,19 @@ class RouteGenerator {
 
       case Routes.zohoCallback:
         return getTransistionPage(const ScanView());
+
+      case Routes.qrTheme:
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CardBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ImageBloc(),
+            ),
+          ],
+          child: QrcodeThemeView(cardId: settings.arguments as String),
+        ));
 
       case Routes.createContact:
         return getTransistionPage(MultiBlocProvider(

@@ -41,6 +41,11 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
         ],
       );
 
+      if(cropped!=null && !event.upload){
+        emit(PickedSuccess(path: cropped.path));
+        return;
+      }
+
       if(cropped!=null){
         var link = await ImageService().uploadImage(file: cropped, cardId: event.path);
         emit(UploadedSuccess(link: link, type: event.path));

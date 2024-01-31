@@ -22,9 +22,12 @@ class UploadCImageEvent extends ImageEvent {
 class UploadImageEvent extends ImageEvent {
   final String croptype;
   final String path;
+  final bool upload;
+
 
   const UploadImageEvent({
     this.croptype = 'square',
-    required this.path
+    required this.path,
+    this.upload = true
   });
 }

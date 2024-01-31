@@ -16,7 +16,7 @@ class MyCardsFragment extends StatelessWidget {
     var cards = Global.cards;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 54),
+      padding: const EdgeInsets.only(bottom: 38),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [

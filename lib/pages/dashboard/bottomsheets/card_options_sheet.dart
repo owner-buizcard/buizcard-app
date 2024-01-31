@@ -10,9 +10,10 @@ class CardOptionsSheet extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final List options = [
-      { 'icon': AntIcons.editOutlined, 'label': 'Edit' },
+      { 'icon': AntIcons.editOutlined, 'label': 'Edit details' },
+      { 'icon': AntIcons.qrcodeOutlined, 'label': 'QrCode theme' },
+      { 'icon': AntIcons.settingOutlined, 'label': 'Settings' },
       { 'icon': AntIcons.eyeOutlined, 'label': 'Preview' },
-      { 'icon': AntIcons.exportOutlined, 'label': 'Export' },
       { 'icon': AntIcons.shareAltOutlined, 'label': 'Share' },
       { 'icon': AntIcons.deleteOutlined, 'label': 'Delete', 'color': Colors.red }
     ];

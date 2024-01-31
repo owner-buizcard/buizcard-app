@@ -60,4 +60,12 @@ class Global {
   static removeCard(String cardId) {
     cards.value.removeWhere((element) => element.id == cardId);
   }
+
+  static Color hexToColor(String hexString) {
+    try{
+      return Color(int.parse(hexString.substring(1, 7), radix: 16) + 0xFF000000);
+    }catch(e){
+      return Colors.black;
+    }
+  }
 }

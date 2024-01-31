@@ -16,6 +16,14 @@ class SaveCardEvent extends CardEvent {
   SaveCardEvent(this.cardId, this.data);
 }
 
+class SaveQrEvent extends CardEvent {
+  final String cardId;
+  final QrInfo info;
+  final String? qrLogoPath;
+
+  SaveQrEvent(this.cardId, this.info, {this.qrLogoPath});
+}
+
 class DeleteCardEvent extends CardEvent {
   final String cardId;
 

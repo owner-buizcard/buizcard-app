@@ -5,6 +5,8 @@ import 'package:bizcard_app/pages/widgets/banner_ph.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../utils/global.dart';
+
 class CardItem extends StatelessWidget {
   final bizcard.Card card;
   final VoidCallback onOptionClick;
@@ -80,9 +82,29 @@ class CardItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         QrImageView(
-                          size: 130,
-                          data: card.cardLink??''
-                        )
+                          size: 160,
+                          data: card.cardLink!,
+                          gapless: false,
+                          dataModuleStyle: QrDataModuleStyle(
+                              dataModuleShape:
+                                  card.qr?.codeStyle == "dots"
+                                      ? QrDataModuleShape.circle
+                                      : QrDataModuleShape.square,
+                              color: Global.hexToColor(
+                                  card.qr?.fgColor ?? '#000000')),
+                          eyeStyle: QrEyeStyle(
+                              eyeShape: card.qr?.eyeStyle == "circle"
+                                  ? QrEyeShape.circle
+                                  : QrEyeShape.square,
+                              color: Global.hexToColor(
+                                  card.qr?.eyeColor ?? '#000000')),
+                          embeddedImageStyle: const QrEmbeddedImageStyle(
+                            size: Size(35, 35),
+                          ),
+                          embeddedImage: card.qr?.logo != null
+                                  ? NetworkImage(card.qr!.logo!)
+                                      as ImageProvider
+                                  : null)
                       ],
                     ),
                   ),

@@ -80,6 +80,8 @@ class DashboardViewModel extends BaseViewModel {
               Navigator.of(context).pushNamed(Routes.preview, arguments: card.id);
             }else if(v=='Share'){
               Share.shareUri(Uri.parse(card.cardLink!));
+            }else if(v=='QrCode theme'){
+              Navigator.of(context).pushNamed(Routes.qrTheme, arguments: card.id);
             }
           },
         );
