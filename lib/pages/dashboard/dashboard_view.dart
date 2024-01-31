@@ -81,6 +81,7 @@ class _DashboardViewState extends State<DashboardView> {
             ),
             floatingActionButton: bottomNavIndex == 0
                 ? FloatingActionButton(
+                    heroTag: 'create',
                     onPressed: () =>
                         _viewModel.openCreateSheet(context, _viewModel),
                     shape: RoundedRectangleBorder(

@@ -62,6 +62,7 @@ class MyCardsFragment extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           FloatingActionButton(
+                            heroTag: 'nav-left',
                             onPressed: (){},
                             elevation: 0,
                             backgroundColor: const Color(0x44000000),
@@ -73,6 +74,7 @@ class MyCardsFragment extends StatelessWidget {
                             child: const Icon(Icons.arrow_back_ios)  
                           ),
                           FloatingActionButton(
+                            heroTag: 'nav-right',
                             onPressed: (){}, 
                             elevation: 0,
                             backgroundColor: const Color(0x44000000),
