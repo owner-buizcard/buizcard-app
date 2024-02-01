@@ -7,6 +7,7 @@ import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bloc/contacts_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bottomsheets/export_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_options_sheet.dart';
+import 'package:bizcard_app/pages/dashboard/bottomsheets/card_settings_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/contact_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/create_card_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
@@ -84,7 +85,25 @@ class DashboardViewModel extends BaseViewModel {
               Navigator.of(context).pushNamed(Routes.qrTheme, arguments: card.id);
             }else if(v=='Analytics'){
               Navigator.of(context).pushNamed(Routes.cardAnalytics, arguments: card.id);
+            }else if(v=='Settings'){
+              openCardSettings(card, context);
             }
+          },
+        );
+    });
+  }
+
+  openCardSettings(bizcard.Card card, BuildContext context){
+    showModalBottomSheet(
+      context: context, 
+      isScrollControlled: true,
+      builder: (_){
+        return CardSettingsSheet(
+          cardId: card.id,
+          onClick: (updated){
+            context.read<CardBloc>().add(
+              SaveCardSettingsEvent(updated)    
+            );
           },
         );
     });

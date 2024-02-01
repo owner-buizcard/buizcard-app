@@ -9,6 +9,8 @@ class Loading extends CardState {}
 
 class Success extends CardState {}
 
+class SettingsUpdated extends CardState {}
+
 class AnalyticsFetched extends CardState {
   final Analytics analytics;
 

@@ -20,6 +20,7 @@ class CardBloc extends Bloc<CardEvent, CardState> {
     on<SaveCardEvent>(_onSaveCard);
     on<CreateCardEvent>(_onCreateCard);
     on<DeleteCardEvent>(_onDeleteCard);
+    on<SaveCardSettingsEvent>(_onSaveCardSettings);
     on<AddLinkEvent>(_onAddLink);
     on<SaveQrEvent>(_onSaveQr);
   }
@@ -61,6 +62,19 @@ class CardBloc extends Bloc<CardEvent, CardState> {
       var card = await CardService().saveCard(cardId: event.cardId, data: data);
       Global.updateCard(bizcard.Card.fromJson(card));
       emit(LinkAdded(field: value));
+    }catch(error){
+      emit(Error());
+    }
+  }
+
+  _onSaveCardSettings(SaveCardSettingsEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      await CardService().saveCardSettings(cardId: event.card.id, data: {
+        'qrVisible': event.card.qrVisible,
+        'status': event.card.status
+      });
+      emit(SettingsUpdated());
     }catch(error){
       emit(Error());
     }

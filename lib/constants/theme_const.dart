@@ -202,6 +202,11 @@ class ThemeConst {
           fontWeight: FontWeight.w500
         )
       ),
+
+      switchTheme: const SwitchThemeData(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+        trackOutlineColor: MaterialStatePropertyAll(ColorsConst.primaryLight)
+      ),
       
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: defaultBorder,

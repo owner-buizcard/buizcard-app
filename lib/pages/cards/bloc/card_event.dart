@@ -22,6 +22,12 @@ class SaveCardEvent extends CardEvent {
   SaveCardEvent(this.cardId, this.data);
 }
 
+class SaveCardSettingsEvent extends CardEvent {
+  final bizcard.Card card;
+
+  SaveCardSettingsEvent(this.card);
+}
+
 class SaveQrEvent extends CardEvent {
   final String cardId;
   final QrInfo info;

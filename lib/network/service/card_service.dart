@@ -7,6 +7,11 @@ class CardService {
     return await client.put(data);
   }
 
+  Future<dynamic> saveCardSettings({required String cardId, required Map data})async{
+    ApiClient client = ApiClient('/card?cardId=$cardId', loader: false);
+    return await client.put(data);
+  }
+
   Future<dynamic> getCardAnalytics({required String cardId})async{
     ApiClient client = ApiClient('/card-analytics?cardId=$cardId');
     return await client.gets();
