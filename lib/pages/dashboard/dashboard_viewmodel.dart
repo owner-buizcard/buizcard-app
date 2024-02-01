@@ -72,7 +72,7 @@ class DashboardViewModel extends BaseViewModel {
         return CardOptionsSheet(
           onClick: (v){
             Navigator.pop(context);
-            if(v=='Edit'){
+            if(v=='Edit details'){
               Navigator.of(context).pushNamed(Routes.cardBuilder, arguments: card.id);
             }else if(v=='Delete'){
               context.read<CardBloc>().add(DeleteCardEvent(card.id));
@@ -82,6 +82,8 @@ class DashboardViewModel extends BaseViewModel {
               Share.shareUri(Uri.parse(card.cardLink!));
             }else if(v=='QrCode theme'){
               Navigator.of(context).pushNamed(Routes.qrTheme, arguments: card.id);
+            }else if(v=='Analytics'){
+              Navigator.of(context).pushNamed(Routes.cardAnalytics, arguments: card.id);
             }
           },
         );

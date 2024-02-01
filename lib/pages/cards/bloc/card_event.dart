@@ -9,6 +9,12 @@ class GetCardDetails extends CardEvent {
   GetCardDetails(this.cardId);
 }
 
+class GetCardAnalyticsEvent extends CardEvent {
+  final String cardId;
+
+  GetCardAnalyticsEvent(this.cardId);
+}
+
 class SaveCardEvent extends CardEvent {
   final String cardId;
   final Map data;

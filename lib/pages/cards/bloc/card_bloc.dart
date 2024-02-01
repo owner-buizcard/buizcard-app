@@ -1,3 +1,4 @@
+import 'package:bizcard_app/models/analytics.dart';
 import 'package:bizcard_app/models/field_value.dart';
 import 'package:bizcard_app/models/qr_info.dart';
 import 'package:bizcard_app/network/service/card_service.dart';
@@ -14,12 +15,23 @@ part 'card_state.dart';
 
 class CardBloc extends Bloc<CardEvent, CardState> {
   CardBloc() : super(CardInitial()) {
+    on<GetCardAnalyticsEvent>(_onGetCardAnalytics);
     on<GetCardDetails>(_onGetCardDetails);
     on<SaveCardEvent>(_onSaveCard);
     on<CreateCardEvent>(_onCreateCard);
     on<DeleteCardEvent>(_onDeleteCard);
     on<AddLinkEvent>(_onAddLink);
     on<SaveQrEvent>(_onSaveQr);
+  }
+
+  _onGetCardAnalytics(GetCardAnalyticsEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      var result = await CardService().getCardAnalytics(cardId: event.cardId);
+      emit(AnalyticsFetched(analytics: Analytics.fromJson(result)));
+    }catch(error){
+      emit(Error());
+    }
   }
 
   _onGetCardDetails(GetCardDetails event, Emitter emit)async{

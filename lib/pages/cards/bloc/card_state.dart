@@ -9,6 +9,12 @@ class Loading extends CardState {}
 
 class Success extends CardState {}
 
+class AnalyticsFetched extends CardState {
+  final Analytics analytics;
+
+  AnalyticsFetched({required this.analytics});
+}
+
 class CardDetailsFetched extends CardState {
   final bizcard.Card card;
   final bool ownCard;

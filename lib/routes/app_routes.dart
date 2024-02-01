@@ -8,6 +8,7 @@ import 'package:bizcard_app/pages/authentication/signup/cubit/page_cubit.dart';
 import 'package:bizcard_app/pages/authentication/photo/photo_view.dart';
 import 'package:bizcard_app/pages/authentication/signup/signup_view.dart';
 import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
+import 'package:bizcard_app/pages/cards/analytics/card_analytics_view.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
 import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
@@ -62,6 +63,7 @@ class Routes {
 
   //cards
   static const String cardBuilder = "/card-builder";
+  static const String cardAnalytics = "/card/analytics";
   static const String qrTheme = "/qr-theme";
   static const String linkStore = "/link-store";
   static const String preview = "/preview";
@@ -142,6 +144,13 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
           child: const ForgotPasswordView(),
+        ));
+
+      case Routes.cardAnalytics:
+        var cardId =  settings.arguments as String;
+        return getTransistionPage(BlocProvider(
+          create: (context) => CardBloc(),
+          child: CardAnalyticsView(cardId: cardId),
         ));
 
       case Routes.cardBuilder:
