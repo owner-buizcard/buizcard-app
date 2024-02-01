@@ -18,4 +18,5 @@ class AssetsConst {
 
   static const relaxing = '${_lottieFolder}relax.json';
   static const loading = '${_lottieFolder}loader.json';
+  static const useradding = '${_lottieFolder}useradd.json';
 }

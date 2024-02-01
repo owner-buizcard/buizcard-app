@@ -27,6 +27,7 @@ import 'package:bizcard_app/pages/settings/settings_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../pages/authentication/bloc/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -187,7 +188,10 @@ class RouteGenerator {
               create: (context) => ContactsBloc(),
             ),
           ],
-          child: const DashboardView(),
+          child: ShowCaseWidget(
+            builder: Builder(
+              builder: (_) => const DashboardView()
+            )),
         ));
 
       case Routes.settings:

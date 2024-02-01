@@ -5,11 +5,22 @@ class LocalDB {
   static init()async{
     await Hive.initFlutter();
     await Hive.openBox('credentials');
+    await Hive.openBox('config');
   }
 
   static Future clearDB()async{
     var box = Hive.box('credentials');
     await box.clear();
+  }
+
+  static launchDone(){
+    var box = Hive.box('config');
+    box.put('launch', false);
+  }
+
+  static showGuide(){
+    var box = Hive.box('config');
+    return box.get('launch') ?? true;
   }
 
   static saveToken(token){
