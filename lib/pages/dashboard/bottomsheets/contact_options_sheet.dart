@@ -1,21 +1,23 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 
 class ContactOptionsSheet extends StatelessWidget {
   final Function(String) onClick;
-  const ContactOptionsSheet({super.key, required this.onClick});
+  final Contact contact;
+  const ContactOptionsSheet({super.key, required this.onClick, required this.contact});
 
   @override
   Widget build(BuildContext context) {
 
+    var email = contact.card?.email??contact.details?.email;
     final List options = [
-      { 'icon': AntIcons.editOutlined, 'label': 'Edit' },
+      ...contact.details!=null ? [{ 'icon': AntIcons.editOutlined, 'label': 'Edit' }]: [],
+      ...contact.card!=null ? [{ 'icon': AntIcons.eyeOutlined, 'label': 'Preview' }]: [],
       { 'icon': AntIcons.paperClipOutlined, 'label': 'Add Tags' },
-      { 'icon': AntIcons.bookOutlined, 'label': 'Add Notes' },
-      { 'icon': AntIcons.starOutlined, 'label': 'Make Favourite' },
+      ...email!=null ? [{ 'icon': AntIcons.mailOutlined, 'label': 'Send Mail' }]: [],
       { 'icon': AntIcons.downloadOutlined, 'label': 'Save as Contact' },
-      { 'icon': AntIcons.shareAltOutlined, 'label': 'Share' },
       { 'icon': AntIcons.exportOutlined, 'label': 'Export' },
       { 'icon': AntIcons.deleteOutlined, 'label': 'Delete', 'color': Colors.red }
     ];

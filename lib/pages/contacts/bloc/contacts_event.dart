@@ -19,6 +19,14 @@ class SaveContactEvent extends ContactsEvent {
   const SaveContactEvent(this.cardId);
 }
 
+class SendMailEvent extends ContactsEvent {
+  final List emails;
+  final String subject;
+  final String content;
+
+  const SendMailEvent({required this.content, required this.emails, required this.subject});
+}
+
 class ExportContactsEvent extends ContactsEvent {
   final String exportId;
   final List ids;

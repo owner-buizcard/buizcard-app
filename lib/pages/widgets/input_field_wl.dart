@@ -11,6 +11,7 @@ class InputFieldWL extends StatelessWidget {
   final String? validationType;
   final String? hint;
   final bool autofocus;
+  final int maxLines;
   final TextEditingController controller;
   const InputFieldWL({
     super.key, 
@@ -19,6 +20,7 @@ class InputFieldWL extends StatelessWidget {
     this.autofocus = false,
     required this.controller,
     this.isRequired = false,
+    this.maxLines = 1,
     this.validationType,
     this.prefixIcon
   });
@@ -32,6 +34,7 @@ class InputFieldWL extends StatelessWidget {
         const Gap(size: 10),
         TextFormField(
           controller: controller,
+          maxLines: maxLines,
           style: GoogleFonts.roboto(
             fontSize: 16,
             color: Colors.black

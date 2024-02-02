@@ -1,5 +1,6 @@
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
+import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/pages/contacts/bloc/contacts_bloc.dart';
 import 'package:flutter/material.dart';
@@ -39,22 +40,39 @@ class CreateContactViewModel extends BaseViewModel {
       UploadImageEvent(path: type, croptype: type=='banner'? 'rect': 'square'));
   }
 
-  onSave(BuildContext context){
+  onSave(BuildContext context, Contact? contact){
     if(!formKey.currentState!.validate()){
       return;
     }
 
-    context.read<ContactsBloc>().add(CreateContactEvent(
-      ContactInfo(
-        name: nameController.trim(), 
-        email: emailController.trim(), 
-        phone: phoneController.trim(), 
-        title: titleController.trim(), 
-        company: companyController.trim(), 
-        website: websiteController.trim(), 
-        location: locationController.trim()
-      )
-    ));
+    if(contact!=null){
+      context.read<ContactsBloc>().add(UpdateContactEvent(
+        contactId: contact.id,
+        data: {
+          "details": ContactInfo(
+            name: nameController.trim(), 
+            email: emailController.trim(), 
+            phone: phoneController.trim(), 
+            title: titleController.trim(), 
+            company: companyController.trim(), 
+            website: websiteController.trim(), 
+            location: locationController.trim()
+          ).toJson()
+        }
+      ));
+    }else{
+      context.read<ContactsBloc>().add(CreateContactEvent(
+        ContactInfo(
+          name: nameController.trim(), 
+          email: emailController.trim(), 
+          phone: phoneController.trim(), 
+          title: titleController.trim(), 
+          company: companyController.trim(), 
+          website: websiteController.trim(), 
+          location: locationController.trim()
+        )
+      ));
+    }
   }
 
   

@@ -20,6 +20,9 @@ class MyContactsFragment extends StatelessWidget {
       listener: (context, state) {
         if(state is Exported){
           toast('Exported success!', success: true);
+        }else if(state is MailSent){
+          Navigator.pop(context);
+          toast('Mail sent successfully!', success: true);
         }
       },
       child: Padding(
@@ -39,7 +42,7 @@ class MyContactsFragment extends StatelessWidget {
                         .map((e) => ContactItem(
                               contact: e,
                               onOptionsClick: (v) =>
-                                  viewModel.openContactOptions(e, context),
+                                  viewModel.openContactOptions(e, context, viewModel),
                             ))
                         .toList()))
           ])),

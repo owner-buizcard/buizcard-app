@@ -1,4 +1,5 @@
 import 'package:bizcard_app/constants/urls_const.dart';
+import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/pages/authentication/callback/callback_view.dart';
 import 'package:bizcard_app/pages/authentication/login/login_view.dart';
@@ -61,6 +62,7 @@ class Routes {
   //contacts
   static const String extracter = "/extracter";
   static const String createContact = "/create-contact";
+  static const String editContact = "/edit-contact";
 
   //cards
   static const String cardBuilder = "/card-builder";
@@ -244,6 +246,20 @@ class RouteGenerator {
           ],
           child: CreateContactView(info: settings.arguments as ContactInfo?),
         ));
+
+      case Routes.editContact:
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => ImageBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ContactsBloc(),
+            ),
+          ],
+          child: CreateContactView(contact: settings.arguments as Contact?),
+        ));
+
 
       case Routes.extracter:
         return getTransistionPage(MultiBlocProvider(

@@ -12,8 +12,8 @@ class ContactService {
     return await client.post(details.toJson());
   }
 
-  Future<dynamic> updateContactDetails({required String contactId, required Map data})async{
-    ApiClient client = ApiClient('/contact?contactId=$contactId', loader: false);
+  Future<dynamic> updateContactDetails({required String contactId, required Map data, bool loader = false})async{
+    ApiClient client = ApiClient('/contact?contactId=$contactId', loader: loader);
     return await client.put(data);
   }
 
@@ -36,5 +36,11 @@ class ContactService {
     ApiClient client = ApiClient('/spreadsheet/export');
     return await client.post({'contactIds': ids});
   }
+
+  Future<dynamic> sendMail(data)async{
+    ApiClient client = ApiClient('/contact/mail');
+    return await client.post(data);
+  }
+
 
 }

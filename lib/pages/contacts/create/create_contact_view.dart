@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/pages/contacts/create/create_contact_viewmodel.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
@@ -14,7 +15,8 @@ import '../bloc/contacts_bloc.dart';
 
 class CreateContactView extends StatefulWidget {
   final ContactInfo? info;
-  const CreateContactView({super.key, required this.info});
+  final Contact? contact;
+  const CreateContactView({super.key, this.info, this.contact});
 
   @override
   State<CreateContactView> createState() => _CreateContactViewState();
@@ -25,7 +27,7 @@ class _CreateContactViewState extends State<CreateContactView> {
 
   @override
   void initState() {
-    _viewModel = CreateContactViewModel(widget.info);
+    _viewModel = CreateContactViewModel(widget.info??widget.contact?.details);
     super.initState();
   }
 
@@ -44,7 +46,7 @@ class _CreateContactViewState extends State<CreateContactView> {
         ),
         BlocListener<ContactsBloc, ContactsState>(
           listener: (context, state) {
-            if(state is ContactCreated){
+            if(state is ContactCreated || state is ContactUpdated){
               Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
             }
           },
@@ -52,10 +54,10 @@ class _CreateContactViewState extends State<CreateContactView> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Create Contact'),
+          title: Text(widget.contact!=null ? 'Edit Contact' :'Create Contact'),
           actions: [
             TextButton(
-                onPressed: () => _viewModel.onSave(context),
+                onPressed: () => _viewModel.onSave(context, widget.contact),
                 child: const Text("Save")),
             const Gap(size: 8)
           ],

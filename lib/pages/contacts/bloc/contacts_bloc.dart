@@ -16,9 +16,24 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     on<DeleteContactEvent>(_onDeleteContact);
     on<UpdateContactEvent>(_onUpdateContact);
     on<ExportContactsEvent>(_onExportContacts);
+    on<SendMailEvent>(_onSendMail);
   }
 
   var service = ContactService();
+
+  _onSendMail(SendMailEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      await service.sendMail({
+        'emails': event.emails,
+        'subject': event.subject,
+        'content': event.content
+      });
+      emit(MailSent());
+    }catch(error){
+      emit(Failure());
+    }
+  }
 
   _onExportContacts(ExportContactsEvent event, Emitter emit)async{
     emit(Loading());
@@ -73,7 +88,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   _onUpdateContact(UpdateContactEvent event, Emitter emit)async{
     emit(Loading());
     try{
-      var result = await service.updateContactDetails(contactId: event.contactId, data: event.data);
+      var result = await service.updateContactDetails(contactId: event.contactId, data: event.data, loader: true);
       var contact = Contact.fromJson(result);
       var updated = Global.contacts.map((e){
         if(e.id==contact.id){

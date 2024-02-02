@@ -10,6 +10,7 @@ import 'package:bizcard_app/pages/dashboard/bottomsheets/card_options_sheet.dart
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_settings_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/contact_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/create_card_sheet.dart';
+import 'package:bizcard_app/pages/dashboard/bottomsheets/mail_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/fragments/my_cards_fragment.dart';
 import 'package:bizcard_app/pages/dashboard/fragments/my_contacts_fragment.dart';
@@ -43,11 +44,18 @@ class DashboardViewModel extends BaseViewModel {
   late PageController controller;
   late TextEditingController cardnameController;
 
+  late TextEditingController subjectController;
+  late TextEditingController contentController;
+
   final GlobalKey<FormState> formKey = GlobalKey();
+  final GlobalKey<FormState> mailFormKey = GlobalKey();
 
   DashboardViewModel(){
     controller = PageController();
     cardnameController = TextEditingController();
+
+    subjectController = TextEditingController();
+    contentController = TextEditingController();
   }
 
   getPages(DashboardViewModel viewModel){
@@ -110,32 +118,32 @@ class DashboardViewModel extends BaseViewModel {
     });
   }
 
-  openContactOptions(Contact contact, BuildContext context){
+  openContactOptions(Contact contact, BuildContext context, viewModel){
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
       builder: (_){
         return ContactOptionsSheet(
+          contact: contact,
           onClick: (v)async{
             Navigator.pop(context);
             if(v=='Delete'){
               context.read<ContactsBloc>().add(DeleteContactEvent(contactId: contact.id));
-            }else if(v=='Make Favourite'){
-
-            }else if(v=='Remove From Favourite'){
-
-            }else if(v=='Add Notes'){
-
             }else if(v=='Add Tags'){
 
+            }else if(v=='Send Mail'){
+              openMailSheet(
+                context, 
+                contact.card?.email??contact.details?.email,
+                viewModel);
             }else if(v=='Save as Contact'){
               await saveVCard(contact: contact);
             }else if(v=='Export'){
               openExportSheet(context, contact);
-            }else if(v=='Share'){
-
             }else if(v=='Edit'){
-              
+              Navigator.pushNamed(context, Routes.editContact, arguments: contact);
+            }else if(v=='Preview'){
+              Navigator.pushNamed(context, Routes.preview, arguments: contact.card?.id);
             }
           },
         );
@@ -153,6 +161,30 @@ class DashboardViewModel extends BaseViewModel {
           onCreate: ()=>createCard(context)
         );
     });
+  }
+
+  openMailSheet(BuildContext context, email,  viewModel){
+    subjectController.clear();
+    contentController.clear();
+    showModalBottomSheet(
+        context: context, 
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
+        builder: (_){
+          return MailSheet(viewModel: viewModel, onSave: ()=>sendMail(context, email),);
+      });
+  }
+
+  sendMail(BuildContext context, String email){
+    if(!mailFormKey.currentState!.validate()){
+      return;
+    }
+    context.read<ContactsBloc>().add(
+            SendMailEvent(
+              emails: [email],
+              subject: subjectController.trim(),
+              content: contentController.trim()  
+            ));
   }
 
   openExportSheet(BuildContext context, Contact contact){
