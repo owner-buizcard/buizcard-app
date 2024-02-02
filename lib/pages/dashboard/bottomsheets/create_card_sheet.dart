@@ -20,6 +20,7 @@ class CreateCardSheet extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             
             'Create Card'.titletext(context),

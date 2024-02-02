@@ -6,6 +6,7 @@ import 'package:bizcard_app/models/card.dart' as bizcard;
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bloc/contacts_bloc.dart';
 import 'package:bizcard_app/pages/contacts/bottomsheets/export_sheet.dart';
+import 'package:bizcard_app/pages/dashboard/bottomsheets/add_tag_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_options_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/card_settings_sheet.dart';
 import 'package:bizcard_app/pages/dashboard/bottomsheets/contact_options_sheet.dart';
@@ -102,6 +103,23 @@ class DashboardViewModel extends BaseViewModel {
     });
   }
 
+  openTagSheet(BuildContext context, Contact contact){
+    showModalBottomSheet(
+      context: context, 
+      builder: (_){
+        return AddTagSheet(
+          contactId: contact.id,
+          onSave: (tags){
+            Navigator.pop(context);
+            context.read<ContactsBloc>().add(
+              UpdateContactEvent(
+                contactId: contact.id, data: {'tags': tags})
+              );
+          },
+        );
+    });
+  }
+
   openCardSettings(bizcard.Card card, BuildContext context){
     showModalBottomSheet(
       context: context, 
@@ -130,7 +148,7 @@ class DashboardViewModel extends BaseViewModel {
             if(v=='Delete'){
               context.read<ContactsBloc>().add(DeleteContactEvent(contactId: contact.id));
             }else if(v=='Add Tags'){
-
+              openTagSheet(context, contact);
             }else if(v=='Send Mail'){
               openMailSheet(
                 context, 

@@ -10,16 +10,24 @@ class InputField extends StatelessWidget {
   final bool isRequired;
   final String? validationType;
   final int maxLines;
+  final Widget? suffix;
   final Function(String)? onChanged;
+  final Function(String)? onFieldSubmitted;
   final TextEditingController controller;
+  final VoidCallback? onSuffixIconClick;
+  final bool autofocus;
   const InputField({
     super.key, 
     this.label, 
     this.hint,
     required this.controller,
     this.isRequired = false,
+    this.onSuffixIconClick,
+    this.autofocus = false,
     this.validationType,
+    this.suffix,
     this.onChanged,
+    this.onFieldSubmitted,
     this.maxLines = 1,
     this.prefixIcon,
     this.suffixIcon
@@ -30,16 +38,21 @@ class InputField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       maxLines: maxLines,
+      onFieldSubmitted: onFieldSubmitted,
       style: GoogleFonts.roboto(
         fontSize: 16,
         color: Colors.black
       ),
       onChanged: onChanged,
+      autofocus: autofocus,
       decoration: InputDecoration(
+        suffix: suffix,
         prefixIcon: prefixIcon!=null 
           ? Icon(prefixIcon) : null,
         suffixIcon: suffixIcon!=null 
-          ? Icon(suffixIcon) : null,
+          ? InkWell(
+            onTap: onSuffixIconClick,
+            child: Icon(suffixIcon)) : null,
         errorMaxLines: 2,
         labelText: label,
         hintText: hint,
