@@ -14,6 +14,7 @@ import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/fragments/my_cards_fragment.dart';
 import 'package:bizcard_app/pages/dashboard/fragments/my_contacts_fragment.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
+import 'package:bizcard_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share_plus/share_plus.dart';
@@ -115,7 +116,7 @@ class DashboardViewModel extends BaseViewModel {
       isScrollControlled: true,
       builder: (_){
         return ContactOptionsSheet(
-          onClick: (v){
+          onClick: (v)async{
             Navigator.pop(context);
             if(v=='Delete'){
               context.read<ContactsBloc>().add(DeleteContactEvent(contactId: contact.id));
@@ -128,13 +129,13 @@ class DashboardViewModel extends BaseViewModel {
             }else if(v=='Add Tags'){
 
             }else if(v=='Save as Contact'){
-
+              await saveVCard(contact: contact);
             }else if(v=='Export'){
               openExportSheet(context, contact);
             }else if(v=='Share'){
 
             }else if(v=='Edit'){
-
+              
             }
           },
         );
