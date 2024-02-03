@@ -1,7 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/contact_item.dart';
-import 'package:bizcard_app/utils/global.dart';
 import 'package:bizcard_app/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,9 +17,9 @@ class MyContactsFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ContactsBloc, ContactsState>(
       listener: (context, state) {
-        if(state is Exported){
+        if (state is Exported) {
           toast('Exported success!', success: true);
-        }else if(state is MailSent){
+        } else if (state is MailSent) {
           Navigator.pop(context);
           toast('Mail sent successfully!', success: true);
         }
@@ -34,17 +33,23 @@ class MyContactsFragment extends StatelessWidget {
             InputField(
                 hint: 'Search contacts...',
                 suffixIcon: AntIcons.searchOutlined,
-                controller: TextEditingController()),
+                controller: TextEditingController(),
+                onChanged: (v)=>viewModel.onSearch(v.toLowerCase())
+            ),
             const Gap(size: 16),
             Expanded(
-                child: ListView(
-                    children: Global.contacts
-                        .map((e) => ContactItem(
-                              contact: e,
-                              onOptionsClick: (v) =>
-                                  viewModel.openContactOptions(e, context, viewModel),
-                            ))
-                        .toList()))
+                child: ValueListenableBuilder(
+                  valueListenable: viewModel.contacts,
+                  builder: (_, val, __) {
+                    return ListView(
+                        children: val.map((e) => ContactItem(
+                                  contact: e,
+                                  onOptionsClick: (v) => viewModel
+                                      .openContactOptions(e, context, viewModel),
+                                ))
+                            .toList());
+                  }
+                ))
           ])),
     );
   }
