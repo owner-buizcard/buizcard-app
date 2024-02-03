@@ -30,6 +30,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../pages/account/bloc/account_bloc.dart';
 import '../pages/authentication/bloc/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -150,7 +151,7 @@ class RouteGenerator {
         ));
 
       case Routes.cardAnalytics:
-        var cardId =  settings.arguments as String;
+        var cardId = settings.arguments as String;
         return getTransistionPage(BlocProvider(
           create: (context) => CardBloc(),
           child: CardAnalyticsView(cardId: cardId),
@@ -191,9 +192,7 @@ class RouteGenerator {
             ),
           ],
           child: ShowCaseWidget(
-            builder: Builder(
-              builder: (_) => const DashboardView()
-            )),
+              builder: Builder(builder: (_) => const DashboardView())),
         ));
 
       case Routes.settings:
@@ -207,7 +206,10 @@ class RouteGenerator {
             LaunchView(url: settings.arguments as String));
 
       case Routes.integrations:
-        return getTransistionPage(const IntegrationView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AccountBloc(),
+          child: const IntegrationView(),
+        ));
 
       case Routes.callback:
         return getTransistionPage(BlocProvider(
@@ -259,7 +261,6 @@ class RouteGenerator {
           ],
           child: CreateContactView(contact: settings.arguments as Contact?),
         ));
-
 
       case Routes.extracter:
         return getTransistionPage(MultiBlocProvider(

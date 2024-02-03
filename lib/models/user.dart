@@ -15,6 +15,7 @@ class User extends Equatable {
   final String? phoneNumber;
   final String? email;
   final bool emailVerified;
+  final bool enableWhatsapp;
   final String? additionalEmail;
   final String? additionalPhoneNumber;
   final String? whatsappNumber;
@@ -38,6 +39,7 @@ class User extends Equatable {
     required this.id,
     this.firstName,
     this.lastName,
+    this.enableWhatsapp = true,
     this.displayName,
     this.designation,
     this.gender,
@@ -69,9 +71,10 @@ class User extends Equatable {
     this.deleted,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
+  factory User.fromJson(json) {
     return User(
       id: json['_id'] as String,
+      enableWhatsapp: json['enableWhatsapp'],
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       displayName: json['displayName'] as String?,
@@ -112,7 +115,4 @@ class User extends Equatable {
   
   @override
   List<Object?> get props => throw UnimplementedError();
-
-  
-
 }

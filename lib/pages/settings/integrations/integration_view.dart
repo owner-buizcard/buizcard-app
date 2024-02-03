@@ -1,5 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
+import 'package:bizcard_app/pages/settings/integrations/integration_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:bizcard_app/utils/global.dart';
@@ -14,6 +15,14 @@ class IntegrationView extends StatefulWidget {
 }
 
 class _IntegrationViewState extends State<IntegrationView> {
+  late IntegrationViewModel _viewModel;
+
+  @override
+  void initState() {
+    _viewModel = IntegrationViewModel();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +57,12 @@ class _IntegrationViewState extends State<IntegrationView> {
                             padding: const MaterialStatePropertyAll(EdgeInsets.all(0)),
                           ),
                         onPressed: ()async{
+
+                          if(e.authType=="api"){
+                            _viewModel.openWhatsappSheet(context, _viewModel);
+                            return;
+                          }
+
                           var link = e.authLink;
                           if(e.authLink.contains('userId')){
                             link = e.authLink.replaceAll('\${userId}', Global.user!.id);
