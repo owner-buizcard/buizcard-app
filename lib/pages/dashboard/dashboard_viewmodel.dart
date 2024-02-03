@@ -212,17 +212,19 @@ class DashboardViewModel extends BaseViewModel {
         content: contentController.trim()));
   }
 
-  openExportSheet(BuildContext context, Contact contact) {
+  openExportSheet(BuildContext context, Contact? contact) {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.white,
         isScrollControlled: true,
         builder: (_) {
-          return ExportSheet(onClick: (v) {
-            Navigator.pop(context);
-            context
+          return ExportSheet(
+            isAll: contact==null,
+            onClick: (v) {
+              Navigator.pop(context);
+              context
                 .read<ContactsBloc>()
-                .add(ExportContactsEvent(exportId: v, ids: [contact.id]));
+                .add(ExportContactsEvent(exportId: v, ids: contact!=null ? [contact.id] : []));
           });
         });
   }

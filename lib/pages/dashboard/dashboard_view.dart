@@ -62,11 +62,7 @@ class _DashboardViewState extends State<DashboardView> {
                     : [
                         IconButton(
                           icon: const Icon(AntIcons.exportOutlined),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(AntIcons.shareAltOutlined),
-                          onPressed: () {},
+                          onPressed: ()=>_viewModel.openExportSheet(context, null),
                         ),
                         IconButton(
                           icon: const Icon(AntIcons.userAddOutlined),
