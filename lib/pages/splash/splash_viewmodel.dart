@@ -12,7 +12,7 @@ class SplashViewModel extends BaseViewModel {
     var accessToken = LocalDB.getAccessToken();
 
     if(accessToken==null){
-      Future.delayed(Duration.zero, ()=>Navigator.pushNamed(context, Routes.welcome));
+      Future.delayed(const Duration(seconds: 5), ()=>Navigator.pushNamed(context, Routes.welcome));
       return;
     }
 

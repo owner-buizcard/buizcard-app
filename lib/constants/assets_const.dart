@@ -15,8 +15,10 @@ class AssetsConst {
 
   static const loader = '${_gifsFolder}loading.gif';
   static const thumbp = '${_gifsFolder}thumb_print.gif';
+  static const logo = '${_gifsFolder}logo.gif';
 
   static const relaxing = '${_lottieFolder}relax.json';
   static const loading = '${_lottieFolder}loader.json';
   static const useradding = '${_lottieFolder}useradd.json';
+  static const onboarding = '${_lottieFolder}onboard.json';
 }

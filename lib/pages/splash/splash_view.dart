@@ -1,3 +1,4 @@
+import 'package:bizcard_app/constants/assets_const.dart';
 import 'package:bizcard_app/pages/splash/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,14 +21,24 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
+      body: Container(
         width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF10A0FF),
+              Color(0xFF2A5298)
+            ])
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Cardbuk', style: GoogleFonts.aBeeZee(
-              fontSize: 32,
-              fontWeight: FontWeight.w900
+            Image.asset(AssetsConst.logo, width: 100),
+            Text('BIZCARD', style: GoogleFonts.lalezar(
+              fontSize: 44,
+              color: Colors.white,
             ))
           ],
         ),
