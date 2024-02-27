@@ -1,7 +1,10 @@
+import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/constants/colors_const.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/models/card.dart' as bizcard;
 import 'package:bizcard_app/pages/widgets/banner_ph.dart';
+import 'package:bizcard_app/pages/widgets/gap.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -18,22 +21,22 @@ class CardItem extends StatelessWidget {
       margin: const EdgeInsets.all(6),
       decoration: BoxDecoration(
         boxShadow: const [
-          BoxShadow(color: Color(0x268c8c8c), blurRadius: 8)
+          BoxShadow(color: Color.fromARGB(37, 124, 123, 123), blurRadius: 4)
         ],
         color: Colors.white,
-        borderRadius: BorderRadius.circular(6)
+        borderRadius: BorderRadius.circular(8)
       ),
       child: Column(
         children: [
     
           Expanded(
-            flex: 2,
+            flex: 3,
             child: 
             
             Stack(
               children: [
                 FractionallySizedBox(
-                  heightFactor: 0.75,
+                  heightFactor: 0.80,
                   child: BannerPH(image: card.banner)
                 ),
             
@@ -55,7 +58,7 @@ class CardItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: 8,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Column(
@@ -64,65 +67,107 @@ class CardItem extends StatelessWidget {
                     contentPadding: EdgeInsets.zero,
                     title: '${card.name?.firstName} ${card.name?.lastName}'.titletext(context),
                     subtitle: '${card.email}'.bltext(context),
-                    trailing: InkWell(
-                      onTap: onOptionClick,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: const Color(0x55D6D6D6),
-                          borderRadius: BorderRadius.circular(6)
-                        ),
-                        child: const Icon(Icons.more_vert, color: Color(0xFF797272),),
-                      ),
-                    ),
+                    trailing: const Icon(Icons.badge, size: 36, color: Color.fromARGB(255, 33, 47, 117),),
                   ),
+
+                  const Gap(size: 8),
               
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        QrImageView(
-                          size: 160,
-                          data: card.cardLink!,
-                          gapless: false,
-                          dataModuleStyle: QrDataModuleStyle(
-                              dataModuleShape:
-                                  card.qr?.codeStyle == "dots"
-                                      ? QrDataModuleShape.circle
-                                      : QrDataModuleShape.square,
-                              color: Global.hexToColor(
-                                  card.qr?.fgColor ?? '#000000')),
-                          eyeStyle: QrEyeStyle(
-                              eyeShape: card.qr?.eyeStyle == "circle"
-                                  ? QrEyeShape.circle
-                                  : QrEyeShape.square,
-                              color: Global.hexToColor(
-                                  card.qr?.eyeColor ?? '#000000')),
-                          embeddedImageStyle: const QrEmbeddedImageStyle(
-                            size: Size(35, 35),
-                          ),
-                          embeddedImage: card.qr?.logo != null
-                                  ? NetworkImage(card.qr!.logo!)
-                                      as ImageProvider
-                                  : null)
+                        DottedBorder(
+                          dashPattern: const [3, 3],
+                          radius: const Radius.circular(12),
+                          color: Colors.grey,
+                          child: QrImageView(
+                            size: 130,
+                            data: card.cardLink!,
+                            gapless: false,
+                            dataModuleStyle: QrDataModuleStyle(
+                                dataModuleShape:
+                                    card.qr?.codeStyle == "dots"
+                                        ? QrDataModuleShape.circle
+                                        : QrDataModuleShape.square,
+                                color: Global.hexToColor(
+                                    card.qr?.fgColor ?? '#000000')),
+                            eyeStyle: QrEyeStyle(
+                                eyeShape: card.qr?.eyeStyle == "circle"
+                                    ? QrEyeShape.circle
+                                    : QrEyeShape.square,
+                                color: Global.hexToColor(
+                                    card.qr?.eyeColor ?? '#000000')),
+                            embeddedImageStyle: const QrEmbeddedImageStyle(
+                              size: Size(35, 35),
+                            ),
+                            embeddedImage: card.qr?.logo != null
+                                    ? NetworkImage(card.qr!.logo!)
+                                        as ImageProvider
+                                    : null),
+                        )
                       ],
                     ),
                   ),
-              
+
+                  const Text('Business Card'),
+
+                  const Gap(size: 32),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      'Updated 1 hour ago'.btext(context),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         decoration: BoxDecoration(
-                          color: const Color(0x241677FF),
-                          borderRadius: BorderRadius.circular(4),
+                          color: const Color(0x55D6D6D6),
+                          borderRadius: BorderRadius.circular(24)
                         ),
-                        child: Text(card.cardName, style: Theme.of(context).textTheme.bodySmall),
-                      )
+                        child: IconButton(onPressed: (){}, icon: const Icon(AntIcons.editOutlined))),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: const Color(0x55D6D6D6),
+                          borderRadius: BorderRadius.circular(24)
+                        ),
+                        child: IconButton(onPressed: (){}, icon: const Icon(AntIcons.shareAltOutlined))),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: const Color(0x55D6D6D6),
+                          borderRadius: BorderRadius.circular(24)
+                        ),
+                        child: IconButton(onPressed: onOptionClick, icon: const Icon(Icons.more_vert)))
+                      // Expanded(
+                      //   child: OutlinedButton(
+                      //     onPressed: (){}, child: const Text('Share')),
+                      // ),
+                      // Expanded(
+                      //   child: OutlinedButton(
+                      //     onPressed: (){}, child: const Text('Edit')),
+                      // ),
+                      // Expanded(
+                      //   child: OutlinedButton(
+                      //     onPressed: (){}, child: const Text('Direct Link')),
+                      // ),
                     ],
-                  ),
+                  )
+
+
+              
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     'Updated 1 hour ago'.btext(context),
+                  //     Container(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  //       decoration: BoxDecoration(
+                  //         color: const Color(0x241677FF),
+                  //         borderRadius: BorderRadius.circular(4),
+                  //       ),
+                  //       child: Text(card.cardName, style: Theme.of(context).textTheme.bodySmall),
+                  //     )
+                  //   ],
+                  // ),
               
                 ],
               ),

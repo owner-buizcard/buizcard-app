@@ -7,7 +7,11 @@ class AssetsConst {
   static const _gifsFolder = 'res/gifs/';
   static const _lottieFolder = 'res/lottie/';
 
-  static const appLogo = '${_imagesFolder}welcome_1.png';
+  static const appLogo = '${_imagesFolder}app-logo-min.png';
+  static const banner = '${_imagesFolder}banner.png';
+  static const logoIcon = '${_imagesFolder}logo-icon.png';
+  static const logomin = '${_imagesFolder}logo-min.png';
+
 
   static const google = '${_iconsFolder}google.png';
   static const github = '${_iconsFolder}github.png';

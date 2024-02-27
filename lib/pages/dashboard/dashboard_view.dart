@@ -1,11 +1,8 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:antdesign_icons/antdesign_icons.dart';
-import 'package:bizcard_app/constants/colors_const.dart';
 import 'package:bizcard_app/pages/dashboard/cubit/bottomnav_cubit.dart';
 import 'package:bizcard_app/pages/dashboard/dashboard_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
-import 'package:bizcard_app/utils/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,33 +40,41 @@ class _DashboardViewState extends State<DashboardView> {
       child: BlocBuilder<HomePageCubit, int>(
         builder: (context, bottomNavIndex) {
           return Scaffold(
-            appBar: AppBar(
-                leading: IconButton(
-                    onPressed: () {}, icon: const Icon(AntIcons.menuOutlined)),
-                actions: bottomNavIndex == 0
-                    ? [
-                        const Gap(size: 16),
-                        CircleAvatar(
-                          backgroundImage: Global.user!.picture != null
-                              ? NetworkImage(Global.user!.picture!)
-                              : null,
-                          backgroundColor: ColorsConst.border,
-                          child: Global.user!.picture != null
-                            ? null: const Icon(AntIcons.userOutlined),
-                        ),
-                        const Gap(size: 16)
-                      ]
-                    : [
-                        IconButton(
-                          icon: const Icon(AntIcons.exportOutlined),
-                          onPressed: ()=>_viewModel.openExportSheet(context, null),
-                        ),
-                        IconButton(
-                          icon: const Icon(AntIcons.userAddOutlined),
-                          onPressed: ()=>Navigator.pushNamed(context, Routes.createContact),
-                        ),
-                        const Gap(size: 16)
-                      ]),
+            backgroundColor: const Color(0xfff5f5f5),
+            // appBar: AppBar(
+            //     // leading: IconButton(
+            //     //     onPressed: () {}, icon: const Icon(AntIcons.menuOutlined)),
+            //     leadingWidth: 60,
+            //     title: Text('Cards', style: GoogleFonts.inter().copyWith(
+            //       fontSize: 24
+            //     )),
+            //     leading: Padding(
+            //       padding: const EdgeInsets.all(8),
+            //       child: Image.asset(AssetsConst.appLogo)),
+            //     actions: bottomNavIndex == 0
+            //         ? [
+                       
+            //             // IconButton(
+            //             //   icon: const Icon(FontAwesomeIcons.paperPlane),
+            //             //   onPressed: ()=>Navigator.pushNamed(context, Routes.createContact),
+            //             // ),
+            //             IconButton(
+            //               icon: Icon(FontAwesomeIcons.crown, color: Colors.red[600],),
+            //               onPressed: ()=>_viewModel.openExportSheet(context, null),
+            //             ),
+            //             const Gap(size: 16)
+            //           ]
+            //         : [
+            //             IconButton(
+            //               icon: const Icon(AntIcons.exportOutlined),
+            //               onPressed: ()=>_viewModel.openExportSheet(context, null),
+            //             ),
+            //             IconButton(
+            //               icon: const Icon(AntIcons.userAddOutlined),
+            //               onPressed: ()=>Navigator.pushNamed(context, Routes.createContact),
+            //             ),
+            //             const Gap(size: 16)
+            //           ]),
             body: PageView(
               controller: _viewModel.controller,
               physics: const NeverScrollableScrollPhysics(),
@@ -109,8 +114,8 @@ class _DashboardViewState extends State<DashboardView> {
               gapLocation: GapLocation.center,
               notchSmoothness: NotchSmoothness.verySmoothEdge,
               gapWidth: bottomNavIndex == 0 ? null : 0,
-              leftCornerRadius: 32,
-              rightCornerRadius: 32,
+              leftCornerRadius: 0,
+              rightCornerRadius: 0,
               onTap: (index) => _viewModel.onMove(index, context),
             ),
           );

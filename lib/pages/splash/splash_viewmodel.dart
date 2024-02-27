@@ -16,7 +16,7 @@ class SplashViewModel extends BaseViewModel {
       return;
     }
 
-    MainService().fetchMainData().then(
+    MainService().fetchMainData(loader: false).then(
       (value){
         Global.init(value);
         Navigator.pushNamed(context, Routes.home);
