@@ -47,7 +47,7 @@ class MyCardsFragment extends StatelessWidget {
                     fontSize: 18
                   ),),
                 GradientText(
-                  'Dhana !',
+                  '${Global.user?.firstName} !',
                   style: GoogleFonts.inter().copyWith(
                     fontSize: 18
                   ),
@@ -61,9 +61,11 @@ class MyCardsFragment extends StatelessWidget {
             actions: [
               IconButton(onPressed: (){}, icon: const Icon(AntIcons.bellOutlined)),
               const Gap(size: 16),
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 16,
-                backgroundImage: AssetImage(AssetsConst.banner),  
+                backgroundColor: Colors.grey[400],
+                backgroundImage: Global.user?.picture!=null
+                  ? NetworkImage(Global.user!.picture!) : null,  
               ),
               const Gap(size: 16)
             ],
