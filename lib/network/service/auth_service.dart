@@ -35,4 +35,14 @@ class AuthService {
     return data;
   }
 
+   Future<dynamic> feedback({required String text,required String type})async{
+    var data = {
+      "message": text,
+      "type": type
+    };
+    ApiClient client = ApiClient('/support', loader: false);
+    await client.post(data);
+    return data;
+  }
+
 }

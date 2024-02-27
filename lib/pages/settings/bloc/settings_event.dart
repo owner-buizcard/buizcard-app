@@ -14,3 +14,10 @@ class IntegrateEvent extends SettingsEvent{
 }
 
 class DeleteAccountEvent extends SettingsEvent{}
+
+class FeedbackEvent extends SettingsEvent{
+  final String text;
+  final String type;
+
+  const FeedbackEvent({required this.text, required this.type});
+}

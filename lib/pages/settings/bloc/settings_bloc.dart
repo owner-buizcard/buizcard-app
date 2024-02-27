@@ -10,9 +10,19 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(SettingsInitial()) {
     on<IntegrateEvent>(_onIntegrate);
     on<DeleteAccountEvent>(_onDeleteAccount);
+    on<FeedbackEvent>(_onFeedbackEvent);
   }
 
   final service = IntegrationService();
+
+  _onFeedbackEvent(FeedbackEvent event, Emitter emit)async{
+    try{
+      await AuthService().feedback(text: event.text, type: event.type);
+      emit(SupportSent());
+    }catch(error){
+      emit(Failure());
+    }
+  }
 
   _onDeleteAccount(DeleteAccountEvent event, Emitter emit)async{
     try{

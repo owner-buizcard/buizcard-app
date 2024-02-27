@@ -1,6 +1,9 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/base/base_viewmodel.dart';
+import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/pages/settings/bottomsheets/confirm_sheet.dart';
+import 'package:bizcard_app/pages/settings/bottomsheets/feedback_sheet.dart';
+import 'package:bizcard_app/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,6 +36,7 @@ class SettingsViewModel extends BaseViewModel {
 
 
   confirmSheet(BuildContext context){
+    controller.clear();
     showModalBottomSheet(
       context: context, 
       isDismissible: true,
@@ -47,6 +51,28 @@ class SettingsViewModel extends BaseViewModel {
           });
       });
   }
+
+  feedbackSheet(BuildContext context, String type){
+    controller.clear();
+    showModalBottomSheet(
+      context: context, 
+      isDismissible: true,
+      enableDrag: true,
+      isScrollControlled: true,
+      builder: (_){
+        return FeedbackSheet(
+          type: type,
+          controller: controller,
+          notifier: notifier,
+          onSend: (){
+            Navigator.pop(context);
+            context.read<SettingsBloc>().add(FeedbackEvent(text: controller.trim(), type: type));
+            toast('Thanks! We will reach you soon!', success: true);
+          });
+      });
+  }
+
+  
   
   @override
   void dispose() {

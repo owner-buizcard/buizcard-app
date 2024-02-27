@@ -14,3 +14,5 @@ class Success extends SettingsState {}
 class Failure extends SettingsState {}
 
 class AccountDeleted extends SettingsState {}
+
+class SupportSent extends SettingsState {}

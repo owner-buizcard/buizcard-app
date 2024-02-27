@@ -101,6 +101,10 @@ class _SettingsViewState extends State<SettingsView> {
                             Navigator.pushNamed(context, Routes.integrations);
                           } else if (v == "Delete account") {
                             _viewModel.confirmSheet(context);
+                          } else if (v == "Request a feature") {
+                            _viewModel.feedbackSheet(context, "feature");
+                          } else if (v == "Help & support") {
+                            _viewModel.feedbackSheet(context, "support");
                           }
                         });
                   } else {
