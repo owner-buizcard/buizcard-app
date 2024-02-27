@@ -109,7 +109,7 @@ class CardItem extends StatelessWidget {
                     ),
                   ),
 
-                  const Text('Business Card'),
+                  Text(card.cardName),
 
                   const Gap(size: 32),
 
@@ -137,37 +137,8 @@ class CardItem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(24)
                         ),
                         child: IconButton(onPressed: onOptionClick, icon: const Icon(Icons.more_vert)))
-                      // Expanded(
-                      //   child: OutlinedButton(
-                      //     onPressed: (){}, child: const Text('Share')),
-                      // ),
-                      // Expanded(
-                      //   child: OutlinedButton(
-                      //     onPressed: (){}, child: const Text('Edit')),
-                      // ),
-                      // Expanded(
-                      //   child: OutlinedButton(
-                      //     onPressed: (){}, child: const Text('Direct Link')),
-                      // ),
                     ],
                   )
-
-
-              
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     'Updated 1 hour ago'.btext(context),
-                  //     Container(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  //       decoration: BoxDecoration(
-                  //         color: const Color(0x241677FF),
-                  //         borderRadius: BorderRadius.circular(4),
-                  //       ),
-                  //       child: Text(card.cardName, style: Theme.of(context).textTheme.bodySmall),
-                  //     )
-                  //   ],
-                  // ),
               
                 ],
               ),

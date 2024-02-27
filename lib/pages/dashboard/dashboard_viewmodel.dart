@@ -40,6 +40,9 @@ class DashboardViewModel extends BaseViewModel {
   final GlobalKey<FormState> mailFormKey = GlobalKey();
 
   late ValueNotifier<List<Contact>> contacts;
+  late ValueNotifier<List<bizcard.Card>> cards;
+
+  bizcard.Card? currentCard;
 
   DashboardViewModel() {
     controller = PageController();
@@ -49,6 +52,12 @@ class DashboardViewModel extends BaseViewModel {
     contentController = TextEditingController();
 
     contacts = ValueNotifier(Global.contacts);
+  }
+
+  showPreview(BuildContext context){
+    Navigator.of(context).pushNamed(Routes.preview, arguments: currentCard!=null 
+                      ? currentCard!.id
+                      : Global.cards.value[0].id); 
   }
 
   onSearch(String query) {

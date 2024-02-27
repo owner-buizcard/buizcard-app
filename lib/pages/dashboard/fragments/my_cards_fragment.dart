@@ -43,8 +43,11 @@ class MyCardsFragment extends StatelessWidget {
               children: [
                 Image.asset(AssetsConst.appLogo, width: 36),
                 const Gap(size: 16),
+                Text('Hi, ',style: GoogleFonts.inter().copyWith(
+                    fontSize: 18
+                  ),),
                 GradientText(
-                  'Hi, Dhana !',
+                  'Dhana !',
                   style: GoogleFonts.inter().copyWith(
                     fontSize: 18
                   ),
@@ -75,15 +78,21 @@ class MyCardsFragment extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('Cards', style: GoogleFonts.inter().copyWith(
-                  fontSize: 22,
+                  fontSize: 20,
+                  height: 0,
                   fontWeight: FontWeight.w600,
                   color: Colors.black
                 )),
-                TextButton(onPressed: (){}, child: const Text('PREVIEW'))
+                TextButton(
+                  onPressed: (){
+                    viewModel.showPreview(context);
+                  }, 
+                  child: const Text('PREVIEW'))
               ],
             ),
           ),
-          const Gap(size: 8),
+          
+          const Gap(size: 0),
       
           Expanded(
             child: ValueListenableBuilder(
@@ -100,7 +109,10 @@ class MyCardsFragment extends StatelessWidget {
                     options: CarouselOptions(
                       height: double.infinity,
                       enableInfiniteScroll: false,
-                      viewportFraction: 0.94  
+                      viewportFraction: 0.94,
+                      onPageChanged: (idx, __)  {
+                        viewModel.currentCard = Global.cards.value[idx];
+                      }
                     ),
                     itemCount: value.length+1,
                     itemBuilder: (context, index, realIndex) {
