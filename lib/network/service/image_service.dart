@@ -5,8 +5,8 @@ import 'package:image_cropper/image_cropper.dart';
 
 class ImageService {
 
-  Future<dynamic> uploadImage({required CroppedFile file, required String cardId})async{
-    ApiClient client = ApiClient('/card-image?cardId=$cardId');
+  Future<dynamic> uploadImage({required CroppedFile file, required String cardId, bool loader = true})async{
+    ApiClient client = ApiClient('/card-image?cardId=$cardId', loader: loader);
     var img = await details(file);
     var multipart = MultipartFile.fromBytes(img['bytes'], filename: img['name'], contentType: MediaType ('image', img['ext']));
     var data = {'file': multipart};

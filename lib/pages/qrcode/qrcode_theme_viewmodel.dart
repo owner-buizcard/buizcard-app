@@ -12,6 +12,7 @@ class QrcodeThemeViewModel extends BaseViewModel {
   late bizcard.Card card;
   late QrInfo? qrinfo;
   late String? logopath;
+  bool removeImage = false;
 
   QrcodeThemeViewModel(id){
     cardId = id;
@@ -26,7 +27,7 @@ class QrcodeThemeViewModel extends BaseViewModel {
 
   onSave(BuildContext context){
     if(qrinfo!=null){
-      context.read<CardBloc>().add(SaveQrEvent(cardId, qrinfo!, qrLogoPath: logopath));
+      context.read<CardBloc>().add(SaveQrEvent(cardId, qrinfo!, qrLogoPath: removeImage ? '': logopath));
     }
   }
   

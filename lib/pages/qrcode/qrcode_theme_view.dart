@@ -50,9 +50,14 @@ class _QrcodeThemeViewState extends State<QrcodeThemeView> {
           ],
         ),
         body: BlocBuilder<ImageBloc, ImageState>(
+          buildWhen: (_, state)=> state is PickedSuccess || state is Removed,
           builder: (context, state) {
             if (state is PickedSuccess) {
               _viewModel.logopath = state.path;
+              _viewModel.removeImage = false;
+            }else if(state is Removed) {
+              _viewModel.logopath = null;
+              _viewModel.removeImage = true;
             }
 
             return ListView(
@@ -80,7 +85,9 @@ class _QrcodeThemeViewState extends State<QrcodeThemeView> {
                       embeddedImageStyle: const QrEmbeddedImageStyle(
                         size: Size(50, 50),
                       ),
-                      embeddedImage: state is PickedSuccess
+                      embeddedImage: state is Removed
+                          ? null
+                          : state is PickedSuccess
                           ? FileImage(File(_viewModel.logopath!))
                           : _viewModel.qrinfo?.logo != null
                               ? NetworkImage(_viewModel.qrinfo!.logo!)
@@ -88,17 +95,40 @@ class _QrcodeThemeViewState extends State<QrcodeThemeView> {
                               : null),
                 ),
                 const Gap(size: 32),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                      width: 200,
-                      child: ElevatedButton(
-                          onPressed: () => context.read<ImageBloc>().add(
-                              const UploadImageEvent(
-                                  path: 'qr-code', upload: false)),
-                          child: const Text('Upload Image'))),
+
+                Visibility(
+                  visible: !((_viewModel.qrinfo?.logo!=null || state is PickedSuccess) && (state is! Removed)),
+                  replacement: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () => context.read<ImageBloc>().add(
+                                const UploadImageEvent(
+                                    path: 'qr-code', upload: false)),
+                            child: const Text('Change Image')),
+                      ),
+                      const Gap(size: 16),
+                      Expanded(
+                        child: OutlinedButton(
+                            onPressed: (){
+                              context.read<ImageBloc>().add(RemoveImageEvent());
+                            },
+                            child: const Text('Remove')),
+                      ),
+                    ],
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                          width: 200,
+                          child: ElevatedButton(
+                              onPressed: () => context.read<ImageBloc>().add(
+                                  const UploadImageEvent(
+                                      path: 'qr-code', upload: false)),
+                              child: const Text('Upload Image'))),
+                  ),       
                 ),
-                const Gap(size: 20),
+                const Gap(size: 32),
                 SingleSelectWL(
                     label: 'Code Style',
                     items: Constants.qrCodeStyle,

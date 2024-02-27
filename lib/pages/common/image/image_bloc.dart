@@ -14,6 +14,11 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
   ImageBloc() : super(ImageInitial()) {
     on<UploadCImageEvent>(_onUploadCImageEvent);
     on<UploadImageEvent>(_onUploadImageEvent);
+    on<RemoveImageEvent>(_onRemoveImageEvent);
+  }
+
+  _onRemoveImageEvent(RemoveImageEvent event, Emitter emit)async{
+    emit(Removed());
   }
 
   _onUploadImageEvent(UploadImageEvent event, Emitter emit)async{

@@ -30,3 +30,5 @@ final class PickedSuccess extends ImageState {
 final class Failure extends ImageState {}
 
 class Uploading extends ImageState {}
+
+class Removed extends ImageState {}

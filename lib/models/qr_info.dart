@@ -24,7 +24,7 @@ class QrInfo extends Equatable {
     String? eyeColor,
   }) {
     return QrInfo(
-      logo: logo ?? this.logo,
+      logo: logo,
       codeStyle: codeStyle ?? this.codeStyle,
       eyeStyle: eyeStyle ?? this.eyeStyle,
       fgColor: fgColor ?? this.fgColor,

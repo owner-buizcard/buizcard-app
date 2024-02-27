@@ -31,3 +31,5 @@ class UploadImageEvent extends ImageEvent {
     this.upload = true
   });
 }
+
+class RemoveImageEvent extends ImageEvent {}
