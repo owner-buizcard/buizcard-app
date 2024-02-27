@@ -22,9 +22,12 @@ class SuccessSheet extends StatelessWidget {
         
           const Gap(size: 45),
         
-          StyledButton(
-            onPressed: ()=>Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false),
-            text: 'Login'
+          SizedBox(
+            width: double.infinity,
+            child: StyledButton(
+              onPressed: ()=>Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false),
+              text: 'Login'
+            ),
           ),
         ],
       ),
