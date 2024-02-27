@@ -48,6 +48,7 @@ class Global {
 
   static addCard(bizcard.Card card) {
     cards.value.add(card);
+    cards.notifyListeners();
   }
 
   static updateCard(bizcard.Card card) {
@@ -55,10 +56,12 @@ class Global {
     if (index != -1) {
       cards.value[index] = card;
     }
+    cards.notifyListeners();
   }
 
   static removeCard(String cardId) {
     cards.value.removeWhere((element) => element.id == cardId);
+    cards.notifyListeners();
   }
 
   static Color hexToColor(String hexString) {
