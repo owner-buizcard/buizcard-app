@@ -40,3 +40,7 @@ Future<void> saveVCard({required Contact contact}) async {
     OpenFile.open(file.path);
   } catch (_) {}
 }
+
+getShareContent(String cardLink){
+  return "Here's my digital business card from Bizcard! 🌟 Connect with me easily and explore my professional profile. Let's stay in touch! #Bizcard #Networking \n\n $cardLink";
+}
