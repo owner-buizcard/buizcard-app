@@ -1,3 +1,4 @@
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,9 @@ class SuccessSheet extends StatelessWidget {
         
           const Gap(size: 45),
         
-          ElevatedButton(
+          StyledButton(
             onPressed: ()=>Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false),
-            child: const Text('Login')
+            text: 'Login'
           ),
         ],
       ),

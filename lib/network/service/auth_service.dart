@@ -2,18 +2,18 @@ import 'package:bizcard_app/network/api_client.dart';
 
 class AuthService {
 
-  Future<dynamic> init()async{
+  Future<dynamic> init({bool loader = false})async{
     ApiClient client = ApiClient('/auth/init');
     return await client.post();
   }
 
   Future<Map> login({required String email, required String password})async{
-    ApiClient client = ApiClient('/auth/login');
+    ApiClient client = ApiClient('/auth/login', loader: false);
     return await client.post({'email': email, 'password': password});
   }
 
   Future<dynamic> signup({required datamap})async{
-    ApiClient client = ApiClient('/auth/signup');
+    ApiClient client = ApiClient('/auth/signup', loader: false);
     return await client.post(datamap);
   }
 

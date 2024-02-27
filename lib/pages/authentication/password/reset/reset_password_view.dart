@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/authentication/password/reset/reset_password_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
@@ -56,9 +57,9 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   prefixIcon: AntIcons.lockOutlined,
                   showIndicator: false),
               const Gap(size: 32),
-              ElevatedButton(
+              StyledButton(
                   onPressed: () => _viewModel.onResetClick(context),
-                  child: const Text('Reset Password'))
+                  text: 'Reset Password')
             ],
           ),
         ),

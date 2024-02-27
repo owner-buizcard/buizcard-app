@@ -1,6 +1,7 @@
 import 'package:bizcard_app/models/user.dart';
 import 'package:bizcard_app/network/service/auth_service.dart';
 import 'package:bizcard_app/network/service/user_service.dart';
+import 'package:bizcard_app/utils/toast.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -35,23 +36,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onUploadPicture(UploadPictureEvent event, Emitter emit)async{
     try{  
-      await UserService().update({'picture': event.picture});
-      var value = await AuthService().init();
+      showLoader();
+      await UserService().update({'picture': event.picture}, loader: false);
+      var value = await AuthService().init(loader: false);
       Global.init(value);
       emit(PhotoSuccess());
     }catch(err){
       emit(Error());
+    }finally{
+      hideLoader();
     }
   }
 
   void _onLogin(LoginEvent event, Emitter emit)async{
     try{  
+      showLoader();
       await AuthService().login(email: event.email, password: event.password);
-      var value = await MainService().fetchMainData();
+      var value = await MainService().fetchMainData(loader: false);
       Global.init(value);
       emit(Success());
     }catch(err){
       emit(Error());
+    }finally{
+      hideLoader();
     }
   }
 
@@ -70,7 +77,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSignup(SignupEvent event, Emitter emit)async{
     try{
-
+      showLoader();
       List names = event.name.split(' ');
 
       var data = await AuthService().signup(
@@ -88,6 +95,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(Success());
     }catch(err){
       emit(Error());
+    }finally{
+      hideLoader();
     }
   }
 

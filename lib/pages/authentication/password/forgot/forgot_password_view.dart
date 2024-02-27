@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/authentication/password/forgot/forgot_password_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
@@ -50,9 +51,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 validationType: 'email',
               ),
               const Gap(size: 32),
-              ElevatedButton(
+              StyledButton(
                   onPressed: () => _viewModel.onForgotClick(context),
-                  child: const Text('Send Password Reset Email'))
+                  text: 'Send Password Reset Email')
             ],
           ),
         ),
