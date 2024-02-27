@@ -1,14 +1,14 @@
 import 'package:bizcard_app/constants/urls_const.dart';
 import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
-import 'package:bizcard_app/pages/authentication/callback/callback_view.dart';
+import 'package:bizcard_app/pages/authentication/common/callback_view.dart';
 import 'package:bizcard_app/pages/authentication/login/login_view.dart';
 import 'package:bizcard_app/pages/authentication/password/forgot/forgot_password_view.dart';
 import 'package:bizcard_app/pages/authentication/password/reset/reset_password_view.dart';
 import 'package:bizcard_app/pages/authentication/signup/cubit/page_cubit.dart';
-import 'package:bizcard_app/pages/authentication/photo/photo_view.dart';
+import 'package:bizcard_app/pages/authentication/common/photo_view.dart';
 import 'package:bizcard_app/pages/authentication/signup/signup_view.dart';
-import 'package:bizcard_app/pages/authentication/welcome/welcome_view.dart';
+import 'package:bizcard_app/pages/authentication/common/welcome_view.dart';
 import 'package:bizcard_app/pages/cards/analytics/card_analytics_view.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';

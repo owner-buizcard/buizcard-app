@@ -1,7 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
-import 'package:bizcard_app/pages/authentication/photo/photo_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/avatar_ph.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
@@ -19,12 +18,17 @@ class PhotoView extends StatefulWidget {
 }
 
 class _PhotoViewState extends State<PhotoView> {
-  late PhotoViewModel _viewModel;
+  late ValueNotifier<String?> picture;
 
   @override
   void initState() {
-    _viewModel = PhotoViewModel();
+    picture = ValueNotifier(null);
     super.initState();
+  }
+
+  pickImage(BuildContext context, String type){
+    context.read<ImageBloc>().add(
+      UploadImageEvent(path: type));
   }
 
   @override
@@ -44,7 +48,7 @@ class _PhotoViewState extends State<PhotoView> {
           BlocListener<ImageBloc, ImageState>(
             listener: (context, state) {
               if(state is UploadedSuccess && state.type=='picture'){
-                _viewModel.picture.value = state.link;
+                picture.value = state.link;
               }
             },
           ),
@@ -62,13 +66,13 @@ class _PhotoViewState extends State<PhotoView> {
                 height: 140,
                 width: 140,
                 child: ValueListenableBuilder(
-                    valueListenable: _viewModel.picture,
+                    valueListenable: picture,
                     builder: (_, value, __) {
                       return Stack(
                         children: [
                           InkWell(
                               borderRadius: BorderRadius.circular(70),
-                              onTap: () async => await _viewModel.pickImage(
+                              onTap: () async => await pickImage(
                                   context, 'picture'),
                               child: AvatarPH(
                                 image: value,
@@ -96,13 +100,13 @@ class _PhotoViewState extends State<PhotoView> {
             ),
             const Gap(size: 80),
             ValueListenableBuilder(
-              valueListenable: _viewModel.picture,
+              valueListenable: picture,
               builder: (_, val, __) {
                 bool enable = val!=null && val.isNotEmpty;
                 return StyledButton(
                   enabled: enable,
                   onPressed: enable ? (){ 
-                    context.read<AuthBloc>().add(UploadPictureEvent(picture: _viewModel.picture.value!));
+                    context.read<AuthBloc>().add(UploadPictureEvent(picture: picture.value!));
                   } : null,
                   text: 'Continue'
                 );

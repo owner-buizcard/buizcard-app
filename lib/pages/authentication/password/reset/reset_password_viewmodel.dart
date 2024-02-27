@@ -1,10 +1,11 @@
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
+import 'package:bizcard_app/pages/authentication/password/success_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../routes/app_routes.dart';
 import '../../bloc/auth_bloc.dart';
-import 'bottomsheets/success_sheet.dart';
 
 class ResetPasswordViewModel extends BaseViewModel {
   late TextEditingController passwordController;
@@ -35,7 +36,11 @@ class ResetPasswordViewModel extends BaseViewModel {
       isDismissible: false,
       enableDrag: false,
       builder: (_){
-        return const SuccessSheet();
+        return SuccessSheet(
+          title: 'Password reset success !',
+          content: 'You can login with your new password now.',
+          onClick: ()=>Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false)
+        );
       });
   }
 

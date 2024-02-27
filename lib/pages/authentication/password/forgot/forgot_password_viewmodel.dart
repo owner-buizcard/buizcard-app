@@ -1,9 +1,10 @@
 import 'package:bizcard_app/base/base_viewmodel.dart';
 import 'package:bizcard_app/extensions/string_ext.dart';
-import 'package:bizcard_app/pages/authentication/password/forgot/bottomsheets/success_sheet.dart';
+import 'package:bizcard_app/pages/authentication/password/success_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../routes/app_routes.dart';
 import '../../bloc/auth_bloc.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel {
@@ -31,7 +32,11 @@ class ForgotPasswordViewModel extends BaseViewModel {
       isDismissible: false,
       enableDrag: false,
       builder: (_){
-        return const SuccessSheet();
+        return SuccessSheet(
+          title: 'Check your email !',
+          content: 'We have sent a password recover instructions to your email.',
+          onClick: ()=>Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false)
+        );
       });
   }
 
