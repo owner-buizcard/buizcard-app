@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/pages/widgets/divider_text.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
@@ -49,9 +50,9 @@ class CreateFragment extends StatelessWidget {
       
             const Gap(size: 32),
       
-            ElevatedButton(
+            StyledButton(
               onPressed: ()=>viewModel.onSignupClick(context),
-              child: const Text('Continue')
+              text: 'Continue'
             ),
       
             const Gap(size: 20),

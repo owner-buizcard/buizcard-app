@@ -1,4 +1,5 @@
 
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/authentication/signup/cubit/page_cubit.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
@@ -25,11 +26,25 @@ class NameFragment extends StatelessWidget {
           InputFieldWL(
               controller: viewModel.nameController,
               isRequired: true,
+              autofocus: true,
               label: 'Enter your name'),
           const Gap(size: 32),
-          ElevatedButton(
-              onPressed: () => context.read<PageCubit>().onPageChange(1),
-              child: const Text('Continue')),
+          StyledButton(
+            onPressed: ()=>context.read<PageCubit>().onPageChange(1), 
+            text: 'Continue'
+          ),
+          // ElevatedButton(
+          //     style: ElevatedButtonTheme.of(context).style!.copyWith(
+          //         padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+          //         foregroundColor: const MaterialStatePropertyAll(Colors.white),
+          //         side: const MaterialStatePropertyAll(BorderSide(color: Color.fromARGB(255, 59, 112, 203), width: 0)),
+          //         backgroundColor: const MaterialStatePropertyAll(Color(0xFF2A5298)),
+          //       ),
+          //     onPressed: () => context.read<PageCubit>().onPageChange(1),
+          //     child: Text('Continue', style: GoogleFonts.aBeeZee().copyWith(
+          //             fontSize: 18,
+          //             fontWeight: FontWeight.w500
+          //     )))
         ],
       ),
     );

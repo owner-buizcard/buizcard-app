@@ -1,3 +1,4 @@
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
@@ -26,13 +27,13 @@ class CompanyFragment extends StatelessWidget {
             Text('Company Info', style: Theme.of(context).textTheme.titleMedium),
             'Tell us your company details'.btext(context),
             const Gap(size: 20),
-            InputFieldWL(controller: viewModel.jobTitleController, label: 'Job title'),
+            InputFieldWL(autofocus: true, controller: viewModel.jobTitleController, label: 'Job title'),
             const Gap(size: 10),
             InputFieldWL(controller: viewModel.companyNameController, label: 'Company Name'),
             const Gap(size: 32),
-            ElevatedButton(
+            StyledButton(
                 onPressed: () => context.read<PageCubit>().onPageChange(2),
-                child: const Text('Continue')),
+                text: 'Continue'),
             const Gap(size: 24),
             TextButton(
                 onPressed: () => context.read<PageCubit>().onPageChange(2),

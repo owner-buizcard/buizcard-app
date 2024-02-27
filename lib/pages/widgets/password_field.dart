@@ -4,6 +4,7 @@ import 'package:bizcard_app/pages/widgets/strength_indicator.dart';
 import 'package:bizcard_app/utils/password_strength.dart';
 import 'package:bizcard_app/utils/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PasswordField extends StatelessWidget {
   final String label;
@@ -34,6 +35,10 @@ class PasswordField extends StatelessWidget {
               onChanged: (value) {
                 strengthNotifier.value = strengthIndicator(value);
               },
+              style: GoogleFonts.roboto(
+                fontSize: 18,
+                color: Colors.black
+              ),
               decoration: InputDecoration(
                 errorMaxLines: 3,
                 prefixIcon: Icon(prefixIcon),

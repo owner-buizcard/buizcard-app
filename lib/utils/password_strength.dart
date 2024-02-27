@@ -15,7 +15,7 @@ bool hasSpecial(String value) {
 
 // set color based on password strength
 Map<String, dynamic> strengthColor(int count) {
-  if (count < 2) return {'label': 'Poor', 'color': '0xFFE57373'};
+  if (count < 2) return {'label': 'Poor', 'color': '0xFFFF0000'};
   if (count < 3) return {'label': 'Weak', 'color': '0xFFFFB74D'};
   if (count < 4) return {'label': 'Normal', 'color': '0xFFF57F17'};
   if (count < 5) return {'label': 'Good', 'color': '0xFF81C784'};

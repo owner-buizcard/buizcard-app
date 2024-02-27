@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/authentication/photo/photo_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/avatar_ph.dart';
@@ -98,15 +99,12 @@ class _PhotoViewState extends State<PhotoView> {
               valueListenable: _viewModel.picture,
               builder: (_, val, __) {
                 bool enable = val!=null && val.isNotEmpty;
-                return ElevatedButton(
+                return StyledButton(
+                  enabled: enable,
                   onPressed: enable ? (){ 
                     context.read<AuthBloc>().add(UploadPictureEvent(picture: _viewModel.picture.value!));
                   } : null,
-                  style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                    side: const MaterialStatePropertyAll(BorderSide.none),
-                    backgroundColor: MaterialStatePropertyAll(enable ? null : Colors.grey ),
-                  ),
-                  child: const Text('Continue')
+                  text: 'Continue'
                 );
               }
             ),

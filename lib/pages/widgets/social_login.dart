@@ -35,8 +35,17 @@ class SocialLogin extends StatelessWidget {
               child: Container(
                 height: 65,
                 decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xFFD6D6D6)),
-                    borderRadius: BorderRadius.circular(4)),
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 3,
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
                 padding: const EdgeInsets.all(16),
                 child: Image.asset(e['icon']),
               ),

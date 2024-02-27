@@ -1,3 +1,4 @@
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
@@ -30,15 +31,16 @@ class ContactFragment extends StatelessWidget {
             const Gap(size: 20),
             
             InputFieldWL(
+              autofocus: true,
               controller: viewModel.phoneNumberController,
               label: 'Phone Number'  
             ),
       
             const Gap(size: 32),
       
-            ElevatedButton(
+            StyledButton(
               onPressed: ()=>context.read<PageCubit>().onPageChange(3),
-              child: const Text('Continue')
+              text: 'Continue'
             ),
       
             const Gap(size: 24),

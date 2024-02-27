@@ -36,7 +36,7 @@ class InputFieldWL extends StatelessWidget {
           controller: controller,
           maxLines: maxLines,
           style: GoogleFonts.roboto(
-            fontSize: 16,
+            fontSize: 18,
             color: Colors.black
           ),
           autofocus: autofocus,

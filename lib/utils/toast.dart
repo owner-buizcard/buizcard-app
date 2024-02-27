@@ -1,3 +1,4 @@
+import 'package:bizcard_app/constants/assets_const.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
@@ -67,10 +68,11 @@ void toast(String? msg, {bool long = false, Alignment? alignment, bool? success}
 
 CancelFunc _loader() {
   return BotToast.showCustomLoading(
-    toastBuilder: (_) => const CircularProgressIndicator(
-      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-      strokeWidth: 2,
-    ),
+    // toastBuilder: (_) => const CircularProgressIndicator(
+    //   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+    //   strokeWidth: 2,
+    // ),
+    toastBuilder: (_) => Image.asset(AssetsConst.logo, width: 100),
     animationDuration: const Duration(milliseconds: 400),
     animationReverseDuration: const Duration(milliseconds: 400),
     backButtonBehavior: BackButtonBehavior.ignore,
