@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:bizcard_app/components/styled_button.dart';
 import 'package:bizcard_app/pages/authentication/login/login_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/divider_text.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
@@ -68,9 +69,9 @@ class _LoginViewState extends State<LoginView> {
                     child: const Text('Forgot Password ?')),
               ),
               const Gap(size: 10),
-              ElevatedButton(
+              StyledButton(
                 onPressed: ()=>_viewModel.onLoginClick(context), 
-                child: const Text('Login')
+                text: 'Login'
               ),
               const Gap(size: 20),
               const DividerText(text: 'Or Signin With'),
