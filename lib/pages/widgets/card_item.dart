@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../routes/app_routes.dart';
 import '../../utils/global.dart';
 
 class CardItem extends StatelessWidget {
@@ -118,13 +119,17 @@ class CardItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: const Color(0x55D6D6D6),
-                          borderRadius: BorderRadius.circular(24)
-                        ),
-                        child: IconButton(onPressed: (){}, icon: const Icon(AntIcons.editOutlined))),
+                      InkWell(
+                        onTap: ()=>Navigator.of(context)
+                          .pushNamed(Routes.cardBuilder, arguments: card.id),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                          decoration: BoxDecoration(
+                            color: const Color(0x55D6D6D6),
+                            borderRadius: BorderRadius.circular(24)
+                          ),
+                          child: const Icon(AntIcons.editOutlined)),
+                      ),
                       InkWell(
                         onTap: ()=>Share.share(
                           getShareContent(card.cardLink!), subject: 'My Digital Business Card'
