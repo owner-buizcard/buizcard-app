@@ -41,6 +41,8 @@ class CreateContactViewModel extends BaseViewModel {
   }
 
   onSave(BuildContext context, Contact? contact){
+    FocusScope.of(context).unfocus();
+
     if(!formKey.currentState!.validate()){
       return;
     }
