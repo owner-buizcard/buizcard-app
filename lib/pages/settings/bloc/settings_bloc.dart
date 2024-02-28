@@ -1,3 +1,5 @@
+import 'package:bizcard_app/models/app_analytics.dart';
+import 'package:bizcard_app/network/service/analytics_service.dart';
 import 'package:bizcard_app/network/service/auth_service.dart';
 import 'package:bizcard_app/network/service/integration_service.dart';
 import 'package:bloc/bloc.dart';
@@ -11,9 +13,20 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<IntegrateEvent>(_onIntegrate);
     on<DeleteAccountEvent>(_onDeleteAccount);
     on<FeedbackEvent>(_onFeedbackEvent);
+    on<GetMyAnalyticsEvent>(_onGetMyAnalyticsEvent);
   }
 
   final service = IntegrationService();
+
+  _onGetMyAnalyticsEvent(GetMyAnalyticsEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      var data = await AnalyticsService().userAnalytics();
+      emit(MyAnalyticsFetched(analytics: AppAnalytics.fromJson(data)));
+    }catch(error){
+      emit(Failure());
+    }
+  }
 
   _onFeedbackEvent(FeedbackEvent event, Emitter emit)async{
     try{

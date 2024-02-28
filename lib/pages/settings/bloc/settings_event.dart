@@ -15,6 +15,8 @@ class IntegrateEvent extends SettingsEvent{
 
 class DeleteAccountEvent extends SettingsEvent{}
 
+class GetMyAnalyticsEvent extends SettingsEvent{}
+
 class FeedbackEvent extends SettingsEvent{
   final String text;
   final String type;

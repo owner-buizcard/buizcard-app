@@ -16,3 +16,10 @@ class Failure extends SettingsState {}
 class AccountDeleted extends SettingsState {}
 
 class SupportSent extends SettingsState {}
+
+class Loading extends SettingsState {}
+
+class MyAnalyticsFetched extends SettingsState {
+  final AppAnalytics analytics;
+  const MyAnalyticsFetched({required this.analytics});
+}

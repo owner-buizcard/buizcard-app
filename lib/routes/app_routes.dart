@@ -22,6 +22,7 @@ import 'package:bizcard_app/pages/dashboard/dashboard_view.dart';
 import 'package:bizcard_app/pages/preview/bizcard_preview.dart';
 import 'package:bizcard_app/pages/qrcode/qrcode_theme_view.dart';
 import 'package:bizcard_app/pages/scan/scan_view.dart';
+import 'package:bizcard_app/pages/settings/analytics/analytics_view.dart';
 import 'package:bizcard_app/pages/settings/bloc/settings_bloc.dart';
 import 'package:bizcard_app/pages/settings/integrations/integration_view.dart';
 import 'package:bizcard_app/pages/settings/settings_view.dart';
@@ -75,6 +76,7 @@ class Routes {
   //settings
   static const String integrations = "/integrations";
   static const String callback = "/callback";
+  static const String analytics = "/analytics";
 
   static const String launchView = "/launch-view";
 }
@@ -148,6 +150,12 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AuthBloc(),
           child: const ForgotPasswordView(),
+        ));
+
+      case Routes.analytics:
+        return getTransistionPage(BlocProvider(
+          create: (context) => SettingsBloc()..add(GetMyAnalyticsEvent()),
+          child: const AnalyticsView(),
         ));
 
       case Routes.cardAnalytics:
