@@ -24,7 +24,7 @@ class _ExtracterViewState extends State<ExtracterView> {
       child: BlocListener<AiBloc, AiState>(
         listener: (context, state) {
           if(state is ExtractedContact){
-            Navigator.pushNamed(context, Routes.createContact, arguments: state.contact);
+            Navigator.pushReplacementNamed(context, Routes.createContact, arguments: state.contact);
           }else if(state is Failure){
             Navigator.pop(context);
           }

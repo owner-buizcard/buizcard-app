@@ -30,7 +30,6 @@ class _ScanViewState extends State<ScanView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scan'),
-        leadingWidth: 30,
       ),
       body: ValueListenableBuilder(
         valueListenable: _viewModel.scanCode,
@@ -67,15 +66,6 @@ class _ScanViewState extends State<ScanView> {
                 child: Column(
                   children: [
                     ListTile(
-                      onTap: ()=>_viewModel.scanCode.value = false,
-                      leading: const Icon(AntIcons.creditCardOutlined),
-                      title: const Text('Scan a paper card'),
-                      trailing: Visibility(
-                        visible: !value,
-                        child: const Icon(AntIcons.checkCircleFilled)),
-                    ),
-                    const Divider(color: Color(0x268c8c8c)),
-                    ListTile(
                       onTap: ()=>_viewModel.scanCode.value = true,
                       leading: const Icon(AntIcons.qrcodeOutlined),
                       title: const Text('Scan a Qr code'),
@@ -83,6 +73,15 @@ class _ScanViewState extends State<ScanView> {
                         visible: value,
                         child: const Icon(AntIcons.checkCircleFilled)),
                     ),
+                    const Divider(color: Color(0x268c8c8c)),
+                    ListTile(
+                      onTap: ()=>_viewModel.scanCode.value = false,
+                      leading: const Icon(AntIcons.creditCardOutlined),
+                      title: const Text('Scan a paper card'),
+                      trailing: Visibility(
+                        visible: !value,
+                        child: const Icon(AntIcons.checkCircleFilled)),
+                    )
                   ],
                 ),
               ),
@@ -94,15 +93,25 @@ class _ScanViewState extends State<ScanView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const MainCard(
-                        width: 100,
-                        child: Column(
-                          children: [
-                            Icon(AntIcons.uploadOutlined),
-                            Gap(size: 8),
-                            Text('Upload')
-                          ],
-                      )),
+                      InkWell(
+                        onTap: ()async{
+                          await _viewModel.pickImage().then(
+                                  (value){
+                                    if(value!=null){
+                                      Navigator.pushNamed(context, Routes.extracter, arguments: value);
+                                    }
+                                  });
+                        },
+                        child: const MainCard(
+                          width: 100,
+                          child: Column(
+                            children: [
+                              Icon(AntIcons.uploadOutlined),
+                              Gap(size: 8),
+                              Text('Upload')
+                            ],
+                        )),
+                      ),
                           
                       ValueListenableBuilder(
                         valueListenable: _viewModel.isExtracting,

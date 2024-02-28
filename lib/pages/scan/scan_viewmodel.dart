@@ -6,6 +6,7 @@ import 'package:bizcard_app/utils/global.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanViewModel extends BaseViewModel {
@@ -23,7 +24,7 @@ class ScanViewModel extends BaseViewModel {
   ValueNotifier<bool> isExtracting = ValueNotifier(false);
 
   ScanViewModel(){
-    scanCode = ValueNotifier(false);
+    scanCode = ValueNotifier(true);
 
     textRecognizer = GoogleMlKit.vision.textRecognizer();
     textBlocks = [];
@@ -66,6 +67,18 @@ class ScanViewModel extends BaseViewModel {
     File file = File(result.path);
     return await startTextRecognition(file);
   }
+
+  Future<String?> pickImage()async{
+    final ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if(image!=null){
+      File file = File(image.path);
+      return await startTextRecognition(file);
+    }else {
+      return null;
+    }
+  }
+
 
   Future<String> startTextRecognition(File file) async {
     try {
