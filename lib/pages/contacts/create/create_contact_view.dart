@@ -2,7 +2,6 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/pages/contacts/create/create_contact_viewmodel.dart';
-import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +46,7 @@ class _CreateContactViewState extends State<CreateContactView> {
         BlocListener<ContactsBloc, ContactsState>(
           listener: (context, state) {
             if(state is ContactCreated || state is ContactUpdated){
-              Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
+              Navigator.pop(context);
             }
           },
         ),

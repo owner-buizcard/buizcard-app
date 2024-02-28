@@ -55,8 +55,9 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   _onDeleteContact(DeleteContactEvent event, Emitter emit)async{
     emit(Loading());
     try{
+      Global.contacts.value.removeWhere((element) => element.id==event.contactId);
+      Global.contacts.notifyListeners();
       await service.deleteContact(contactId: event.contactId);
-      Global.contacts.removeWhere((element) => element.id==event.contactId);
       emit(ContactDeleted());
     }catch(error){
       emit(Failure());
@@ -67,7 +68,8 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     emit(Loading());
     try{
       var contact = await service.saveContactDetails(details: event.info);
-      Global.contacts.add(Contact.fromJson(contact));
+      Global.contacts.value.add(Contact.fromJson(contact));
+      Global.contacts.notifyListeners();
       emit(ContactCreated());
     }catch(error){
       emit(Failure());
@@ -78,7 +80,8 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     emit(Creating());
     try{
       var contact = await service.saveContact(cardId: event.cardId);
-      Global.contacts.add(Contact.fromJson(contact));
+      Global.contacts.value.add(Contact.fromJson(contact));
+      Global.contacts.notifyListeners();
       emit(ContactCreated());
     }catch(error){
       emit(Failure());
@@ -90,14 +93,15 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     try{
       var result = await service.updateContactDetails(contactId: event.contactId, data: event.data, loader: true);
       var contact = Contact.fromJson(result);
-      var updated = Global.contacts.map((e){
+      var updated = Global.contacts.value.map((e){
         if(e.id==contact.id){
           return contact;
         }
         return e;
       }).toList();
 
-      Global.contacts = updated;
+      Global.contacts.value = updated;
+      Global.contacts.notifyListeners();
       
       emit(ContactUpdated());
     }catch(error){

@@ -18,7 +18,7 @@ class ContactService {
   }
 
   Future<dynamic> deleteContact({required String contactId})async{
-    ApiClient client = ApiClient('/contact?contactId=$contactId');
+    ApiClient client = ApiClient('/contact?contactId=$contactId', loader: false);
     return await client.delete();
   }
 

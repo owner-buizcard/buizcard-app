@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constants/assets_const.dart';
 import '../../../routes/app_routes.dart';
+import '../../../utils/global.dart';
 import '../../contacts/bloc/contacts_bloc.dart';
 import '../../widgets/gap.dart';
 
@@ -57,7 +58,7 @@ class MyContactsFragment extends StatelessWidget {
 
           Expanded(
               child: ValueListenableBuilder(
-                valueListenable: viewModel.contacts,
+                valueListenable: Global.contacts,
                 builder: (_, val, __) {
                   return ListView(
                       padding: const EdgeInsets.all(16),

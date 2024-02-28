@@ -10,7 +10,7 @@ import '../models/contact.dart';
 class Global {
   static late User? user;
   static ValueNotifier<List<bizcard.Card>> cards = ValueNotifier([]);
-  static List<Contact> contacts = [];
+  static ValueNotifier<List<Contact>> contacts = ValueNotifier([]);
   static List<Field> fieldTypes = [];
   static List<Integration> integrations = [];
   static Map<String, List<Field>> groupedFields = {};
@@ -22,7 +22,7 @@ class Global {
     try {
       user = User.fromJson(data['user']);
       cards.value = (data['cards'] as List).map((e) => bizcard.Card.fromJson(e)).toList();
-      contacts = (data['contacts'] as List).map((e) => Contact.fromJson(e)).toList();
+      contacts.value = (data['contacts'] as List).map((e) => Contact.fromJson(e)).toList();
 
       fieldTypes = (data['config']['fieldTypes'] as List).map((e) => Field.fromJson(e)).toList();
       var configs = data['config']['configs'] as List;

@@ -23,7 +23,7 @@ class _AddTagSheetState extends State<AddTagSheet> {
 
   @override
   void initState() {
-    tags = Global.contacts.firstWhere((element) => element.id==widget.contactId).tags;
+    tags = Global.contacts.value.firstWhere((element) => element.id==widget.contactId).tags;
     super.initState();
   }
 

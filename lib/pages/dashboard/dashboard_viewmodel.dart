@@ -39,7 +39,6 @@ class DashboardViewModel extends BaseViewModel {
   final GlobalKey<FormState> formKey = GlobalKey();
   final GlobalKey<FormState> mailFormKey = GlobalKey();
 
-  late ValueNotifier<List<Contact>> contacts;
   late ValueNotifier<List<bizcard.Card>> cards;
 
   bizcard.Card? currentCard;
@@ -50,8 +49,6 @@ class DashboardViewModel extends BaseViewModel {
 
     subjectController = TextEditingController();
     contentController = TextEditingController();
-
-    contacts = ValueNotifier(Global.contacts);
   }
 
   showPreview(BuildContext context){
@@ -60,19 +57,19 @@ class DashboardViewModel extends BaseViewModel {
                       : Global.cards.value[0].id); 
   }
 
-  onSearch(String query) {
-    var filtered = Global.contacts.where((e) {
-      String name = e.card != null
-          ? '${e.card?.name?.firstName ?? ''} ${e.card?.name?.lastName ?? ''}'
-          : e.details?.name ?? '';
-      String? email = e.card != null ? e.card?.email : e.details?.email;
-      String? phone = e.card != null ? e.card?.phoneNumber : e.details?.phone;
-      return name.toLowerCase().contains(query) ||
-          (email != null && email.toLowerCase().contains(query)) ||
-          (phone != null && phone.toLowerCase().contains(query));
-    });
-    contacts.value = [...filtered];
-  }
+  // onSearch(String query) {
+  //   var filtered = Global.contacts.value.where((e) {
+  //     String name = e.card != null
+  //         ? '${e.card?.name?.firstName ?? ''} ${e.card?.name?.lastName ?? ''}'
+  //         : e.details?.name ?? '';
+  //     String? email = e.card != null ? e.card?.email : e.details?.email;
+  //     String? phone = e.card != null ? e.card?.phoneNumber : e.details?.phone;
+  //     return name.toLowerCase().contains(query) ||
+  //         (email != null && email.toLowerCase().contains(query)) ||
+  //         (phone != null && phone.toLowerCase().contains(query));
+  //   });
+  //   contacts.value = [...filtered];
+  // }
 
   getPages(DashboardViewModel viewModel) {
     return [
