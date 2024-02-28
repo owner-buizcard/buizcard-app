@@ -124,15 +124,18 @@ class _ScanViewState extends State<ScanView> {
                         }
                       ),
                           
-                      const MainCard(
-                        width: 100,
-                        child: Column(
-                        children: [
-                          Icon(Icons.bolt),
-                          Gap(size: 8),
-                          Text('Flash')
-                        ],
-                      )),
+                      InkWell(
+                        onTap: ()=>_viewModel.toggleFlash(),
+                        child: const MainCard(
+                          width: 100,
+                          child: Column(
+                          children: [
+                            Icon(Icons.bolt),
+                            Gap(size: 8),
+                            Text('Flash')
+                          ],
+                        )),
+                      ),
                           
                     ],
                   ),

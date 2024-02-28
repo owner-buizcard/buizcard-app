@@ -49,6 +49,18 @@ class ScanViewModel extends BaseViewModel {
     camController.dispose();
   }
 
+  void toggleFlash() async {
+    if (!camController.value.isInitialized) {
+      return;
+    }
+
+    if (camController.value.flashMode == FlashMode.off) {
+      await camController.setFlashMode(FlashMode.torch);
+    } else {
+      await camController.setFlashMode(FlashMode.off);
+    }
+  }
+
   Future<String> captureImage()async{
     XFile result = await camController.takePicture();
     File file = File(result.path);
