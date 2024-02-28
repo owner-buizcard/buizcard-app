@@ -24,7 +24,7 @@ class ScanViewModel extends BaseViewModel {
   ValueNotifier<bool> isExtracting = ValueNotifier(false);
 
   ScanViewModel(){
-    scanCode = ValueNotifier(true);
+    scanCode = ValueNotifier(false);
 
     textRecognizer = GoogleMlKit.vision.textRecognizer();
     textBlocks = [];
