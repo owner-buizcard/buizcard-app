@@ -28,6 +28,7 @@ import 'package:bizcard_app/pages/settings/bloc/settings_bloc.dart';
 import 'package:bizcard_app/pages/settings/integrations/integration_view.dart';
 import 'package:bizcard_app/pages/settings/settings_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
+import 'package:bizcard_app/subscription/plans/plans_view.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -81,6 +82,7 @@ class Routes {
 
   //account
   static const String editAccount = "/account-edit";
+  static const String plans = "/plans";
 
   //other
   static const String launchView = "/launch-view";
@@ -222,6 +224,12 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AccountBloc(),
           child: const IntegrationView(),
+        ));
+
+      case Routes.plans:
+        return getTransistionPage(BlocProvider(
+          create: (context) => AccountBloc(),
+          child: const PlansView(),
         ));
 
       case Routes.editAccount:

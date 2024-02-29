@@ -1,6 +1,7 @@
 import 'package:bizcard_app/models/card.dart' as bizcard;
 import 'package:bizcard_app/models/field.dart';
 import 'package:bizcard_app/models/integration.dart';
+import 'package:bizcard_app/models/subscribe.dart';
 import 'package:bizcard_app/models/user.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,11 @@ class Global {
   static List<Field> fieldTypes = [];
   static List<Integration> integrations = [];
   static Map<String, List<Field>> groupedFields = {};
+  static List<Plan> plans = [];
+  static Map subscriptions = {};
 
   static final List<CameraDescription> cameras = [];
-  static late String openAiKey; // Use late initialization
+  static late String openAiKey;
 
   static init(data) {
     try {
@@ -26,6 +29,8 @@ class Global {
 
       fieldTypes = (data['config']['fieldTypes'] as List).map((e) => Field.fromJson(e)).toList();
       var configs = data['config']['configs'] as List;
+      plans = (data['config']['plans'] as List).map((e) => Plan.fromJson(e)).toList();
+      subscriptions = data['subscriptionMap'];
 
       for (var item in fieldTypes) {
         String category = item.category;
