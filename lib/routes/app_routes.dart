@@ -1,6 +1,7 @@
 import 'package:bizcard_app/constants/urls_const.dart';
 import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
+import 'package:bizcard_app/pages/account/edit/edit_account_view.dart';
 import 'package:bizcard_app/pages/authentication/common/callback_view.dart';
 import 'package:bizcard_app/pages/authentication/login/login_view.dart';
 import 'package:bizcard_app/pages/authentication/password/forgot/forgot_password_view.dart';
@@ -78,6 +79,10 @@ class Routes {
   static const String callback = "/callback";
   static const String analytics = "/analytics";
 
+  //account
+  static const String editAccount = "/account-edit";
+
+  //other
   static const String launchView = "/launch-view";
 }
 
@@ -217,6 +222,19 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => AccountBloc(),
           child: const IntegrationView(),
+        ));
+
+      case Routes.editAccount:
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AccountBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ImageBloc(),
+            ),
+          ],
+          child: const EditAccountView(),
         ));
 
       case Routes.callback:

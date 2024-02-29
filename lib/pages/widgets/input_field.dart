@@ -40,7 +40,7 @@ class InputField extends StatelessWidget {
       maxLines: maxLines,
       onFieldSubmitted: onFieldSubmitted,
       style: GoogleFonts.roboto(
-        fontSize: 18,
+        fontSize: 17,
         color: Colors.black
       ),
       onChanged: onChanged,

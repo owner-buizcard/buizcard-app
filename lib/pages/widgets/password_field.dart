@@ -36,7 +36,7 @@ class PasswordField extends StatelessWidget {
                 strengthNotifier.value = strengthIndicator(value);
               },
               style: GoogleFonts.roboto(
-                fontSize: 18,
+                fontSize: 17,
                 color: Colors.black
               ),
               decoration: InputDecoration(

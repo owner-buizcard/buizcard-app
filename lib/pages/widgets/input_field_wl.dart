@@ -36,7 +36,7 @@ class InputFieldWL extends StatelessWidget {
           controller: controller,
           maxLines: maxLines,
           style: GoogleFonts.roboto(
-            fontSize: 18,
+            fontSize: 17,
             color: Colors.black
           ),
           autofocus: autofocus,
@@ -44,7 +44,9 @@ class InputFieldWL extends StatelessWidget {
             prefixIcon: prefixIcon!=null 
               ? Icon(prefixIcon) : null,
             errorMaxLines: 2,
-            hintText: hint
+            hintText: hint,
+            filled: true,
+            fillColor: Colors.white
           ),
           validator: (val){
             if(validationType=='email'){

@@ -107,6 +107,8 @@ class _SettingsViewState extends State<SettingsView> {
                             _viewModel.feedbackSheet(context, "support");
                           }else if (v == "My Analytics"){
                             Navigator.pushNamed(context, Routes.analytics);
+                          }else if (v == "Edit Account"){
+                            Navigator.pushNamed(context, Routes.editAccount);
                           }
                         });
                   } else {

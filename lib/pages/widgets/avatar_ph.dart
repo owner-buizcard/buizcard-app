@@ -15,7 +15,7 @@ class AvatarPH extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFD9D9D9),
         border: Border.all(color: Colors.white, width: 2),
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular( radius ?? 32),
         image: image!=null
           ? DecorationImage(image: NetworkImage(image!)): null
       ),

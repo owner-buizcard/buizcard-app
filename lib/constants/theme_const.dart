@@ -213,6 +213,8 @@ class ThemeConst {
         focusedBorder: defaultBorder,
         errorBorder: errorBorder,
         focusedErrorBorder: errorBorder,
+        filled: true,
+        fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
         prefixIconColor: const Color(0xFF0077B5),
         suffixIconColor: const Color(0xFFB0B0B0),
