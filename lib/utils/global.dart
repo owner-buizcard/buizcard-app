@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import '../models/contact.dart';
 
 class Global {
+
+  static String razorpayKey = "rzp_live_v5uEoz77A8mTwT";
+
   static late User? user;
   static ValueNotifier<List<bizcard.Card>> cards = ValueNotifier([]);
   static ValueNotifier<List<Contact>> contacts = ValueNotifier([]);

@@ -110,7 +110,7 @@ class _SettingsViewState extends State<SettingsView> {
                           }else if (v == "Edit Account"){
                             Navigator.pushNamed(context, Routes.editAccount);
                           }else if (v == "Upgrade to Pro"){
-                            Navigator.pushNamed(context, Routes.plans);
+                            Navigator.pushNamed(context, Routes.subscriptions);
                           }
                         });
                   } else {

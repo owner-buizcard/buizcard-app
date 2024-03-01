@@ -28,6 +28,8 @@ import 'package:bizcard_app/pages/settings/bloc/settings_bloc.dart';
 import 'package:bizcard_app/pages/settings/integrations/integration_view.dart';
 import 'package:bizcard_app/pages/settings/settings_view.dart';
 import 'package:bizcard_app/pages/splash/splash_view.dart';
+import 'package:bizcard_app/subscription/bloc/subscription_bloc.dart';
+import 'package:bizcard_app/subscription/payments/payments_view.dart';
 import 'package:bizcard_app/subscription/plans/plans_view.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -82,7 +84,10 @@ class Routes {
 
   //account
   static const String editAccount = "/account-edit";
+
+  //subscriptions
   static const String plans = "/plans";
+  static const String subscriptions = "/subscriptions";
 
   //other
   static const String launchView = "/launch-view";
@@ -185,6 +190,9 @@ class RouteGenerator {
           child: CardBuilderView(cardId: settings.arguments as String),
         ));
 
+      case Routes.subscriptions:
+        return getTransistionPage(const PaymentsView());
+
       case Routes.linkStore:
         return getTransistionPage(BlocProvider(
           create: (context) => CardBloc(),
@@ -227,8 +235,15 @@ class RouteGenerator {
         ));
 
       case Routes.plans:
-        return getTransistionPage(BlocProvider(
-          create: (context) => AccountBloc(),
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AccountBloc(),
+            ),
+            BlocProvider(
+              create: (context) => SubscriptionBloc(),
+            ),
+          ],
           child: const PlansView(),
         ));
 
