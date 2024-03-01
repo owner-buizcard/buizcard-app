@@ -12,4 +12,9 @@ class UserService {
     ApiClient client = ApiClient('/followUp?value=$value', loader: false);
     return await client.put();
   }
+
+  Future updateBranding(value)async{
+    ApiClient client = ApiClient('/branding?value=$value', loader: false);
+    return await client.put();
+  }
 }

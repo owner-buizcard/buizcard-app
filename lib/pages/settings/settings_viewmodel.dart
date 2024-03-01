@@ -18,7 +18,7 @@ class SettingsViewModel extends BaseViewModel {
 
   SettingsViewModel(){
     controller = TextEditingController();
-    switchValues = ValueNotifier({'followUp': Global.user!.followUp});
+    switchValues = ValueNotifier({'followUp': Global.user!.followUp, 'branding': Global.user!.branding});
   }
   
   final List options = [
@@ -34,7 +34,12 @@ class SettingsViewModel extends BaseViewModel {
       'isCustom': true,
       'color': null
     },
-    {'icon': AntIcons.aliwangwangOutlined, 'label': 'Remove branding', 'color': null, 'isCustom': false,},
+    {
+      'icon': AntIcons.aliwangwangOutlined, 
+      'label': 'Remove branding', 
+      'isCustom': true,
+      'color': null
+    },
     {'title': 'Support'},
     {'icon': AntIcons.messageOutlined, 'label': 'Request a feature', 'color': null, 'isCustom': false,},
     {'icon': AntIcons.questionCircleOutlined, 'label': 'Help & support', 'color': null, 'isCustom': false,},

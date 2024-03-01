@@ -104,12 +104,16 @@ class _SettingsViewState extends State<SettingsView> {
                             child: ListTile(
                               leading: Icon(e['icon']),
                               onTap: (){
-                                
                                 if (e["label"] == "Follow up email") {
                                   var value = !_viewModel.switchValues.value['followUp'];
                                   _viewModel.switchValues.value = { ..._viewModel.switchValues.value, ...{'followUp': value} };
                                   Global.user = Global.user!.copyWith(followUp: value);
                                   UserService().updateFollowUp(value);
+                                }else {
+                                  var value = !_viewModel.switchValues.value['branding'];
+                                  _viewModel.switchValues.value = { ..._viewModel.switchValues.value, ...{'branding': value} };
+                                  Global.user = Global.user!.copyWith(branding: value);
+                                  UserService().updateBranding(value);
                                 }
                               },
                               title: Padding(
@@ -120,7 +124,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 child: SizedBox(
                                   width: 20,
                                   child: SwitchListTile(
-                                    value: val['followUp'], 
+                                    value: e["label"] == "Follow up email" ? val['followUp'] : !val['branding'], 
                                     onChanged: (v){}
                                 )),
                               ),

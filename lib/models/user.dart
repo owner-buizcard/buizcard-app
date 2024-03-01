@@ -31,6 +31,7 @@ class User extends Equatable {
   final int notificationsCount;
   final List integrations;
   final bool followUp;
+  final bool branding;
   final DateTime lastLogin;
   final DateTime created;
   final DateTime updated;
@@ -45,6 +46,7 @@ class User extends Equatable {
     this.designation,
     this.gender,
     this.followUp = false,
+    this.branding = false,
     this.dateOfBirth,
     this.companyName,
     this.companyWebsite,
@@ -82,6 +84,7 @@ class User extends Equatable {
     String? gender,
     bool? enableWhatsapp,
     bool? followUp,
+    bool? branding,
     DateTime? dateOfBirth,
     String? companyName,
     String? companyWebsite,
@@ -118,6 +121,7 @@ class User extends Equatable {
       gender: gender ?? this.gender,
       enableWhatsapp: enableWhatsapp ?? this.enableWhatsapp,
       followUp: followUp ?? this.followUp,
+      branding: branding ?? this.branding,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       companyName: companyName ?? this.companyName,
       companyWebsite: companyWebsite ?? this.companyWebsite,
@@ -152,6 +156,7 @@ class User extends Equatable {
     return User(
       id: json['_id'] as String,
       followUp: json['followUp'] as bool,
+      branding: json['branding'] as bool,
       enableWhatsapp: json['enableWhatsapp'],
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
