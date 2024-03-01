@@ -108,6 +108,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 if (e["label"] == "Follow up email") {
                                   var value = !_viewModel.switchValues.value['followUp'];
                                   _viewModel.switchValues.value = { ..._viewModel.switchValues.value, ...{'followUp': value} };
+                                  Global.user = Global.user!.copyWith(followUp: value);
                                   UserService().updateFollowUp(value);
                                 }
                               },
