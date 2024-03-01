@@ -7,4 +7,9 @@ class UserService {
     ApiClient client = ApiClient('/me', loader: loader);
     return await client.put(data);
   }
+
+  Future updateFollowUp(value)async{
+    ApiClient client = ApiClient('/followUp?value=$value', loader: false);
+    return await client.put();
+  }
 }

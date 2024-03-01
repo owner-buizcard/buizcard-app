@@ -30,6 +30,7 @@ class User extends Equatable {
   final DateTime notificationsRead;
   final int notificationsCount;
   final List integrations;
+  final bool followUp;
   final DateTime lastLogin;
   final DateTime created;
   final DateTime updated;
@@ -43,6 +44,7 @@ class User extends Equatable {
     this.displayName,
     this.designation,
     this.gender,
+    this.followUp = false,
     this.dateOfBirth,
     this.companyName,
     this.companyWebsite,
@@ -71,9 +73,85 @@ class User extends Equatable {
     this.deleted,
   });
 
+  User copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? displayName,
+    String? designation,
+    String? gender,
+    bool? enableWhatsapp,
+    bool? followUp,
+    DateTime? dateOfBirth,
+    String? companyName,
+    String? companyWebsite,
+    Map? address,
+    String? picture,
+    String? phoneNumber,
+    String? email,
+    bool? emailVerified,
+    String? additionalEmail,
+    String? additionalPhoneNumber,
+    String? whatsappNumber,
+    String? telegramNumber,
+    String? provider,
+    String? providerId,
+    String? registrationStatus,
+    String? locale,
+    String? countryCode,
+    String? dateFormat,
+    String? defaultCurrency,
+    DateTime? notificationsRead,
+    int? notificationsCount,
+    List? integrations,
+    DateTime? lastLogin,
+    DateTime? created,
+    DateTime? updated,
+    DateTime? deleted,
+  }) {
+    return User(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      displayName: displayName ?? this.displayName,
+      designation: designation ?? this.designation,
+      gender: gender ?? this.gender,
+      enableWhatsapp: enableWhatsapp ?? this.enableWhatsapp,
+      followUp: followUp ?? this.followUp,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      companyName: companyName ?? this.companyName,
+      companyWebsite: companyWebsite ?? this.companyWebsite,
+      address: address ?? this.address,
+      picture: picture ?? this.picture,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      email: email ?? this.email,
+      emailVerified: emailVerified ?? this.emailVerified,
+      additionalEmail: additionalEmail ?? this.additionalEmail,
+      additionalPhoneNumber: additionalPhoneNumber ?? this.additionalPhoneNumber,
+      whatsappNumber: whatsappNumber ?? this.whatsappNumber,
+      telegramNumber: telegramNumber ?? this.telegramNumber,
+      provider: provider ?? this.provider,
+      providerId: providerId ?? this.providerId,
+      registrationStatus: registrationStatus ?? this.registrationStatus,
+      locale: locale ?? this.locale,
+      countryCode: countryCode ?? this.countryCode,
+      dateFormat: dateFormat ?? this.dateFormat,
+      defaultCurrency: defaultCurrency ?? this.defaultCurrency,
+      notificationsRead: notificationsRead ?? this.notificationsRead,
+      notificationsCount: notificationsCount ?? this.notificationsCount,
+      integrations: integrations ?? this.integrations,
+      lastLogin: lastLogin ?? this.lastLogin,
+      created: created ?? this.created,
+      updated: updated ?? this.updated,
+      deleted: deleted ?? this.deleted,
+    );
+  }
+
+
   factory User.fromJson(json) {
     return User(
       id: json['_id'] as String,
+      followUp: json['followUp'] as bool,
       enableWhatsapp: json['enableWhatsapp'],
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
@@ -114,5 +192,5 @@ class User extends Equatable {
   }
   
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }

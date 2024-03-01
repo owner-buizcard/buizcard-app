@@ -1,5 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/extensions/text_ext.dart';
+import 'package:bizcard_app/network/service/user_service.dart';
 import 'package:bizcard_app/pages/settings/settings_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
@@ -94,8 +95,42 @@ class _SettingsViewState extends State<SettingsView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: _viewModel.options.map((e) {
                   if (e["title"] == null) {
+                    if(e["isCustom"]){
+                      return ValueListenableBuilder(
+                        valueListenable: _viewModel.switchValues,
+                        builder: (_, val, __) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: ListTile(
+                              leading: Icon(e['icon']),
+                              onTap: (){
+                                
+                                if (e["label"] == "Follow up email") {
+                                  var value = !_viewModel.switchValues.value['followUp'];
+                                  _viewModel.switchValues.value = { ..._viewModel.switchValues.value, ...{'followUp': value} };
+                                  UserService().updateFollowUp(value);
+                                }
+                              },
+                              title: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: '${e["label"]}'.bltext(context, color: 'darker')
+                              ),
+                              trailing: IgnorePointer(
+                                child: SizedBox(
+                                  width: 20,
+                                  child: SwitchListTile(
+                                    value: val['followUp'], 
+                                    onChanged: (v){}
+                                )),
+                              ),
+                            ),
+                          );
+                        }
+                      );
+                    }
                     return ListItem(
                         item: e,
+                        isSwitch: e["isSwitch"]??false,
                         onClick: (v) {
                           if (v == "Integrations") {
                             Navigator.pushNamed(context, Routes.integrations);
