@@ -2,6 +2,7 @@ import 'package:bizcard_app/constants/urls_const.dart';
 import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/pages/account/edit/edit_account_view.dart';
+import 'package:bizcard_app/pages/account/username/edit_username_view.dart';
 import 'package:bizcard_app/pages/authentication/common/callback_view.dart';
 import 'package:bizcard_app/pages/authentication/login/login_view.dart';
 import 'package:bizcard_app/pages/authentication/password/forgot/forgot_password_view.dart';
@@ -84,6 +85,7 @@ class Routes {
 
   //account
   static const String editAccount = "/account-edit";
+  static const String editUsername = "/account-edit-username";
 
   //subscriptions
   static const String plans = "/plans";
@@ -258,6 +260,12 @@ class RouteGenerator {
             ),
           ],
           child: const EditAccountView(),
+        ));
+
+      case Routes.editUsername:
+        return getTransistionPage(BlocProvider(
+          create: (context) => AccountBloc(),
+          child: const EditUsernameView(),
         ));
 
       case Routes.callback:

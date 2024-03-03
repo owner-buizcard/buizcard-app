@@ -151,6 +151,8 @@ class _SettingsViewState extends State<SettingsView> {
                             Navigator.pushNamed(context, Routes.editAccount);
                           }else if (v == "Upgrade to Pro"){
                             Navigator.pushNamed(context, Routes.subscriptions);
+                          }else if (v == "Personalized Link"){
+                            Navigator.pushNamed(context, Routes.editUsername);
                           }
                         });
                   } else {

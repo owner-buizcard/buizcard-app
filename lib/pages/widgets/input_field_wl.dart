@@ -9,14 +9,18 @@ class InputFieldWL extends StatelessWidget {
   final IconData? prefixIcon;
   final bool isRequired;
   final String? validationType;
+  final String? prefixText;
   final String? hint;
   final bool autofocus;
   final int maxLines;
   final TextEditingController controller;
+  final Function(String)? onChanged;
   const InputFieldWL({
     super.key, 
     required this.label, 
     this.hint,
+    this.prefixText,
+    this.onChanged,
     this.autofocus = false,
     required this.controller,
     this.isRequired = false,
@@ -39,10 +43,11 @@ class InputFieldWL extends StatelessWidget {
             fontSize: 17,
             color: Colors.black
           ),
+          onChanged: onChanged,
           autofocus: autofocus,
           decoration: InputDecoration(
             prefixIcon: prefixIcon!=null 
-              ? Icon(prefixIcon) : null,
+              ? Icon(prefixIcon) : prefixText!=null ? Container(width: 90, alignment: Alignment.center, child: Text(prefixText!)): null,
             errorMaxLines: 2,
             hintText: hint,
             filled: true,

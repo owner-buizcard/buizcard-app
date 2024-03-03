@@ -26,6 +26,7 @@ class User extends Equatable {
   final String locale;
   final String countryCode;
   final String dateFormat;
+  final String? personalizedLink;
   final String defaultCurrency;
   final DateTime notificationsRead;
   final int notificationsCount;
@@ -41,6 +42,7 @@ class User extends Equatable {
     required this.id,
     this.firstName,
     this.lastName,
+    this.personalizedLink,
     this.enableWhatsapp = true,
     this.displayName,
     this.designation,
@@ -82,6 +84,7 @@ class User extends Equatable {
     String? displayName,
     String? designation,
     String? gender,
+    String? personalizedLink,
     bool? enableWhatsapp,
     bool? followUp,
     bool? branding,
@@ -114,6 +117,7 @@ class User extends Equatable {
   }) {
     return User(
       id: id ?? this.id,
+      personalizedLink: personalizedLink ?? this.personalizedLink,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       displayName: displayName ?? this.displayName,
@@ -156,6 +160,7 @@ class User extends Equatable {
     return User(
       id: json['_id'] as String,
       followUp: json['followUp'] as bool,
+      personalizedLink: json['personalizedLink'],
       branding: json['branding'] as bool,
       enableWhatsapp: json['enableWhatsapp'],
       firstName: json['firstName'] as String?,

@@ -24,6 +24,7 @@ class SettingsViewModel extends BaseViewModel {
   final List options = [
     {'title': 'Account'},
     {'icon': AntIcons.editOutlined, 'label': 'Edit Account', 'color': null, 'isCustom': false,},
+    {'icon': AntIcons.linkOutlined, 'label': 'Personalized Link', 'color': null, 'isCustom': false,},
     {'icon': AntIcons.crownOutlined, 'label': 'Upgrade to Pro', 'color': null, 'isCustom': false,},
     {'icon': AntIcons.lineChartOutlined, 'label': 'My Analytics', 'color': null, 'isCustom': false,},
     {'title': 'Features'},
