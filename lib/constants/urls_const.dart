@@ -3,8 +3,8 @@ class UrlsConst {
 
   UrlsConst._();
 
-  static String apiHost = "https://m93o2s6r6l.execute-api.us-east-1.amazonaws.com/dev";
-  static String domain = "https://bizcard-spiderlingz.web.app/";
+  static String apiHost = "https://buizcard.co";
+  static String domain = "https://buizcard.com/";
 
   static String googleAuth = "$apiHost/auth/google";
   static String githubAuth = "$apiHost/auth/github";

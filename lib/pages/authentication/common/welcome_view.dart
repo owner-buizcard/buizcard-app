@@ -92,7 +92,7 @@ class WelcomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 26),
               child: Text(
-                '© Bizcard a digital cards By Spiderlingz',
+                '© Buizcard a digital cards By Spiderlingz',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.aBeeZee().copyWith(
                   color: Colors.blue[400],

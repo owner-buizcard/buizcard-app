@@ -35,12 +35,12 @@ Future<void> saveVCard({required Contact contact}) async {
       ''';
 
     final directory = Directory('/storage/emulated/0/Download');
-    final file = File('${directory.path}/$name bizcard.vcf');
+    final file = File('${directory.path}/${name}_buizcard.vcf');
     await file.writeAsString(vCardContent);
     OpenFile.open(file.path);
   } catch (_) {}
 }
 
 getShareContent(String cardLink){
-  return "Here's my digital business card from Bizcard! 🌟 Connect with me easily and explore my professional profile. Let's stay in touch! #Bizcard #Networking \n\n $cardLink";
+  return "Here's my digital business card from Buizcard! 🌟 Connect with me easily and explore my professional profile. Let's stay in touch! #Buizcard #Networking \n\n $cardLink";
 }

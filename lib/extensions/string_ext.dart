@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 extension TextEditingControllerTrim on TextEditingController {
 
-  trim()=>text.trim();
+  String trim()=>text.trim();
 
 }
 

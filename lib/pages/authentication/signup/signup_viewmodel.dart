@@ -64,7 +64,7 @@ class SignupViewModel extends BaseViewModel {
     FocusScope.of(context).unfocus();
     context.read<AuthBloc>().add(
       SignupEvent(
-        email: emailController.trim(),
+        email: emailController.trim().toLowerCase(),
         password: passwordController.trim(),
         name: nameController.trim(),
         companyName: companyNameController.trim(),

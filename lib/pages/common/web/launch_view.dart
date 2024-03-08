@@ -26,7 +26,7 @@ class _LaunchViewState extends State<LaunchView> {
             // Update loading bar.
           },
           onUrlChange: (v){
-            if(v.url!=null && v.url!.contains('https://bizcard-spiderlingz.web.app/i/')){
+            if(v.url!=null && v.url!.contains('https://buizcard.com/i/')){
               Navigator.pushNamedAndRemoveUntil(context, Routes.callback, (route) => false, arguments: v.url);
             }
           },

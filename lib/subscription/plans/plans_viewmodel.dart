@@ -56,7 +56,7 @@ class PlansViewModel extends BaseViewModel {
     var options = {
       'key': Global.razorpayKey,
       'amount': 100,
-      'name': 'Bizcard',
+      'name': 'Buizcard',
       'currency': 'INR',
       'description': plan.name,
       'order_id': orderId,
