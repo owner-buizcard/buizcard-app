@@ -9,6 +9,12 @@ class SocialLoginEvent extends AuthEvent {
   SocialLoginEvent({required this.link});
 }
 
+class EmailVerificationEvent extends AuthEvent {
+  final String link;
+
+  EmailVerificationEvent({required this.link});
+}
+
 class LoginEvent extends AuthEvent {
   final String email;
   final String password;

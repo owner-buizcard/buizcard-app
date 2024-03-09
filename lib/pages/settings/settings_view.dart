@@ -5,6 +5,7 @@ import 'package:bizcard_app/pages/settings/settings_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/list_item.dart';
 import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:bizcard_app/utils/global.dart';
+import 'package:bizcard_app/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,11 +42,13 @@ class _SettingsViewState extends State<SettingsView> {
         title: const Text('Settings'),
       ),
       body: BlocListener<SettingsBloc, SettingsState>(
-        listener: (context, state) async{
-          if(state is AccountDeleted){
+        listener: (context, state) async {
+          if (state is AccountDeleted) {
             await LocalDB.clearDB().then((_) =>
-              Navigator.pushNamedAndRemoveUntil(
-                  context, Routes.welcome, (route) => false));
+                Navigator.pushNamedAndRemoveUntil(
+                    context, Routes.welcome, (route) => false));
+          }else if(state is SentSuccess){
+            toast("Verification mail sent successfully, to registered email address!", success: true);
           }
         },
         child: ListView(
@@ -95,47 +98,96 @@ class _SettingsViewState extends State<SettingsView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: _viewModel.options.map((e) {
                   if (e["title"] == null) {
-                    if(e["isCustom"]){
+                    if (e["isCustom"]) {
                       return ValueListenableBuilder(
-                        valueListenable: _viewModel.switchValues,
-                        builder: (_, val, __) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: ListTile(
-                              leading: Icon(e['icon']),
-                              onTap: (){
-                                if (e["label"] == "Follow up email") {
-                                  var value = !_viewModel.switchValues.value['followUp'];
-                                  _viewModel.switchValues.value = { ..._viewModel.switchValues.value, ...{'followUp': value} };
-                                  Global.user = Global.user!.copyWith(followUp: value);
-                                  UserService().updateFollowUp(value);
-                                }else {
-                                  var value = !_viewModel.switchValues.value['branding'];
-                                  _viewModel.switchValues.value = { ..._viewModel.switchValues.value, ...{'branding': value} };
-                                  Global.user = Global.user!.copyWith(branding: value);
-                                  UserService().updateBranding(value);
-                                }
-                              },
-                              title: Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: '${e["label"]}'.bltext(context, color: 'darker')
+                          valueListenable: _viewModel.switchValues,
+                          builder: (_, val, __) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: ListTile(
+                                leading: Icon(e['icon']),
+                                onTap: () {
+                                  if (e["label"] == "Follow up email") {
+                                    var value = !_viewModel
+                                        .switchValues.value['followUp'];
+                                    _viewModel.switchValues.value = {
+                                      ..._viewModel.switchValues.value,
+                                      ...{'followUp': value}
+                                    };
+                                    Global.user =
+                                        Global.user!.copyWith(followUp: value);
+                                    UserService().updateFollowUp(value);
+                                  } else {
+                                    var value = !_viewModel
+                                        .switchValues.value['branding'];
+                                    _viewModel.switchValues.value = {
+                                      ..._viewModel.switchValues.value,
+                                      ...{'branding': value}
+                                    };
+                                    Global.user =
+                                        Global.user!.copyWith(branding: value);
+                                    UserService().updateBranding(value);
+                                  }
+                                },
+                                title: Padding(
+                                    padding: const EdgeInsets.only(left: 8),
+                                    child: '${e["label"]}'
+                                        .bltext(context, color: 'darker')),
+                                trailing: IgnorePointer(
+                                  child: SizedBox(
+                                      width: 20,
+                                      child: SwitchListTile(
+                                          value: e["label"] == "Follow up email"
+                                              ? val['followUp']
+                                              : !val['branding'],
+                                          onChanged: (v) {})),
+                                ),
                               ),
-                              trailing: IgnorePointer(
-                                child: SizedBox(
-                                  width: 20,
-                                  child: SwitchListTile(
-                                    value: e["label"] == "Follow up email" ? val['followUp'] : !val['branding'], 
-                                    onChanged: (v){}
-                                )),
+                            );
+                          });
+                    }
+                    if (e["isBtn"] ?? false) {
+                      return ValueListenableBuilder(
+                          valueListenable: _viewModel.switchValues,
+                          builder: (_, val, __) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: ListTile(
+                                leading: Icon(e['icon']),
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                title: Padding(
+                                    padding: const EdgeInsets.only(left: 8),
+                                    child: '${e["label"]}'
+                                        .bltext(context, color: 'darker')),
+                                trailing:
+                                    Visibility(
+                                      visible: Global.user!.emailVerified,
+                                      replacement: BlocBuilder<SettingsBloc, SettingsState>(
+                                                                        builder: (context, state) {
+                                      return InkWell(
+                                          onTap: () {
+                                            context
+                                                .read<SettingsBloc>()
+                                                .add(SendVerificationEmail());
+                                          },
+                                          child: state is Sending 
+                                            ? const SizedBox(
+                                              width: 20, height: 20,
+                                              child: CircularProgressIndicator(strokeWidth: 2)
+                                            ) 
+                                            : const Text("VERIFY"));
+                                                                        },
+                                                                      ),
+                                      child: const Text("VERIFIED", style: TextStyle(color: Colors.green)),
+                                    ),
                               ),
-                            ),
-                          );
-                        }
-                      );
+                            );
+                          });
                     }
                     return ListItem(
                         item: e,
-                        isSwitch: e["isSwitch"]??false,
+                        isSwitch: e["isSwitch"] ?? false,
                         onClick: (v) {
                           if (v == "Integrations") {
                             Navigator.pushNamed(context, Routes.integrations);
@@ -145,13 +197,13 @@ class _SettingsViewState extends State<SettingsView> {
                             _viewModel.feedbackSheet(context, "feature");
                           } else if (v == "Help & support") {
                             _viewModel.feedbackSheet(context, "support");
-                          }else if (v == "My Analytics"){
+                          } else if (v == "My Analytics") {
                             Navigator.pushNamed(context, Routes.analytics);
-                          }else if (v == "Edit Account"){
+                          } else if (v == "Edit Account") {
                             Navigator.pushNamed(context, Routes.editAccount);
-                          }else if (v == "Upgrade to Pro"){
+                          } else if (v == "Upgrade to Pro") {
                             Navigator.pushNamed(context, Routes.subscriptions);
-                          }else if (v == "Personalized Link"){
+                          } else if (v == "Personalized Link") {
                             Navigator.pushNamed(context, Routes.editUsername);
                           }
                         });

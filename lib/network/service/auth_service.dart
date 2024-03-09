@@ -35,6 +35,11 @@ class AuthService {
     return data;
   }
 
+  Future<dynamic> verifyEmail()async{
+    ApiClient client = ApiClient('/verify-email', loader: false);
+    return await client.put();
+  }
+
    Future<dynamic> feedback({required String text,required String type})async{
     var data = {
       "message": text,

@@ -18,6 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>(_onLogin);
     on<SignupEvent>(_onSignup);
     on<SocialLoginEvent>(_onSocialLogin);
+    on<EmailVerificationEvent>(_onEmailVerification);
     on<ForgotPasswordEvent>(_onForgotPassword);
     on<ResetPasswordEvent>(_onResetPassword);
     on<UploadPictureEvent>(_onUploadPicture);
@@ -67,6 +68,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       Uri uri = Uri.parse(event.link);
       String? token = uri.queryParameters['token'];
       LocalDB.saveToken({'accessToken': token});
+      var value = await MainService().fetchMainData(loader: false);
+      Global.init(value);
+      emit(Success());
+    }catch(err){
+      emit(Error());
+    }
+  }
+
+  void _onEmailVerification(EmailVerificationEvent event, Emitter emit)async{
+    try{  
+      Uri uri = Uri.parse(event.link);
+      String? token = uri.queryParameters['token'];
+      LocalDB.saveToken({'accessToken': token});
+      await AuthService().verifyEmail();
       var value = await MainService().fetchMainData(loader: false);
       Global.init(value);
       emit(Success());

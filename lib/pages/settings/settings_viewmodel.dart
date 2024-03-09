@@ -27,8 +27,9 @@ class SettingsViewModel extends BaseViewModel {
     {'icon': AntIcons.linkOutlined, 'label': 'Personalized Link', 'color': null, 'isCustom': false,},
     {'icon': AntIcons.crownOutlined, 'label': 'Upgrade to Pro', 'color': null, 'isCustom': false,},
     {'icon': AntIcons.lineChartOutlined, 'label': 'My Analytics', 'color': null, 'isCustom': false,},
+    {'icon': AntIcons.checkCircleOutlined, 'label': 'Verify Email', 'color': null, 'isCustom': false, 'isBtn': true},
     {'title': 'Features'},
-    {'icon': AntIcons.apiOutlined, 'label': 'Integrations', 'color': null, 'isCustom': false,},
+    {'icon': AntIcons.apiOutlined, 'label': 'Integrations', 'color': null, 'isCustom': false},
     { 
       'icon': AntIcons.mailOutlined, 
       'label': 'Follow up email', 

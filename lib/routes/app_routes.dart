@@ -4,6 +4,7 @@ import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/pages/account/edit/edit_account_view.dart';
 import 'package:bizcard_app/pages/account/username/edit_username_view.dart';
 import 'package:bizcard_app/pages/authentication/common/callback_view.dart';
+import 'package:bizcard_app/pages/authentication/common/email_verify_view.dart';
 import 'package:bizcard_app/pages/authentication/login/login_view.dart';
 import 'package:bizcard_app/pages/authentication/password/forgot/forgot_password_view.dart';
 import 'package:bizcard_app/pages/authentication/password/reset/reset_password_view.dart';
@@ -113,6 +114,11 @@ class RouteGenerator {
       return getTransistionPage(BlocProvider(
         create: (context) => AuthBloc(),
         child: CallbackView(callbackUrl: link),
+      ));
+    } else if (routeName.contains("verify-email")) {
+      return getTransistionPage(BlocProvider(
+        create: (context) => AuthBloc(),
+        child: EmailVerifyView(callbackUrl: link),
       ));
     } else if (routeName.contains("password/reset")) {
       return getTransistionPage(BlocProvider(

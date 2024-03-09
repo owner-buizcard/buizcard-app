@@ -27,4 +27,14 @@ class UserService {
     ApiClient client = ApiClient('/branding?value=$value', loader: false);
     return await client.put();
   }
+
+  Future sendVerificationMail()async{
+    ApiClient client = ApiClient('/auth/verify-email', loader: false);
+    return await client.put();
+  }
+
+  Future verifyMail()async{
+    ApiClient client = ApiClient('/verify-email', loader: false);
+    return await client.put();
+  }
 }
