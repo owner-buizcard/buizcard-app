@@ -13,9 +13,9 @@ import 'package:bizcard_app/pages/authentication/common/photo_view.dart';
 import 'package:bizcard_app/pages/authentication/signup/signup_view.dart';
 import 'package:bizcard_app/pages/authentication/common/welcome_view.dart';
 import 'package:bizcard_app/pages/cards/analytics/card_analytics_view.dart';
+import 'package:bizcard_app/pages/cards/badge/badges_view.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_view.dart';
-import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
 import 'package:bizcard_app/pages/common/callback/connect_view.dart';
 import 'package:bizcard_app/pages/common/web/launch_view.dart';
 import 'package:bizcard_app/pages/contacts/create/create_contact_view.dart';
@@ -76,6 +76,7 @@ class Routes {
   static const String cardBuilder = "/card-builder";
   static const String cardAnalytics = "/card/analytics";
   static const String qrTheme = "/qr-theme";
+  static const String badges = "/badges";
   static const String linkStore = "/link-store";
   static const String preview = "/preview";
 
@@ -183,6 +184,20 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => CardBloc(),
           child: CardAnalyticsView(cardId: cardId),
+        ));
+
+      case Routes.badges:
+        var cardId = settings.arguments as String;
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CardBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ImageBloc(),
+            ),
+          ],
+          child: BadgesView(cardId: cardId),
         ));
 
       case Routes.cardBuilder:

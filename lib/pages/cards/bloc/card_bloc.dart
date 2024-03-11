@@ -86,6 +86,7 @@ class CardBloc extends Bloc<CardEvent, CardState> {
     try{
     
       var card = await CardService().saveCard(cardId: event.cardId, data: event.data);
+      print(card);
       Global.updateCard(bizcard.Card.fromJson(card));
       emit(Success());
     }catch(error){

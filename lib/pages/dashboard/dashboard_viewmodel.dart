@@ -109,6 +109,9 @@ class DashboardViewModel extends BaseViewModel {
               } else if (v == 'QrCode theme') {
                 Navigator.of(context)
                     .pushNamed(Routes.qrTheme, arguments: card.id);
+              } else if (v == 'Add Badges') {
+                Navigator.of(context)
+                    .pushNamed(Routes.badges, arguments: card.id);
               } else if (v == 'Analytics') {
                 Navigator.of(context)
                     .pushNamed(Routes.cardAnalytics, arguments: card.id);

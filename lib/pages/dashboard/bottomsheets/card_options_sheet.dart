@@ -11,6 +11,7 @@ class CardOptionsSheet extends StatelessWidget {
 
     final List options = [
       { 'icon': AntIcons.editOutlined, 'label': 'Edit details' },
+      { 'icon': AntIcons.checkCircleOutlined, 'label': 'Add Badges' },
       { 'icon': AntIcons.qrcodeOutlined, 'label': 'QrCode theme' },
       { 'icon': AntIcons.settingOutlined, 'label': 'Settings' },
       { 'icon': AntIcons.eyeOutlined, 'label': 'Preview' },
