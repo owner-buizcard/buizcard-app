@@ -4,10 +4,14 @@ import 'package:bizcard_app/models/field_value.dart';
 import 'package:bizcard_app/pages/cards/bloc/card_bloc.dart';
 import 'package:bizcard_app/pages/cards/builder/bottomsheets/edit_link.dart';
 import 'package:bizcard_app/models/card.dart' as bizcard;
+import 'package:bizcard_app/pages/cards/links/link_store_view.dart';
 import 'package:bizcard_app/pages/common/image/image_bloc.dart';
 import 'package:bizcard_app/utils/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../models/field.dart';
+import '../links/bottomsheets/add_link.dart';
 
 class CardBuilderViewModel extends BaseViewModel {
 
@@ -66,26 +70,49 @@ class CardBuilderViewModel extends BaseViewModel {
     });
   }
 
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+  openSheetAdd(BuildContext context, Field field){
+    showModalBottomSheet(
+      context: context, 
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
+      shape: const RoundedRectangleBorder(),
+      backgroundColor: Colors.white,
+      builder: (_){
+        return AddLinkSheet(field: field, viewModel: this, onAdd: ()=>{
+         addLink(_, context, field)
+        });
+      });
+  }
+
+  addLink(BuildContext _, BuildContext context, Field field){
+    FocusScope.of(_).unfocus();
+    if(!formKey.currentState!.validate()){
+      return;
+    }
+    var newField = FieldValue(id: '', title: "", link: linkController.trim(), icon: field.icon, highlight: false);
+    fields.value.add(newField);
+    fields.notifyListeners();
+    linkController.clear();
+    Navigator.pop(context);
+  }
+
   removeLink(BuildContext context){
     var updated =  fields.value.where((e) => e.id!=selectedId).toList();
     fields.value = [...updated];
     Navigator.pop(context);
   }
 
-  editLink(BuildContext context){
+  editLink(BuildContext context, FieldValue value){
     if(!linkKey.currentState!.validate()){
       return;
     }
 
     var updated =  fields.value.map((element) { 
-      if(element.id==selectedId){
-        return FieldValue(
-          id: '${fields.value.length+1}', 
-          title: linkTitleController.trim(), 
-          link: linkController.trim(), 
-          icon: element.icon, 
-          highlight: linkHighlight
-        );
+      if(element.id==value.id){
+        return value;
       }
       return element;
     }).toList();
@@ -171,6 +198,24 @@ class CardBuilderViewModel extends BaseViewModel {
       UploadCImageEvent(cardId: card.id, path: type, croptype: type=='banner'? 'rect': 'square'));
   }
   
+  openLinkStore(BuildContext context){
+    showModalBottomSheet(
+      context: context, 
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
+      shape: const RoundedRectangleBorder(),
+      backgroundColor: Colors.white,
+      builder: (_){
+        return LinkStoreView(
+          cardId: card.id, 
+          viewModel: this,
+          onAdd: (e){
+            openSheetAdd(context, e);
+          });
+      });
+  }
+
   @override
   void dispose() {
   

@@ -1,7 +1,6 @@
 import 'package:bizcard_app/constants/colors_const.dart';
 import 'package:bizcard_app/pages/widgets/link_item_edit.dart';
 import 'package:bizcard_app/pages/widgets/links_empty.dart';
-import 'package:bizcard_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +17,7 @@ class LinksFragment extends StatelessWidget {
         valueListenable: viewModel.fields,
         builder: (_, value, __) {
           if (value.isEmpty) {
-            return LinksEmpty(cardId: viewModel.card.id);
+            return LinksEmpty(cardId: viewModel.card.id, viewModel: viewModel);
           }
 
           return ListView(
@@ -31,7 +30,8 @@ class LinksFragment extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.linkStore, arguments: viewModel.card.id);
+                      // Navigator.pushNamed(context, Routes.linkStore, arguments: viewModel.card.id);
+                      viewModel.openLinkStore(context);
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),

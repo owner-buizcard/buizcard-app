@@ -1,5 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:bizcard_app/constants/colors_const.dart';
+import 'package:bizcard_app/extensions/string_ext.dart';
 import 'package:bizcard_app/models/field_value.dart';
 import 'package:bizcard_app/pages/cards/builder/card_builder_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
@@ -8,32 +9,51 @@ import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditLinkSheet extends StatelessWidget {
+class EditLinkSheet extends StatefulWidget {
   final FieldValue value;
   final CardBuilderViewModel viewModel;
   const EditLinkSheet({super.key, required this.value, required this.viewModel});
 
   @override
+  State<EditLinkSheet> createState() => _EditLinkSheetState();
+}
+
+class _EditLinkSheetState extends State<EditLinkSheet> {
+  late TextEditingController linkController;
+  late TextEditingController titleController;
+  late TextEditingController descController;
+  late ValueNotifier<bool> switchNotifier;
+
+  @override
+  void initState() {
+    linkController = TextEditingController(text: widget.value.link);
+    titleController = TextEditingController(text: widget.value.title);
+    descController = TextEditingController(text: widget.value.desc);
+    switchNotifier = ValueNotifier(widget.value.highlight);
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
 
-    ValueNotifier<bool> switchNotifier = ValueNotifier(viewModel.linkHighlight);
 
     return Form(
-      key: viewModel.linkKey,
+      key: widget.viewModel.linkKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: ListView(
           children: [  
             AppBar(
               leadingWidth: 30,
-              title: Text(value.title),
+              title: Text(widget.value.title),
               centerTitle: true,
               leading: IconButton(onPressed: ()=>Navigator.pop(context), 
                 icon: const Icon(Icons.close)),
               backgroundColor: Colors.transparent,
               actions: [
                 IconButton(
-                  onPressed: ()=>viewModel.removeLink(context), 
+                  onPressed: ()=>widget.viewModel.removeLink(context), 
                   icon: const Icon(AntIcons.deleteOutlined, color: Colors.red)
                 ),
               ]
@@ -46,14 +66,17 @@ class EditLinkSheet extends StatelessWidget {
                   
                   MainCard(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.network(
-                          'https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${value.icon}',
+                          'https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${widget.value.icon}',
                           width: double.infinity,
                           height: 100
                         ),
             
-                        Text('@agamagilan', style: Theme.of(context).textTheme.labelLarge)
+                        Visibility(
+                          visible: widget.viewModel.linkTitleController.text.isNotEmpty,
+                          child: Text(widget.viewModel.linkTitleController.text, style: Theme.of(context).textTheme.labelLarge))
                       ],
                     )
                   ),
@@ -61,13 +84,13 @@ class EditLinkSheet extends StatelessWidget {
                   InputFieldWL(
                     label: 'Link', 
                     isRequired: true,
-                    controller: viewModel.linkController
+                    controller: linkController
                   ),
                   const Gap(size: 12),
                   InputFieldWL(
                     label: 'Title', 
                     isRequired: true,
-                    controller: viewModel.linkTitleController
+                    controller: titleController
                   ),
                   const Gap(size: 16),
             
@@ -81,7 +104,7 @@ class EditLinkSheet extends StatelessWidget {
                             child: InputFieldWL(
                             label: 'Description', 
                             isRequired: value && true,
-                            controller: viewModel.linkDescController
+                            controller: descController
                           )),
       
                           Row(
@@ -113,7 +136,13 @@ class EditLinkSheet extends StatelessWidget {
                   const Gap(size: 24),
                 
                   ElevatedButton(
-                    onPressed: ()=>viewModel.editLink(context),
+                    onPressed: ()=>widget.viewModel.editLink(context, FieldValue(
+                      id: widget.value.id, 
+                      title: titleController.trim(), 
+                      link: linkController.trim(), 
+                      icon: widget.value.icon, 
+                      highlight: switchNotifier.value
+                    )),
                     child: const Text('Save Link')
                   ),
                 ],

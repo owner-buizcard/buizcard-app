@@ -201,13 +201,13 @@ class RouteGenerator {
       case Routes.subscriptions:
         return getTransistionPage(const PaymentsView());
 
-      case Routes.linkStore:
-        return getTransistionPage(BlocProvider(
-          create: (context) => CardBloc(),
-          child: LinkStoreView(
-            cardId: settings.arguments as String,
-          ),
-        ));
+      // case Routes.linkStore:
+      //   return getTransistionPage(BlocProvider(
+      //     create: (context) => CardBloc(),
+      //     child: LinkStoreView(
+      //       cardId: settings.arguments as String,
+      //     ),
+      //   ));
 
       case Routes.home:
         return getTransistionPage(MultiBlocProvider(

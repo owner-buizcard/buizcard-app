@@ -1,6 +1,6 @@
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/models/field.dart';
-import 'package:bizcard_app/pages/cards/links/link_store_viewmodel.dart';
+import 'package:bizcard_app/pages/cards/builder/card_builder_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/input_field_wl.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class AddLinkSheet extends StatelessWidget {
   final Field field;
-  final LinkStoreViewModel viewModel;
+  final CardBuilderViewModel viewModel;
   final VoidCallback onAdd;
   const AddLinkSheet({super.key, required this.field, required this.viewModel, required this.onAdd});
 

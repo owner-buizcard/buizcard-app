@@ -1,12 +1,15 @@
 import 'package:bizcard_app/extensions/text_ext.dart';
 import 'package:bizcard_app/models/field.dart';
+import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LinkItemAdd extends StatelessWidget {
   final Function(String) onAdd;
   final Field field;
-  const LinkItemAdd({super.key, required this.onAdd, required this.field});
+  final bool added;
+  const LinkItemAdd({super.key, required this.onAdd, required this.field, required this.added});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,10 @@ class LinkItemAdd extends StatelessWidget {
               child: field.label.bltext(context, color: 'darker'),
             ),
           ),
+          Visibility(
+            visible: added,
+            child: const Icon(Icons.check_circle, color: Colors.green,)),
+          const Gap(size: 10),
           InkWell(
             onTap: ()=>onAdd(''),
             child: Container(
