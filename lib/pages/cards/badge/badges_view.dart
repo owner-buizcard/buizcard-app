@@ -1,5 +1,7 @@
 import 'package:bizcard_app/utils/global.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/image/image_bloc.dart';
@@ -65,11 +67,32 @@ class _BadgesViewState extends State<BadgesView> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            mainAxisSpacing: 16,
-                            crossAxisSpacing: 16),
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8),
                     itemCount: badges.length,
                     itemBuilder: (_, idx) {
-                      return Image.network(badges[idx]);
+                      return Stack(
+                        children: [
+                          
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Image.network(badges[idx])),
+                          Positioned(
+                            right: 0,
+                            child: InkWell(
+                              onTap: (){
+                                badges.removeAt(idx);
+                                setState(() {});
+                              },
+                              child: const CircleAvatar(
+                                radius: 14,
+                                backgroundColor: Color(0xaa333333),
+                                child: Icon(Icons.close, size: 16,),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
                     }),
                 Visibility(
                   visible: badges.length < 6,

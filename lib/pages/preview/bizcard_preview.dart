@@ -4,6 +4,7 @@ import 'package:bizcard_app/pages/preview/bizcard_preview_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cards/bloc/card_bloc.dart';
@@ -158,6 +159,24 @@ class _BizcardPreviewState extends State<BizcardPreview> {
                       title: Text(_viewModel.card?.company?.companyWebsite??''),
                     )),
                 const Gap(size: 16),
+
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.all(20),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 16,
+                              crossAxisSpacing: 16),
+                      itemCount: _viewModel.card?.badges.length,
+                      itemBuilder: (_, idx) {
+                        return Image.network(_viewModel.card?.badges[idx]);
+                      }),
+                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Visibility(
@@ -178,18 +197,20 @@ class _BizcardPreviewState extends State<BizcardPreview> {
                       crossAxisCount: 3,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
-                      childAspectRatio: 0.8,
+                      childAspectRatio: 0.7,
                     ),
                     itemCount: _viewModel.card?.fields.length??0,
                     itemBuilder: (_, index) {
                       var item = _viewModel.card!.fields[index];
                       return Column(
                         children: [
-                          InkWell(
-                            child: Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${item.icon}'),
+                          Expanded(
+                            child: InkWell(
+                              child: Image.network(
+                                  'https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${item.icon}', width: 80,),
+                            ),
                           ),
-                          item.title.btext(context)
+                          // item.title.btext(context, align: "center", color: 'dark')
                         ],
                       );
                     })
