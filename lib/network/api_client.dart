@@ -92,6 +92,8 @@ class ApiInterceptors extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async{
     if (loader) hideLoader();
 
+    print(err.response);
+
     if (err.response?.data is Map && err.response!.data.containsKey('message')) {
       if (errToast) toast(err.response?.data['message'], success: false);
     } else {

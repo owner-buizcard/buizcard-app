@@ -30,9 +30,9 @@ class SendMailEvent extends ContactsEvent {
 
 class ExportContactsEvent extends ContactsEvent {
   final String exportId;
-  final List ids;
+  final List<Contact> contacts;
 
-  const ExportContactsEvent({required this.exportId, required this.ids});
+  const ExportContactsEvent({required this.exportId, required this.contacts});
 }
 
 class DeleteContactEvent extends ContactsEvent {

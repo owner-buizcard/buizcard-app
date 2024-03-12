@@ -234,7 +234,7 @@ class DashboardViewModel extends BaseViewModel {
               Navigator.pop(context);
               context
                 .read<ContactsBloc>()
-                .add(ExportContactsEvent(exportId: v, ids: contact!=null ? [contact.id] : []));
+                .add(ExportContactsEvent(exportId: v, contacts: contact!=null ? [contact] : []));
           });
         });
   }

@@ -29,7 +29,9 @@ class ContactService {
 
   Future<dynamic> exportToHubspotCRM({required List ids})async{
     ApiClient client = ApiClient('/hubspot/export');
-    return await client.post({'contactIds': ids});
+    var res = await client.post({'contactIds': ids});
+    print(res);
+    return res;
   }
 
   Future<dynamic> exportToSpreadsheet({required List ids})async{

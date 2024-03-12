@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:bizcard_app/models/contact.dart';
 import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/network/service/contact_service.dart';
 import 'package:bloc/bloc.dart';
+import 'package:csv/csv.dart';
 import 'package:equatable/equatable.dart';
+import 'package:excel/excel.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 
 import '../../../utils/global.dart';
 
@@ -38,12 +43,65 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   _onExportContacts(ExportContactsEvent event, Emitter emit)async{
     emit(Loading());
     try{
+
+      var ids = event.contacts.map((e) => e.id).toList();
       if(event.exportId=='zoho_crm'){
-        await service.exportToZohoCRM(ids: event.ids);
+        await service.exportToZohoCRM(ids: ids);
       }else if(event.exportId=='hubspot_crm'){
-        await service.exportToHubspotCRM(ids: event.ids);
+        await service.exportToHubspotCRM(ids: ids);
       }else if(event.exportId=='spreadsheet'){
-        await service.exportToSpreadsheet(ids: event.ids);
+        await service.exportToSpreadsheet(ids: ids);
+      }
+
+      if(event.exportId=='csv' || event.exportId=='excel'){
+        var dataList = event.contacts.map((e){
+          var card = e.card;
+          var details = e.details;
+
+          return {
+            "name": card!=null ? '${card.name?.firstName??''} ${card.name?.lastName??''}': details?.name??'',
+            "phone": card?.phoneNumber??details?.phone??'',
+            "email": card?.email??details?.email??'',
+            "address": card!=null ? '${card.address?.addressLine1??''} ${card.address?.city??''} ${card.address?.state??''} ${card.address?.country??''} ${card.address?.pincode??''}': details?.location??'',
+            "company": card?.company?.companyName??details?.company??'',
+            "title": card?.company?.title??details?.title??'',
+            "website": card?.company?.companyWebsite??details?.website??''
+          };
+        }).toList();
+
+        if(event.exportId=='csv'){
+          List<List<dynamic>> csvData = [];
+
+          csvData.add(dataList.first.keys.toList());
+
+          for (var data in dataList) {
+            csvData.add(data.values.toList());
+          }
+
+          String csvString = const ListToCsvConverter().convert(csvData);
+
+          final directory = Directory('/storage/emulated/0/Download');
+          final file = File('${directory.path}/buizcard-contacts.csv');
+          await file.writeAsString(csvString);
+          OpenFile.open(file.path);
+        }else{
+          final excel = Excel.createExcel();
+          final Sheet sheet = excel['Contacts'];
+          for (var key in dataList.first.keys) {
+            sheet.cell(CellIndex.indexByString('${String.fromCharCode('A'.codeUnitAt(0) + dataList.first.keys.toList().indexOf(key) + 1)}1')).value = TextCellValue(key);
+          }
+          for (int i = 0; i < dataList.length; i++) {
+            final rowData = dataList[i];
+            rowData.forEach((key, value) {
+              sheet.cell(CellIndex.indexByString('${String.fromCharCode('A'.codeUnitAt(0) + rowData.keys.toList().indexOf(key) + 1)}${i + 2}')).value = TextCellValue(value);
+            });
+          }
+          final directory = Directory('/storage/emulated/0/Download');
+          final file = File('${directory.path}/buizcard-contacts.xlsx');
+          var fileBytes = excel.save();
+          await file.writeAsBytes(fileBytes??[]);
+          OpenFile.open(file.path);
+        }
       }
       
       emit(Exported());

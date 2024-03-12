@@ -42,6 +42,8 @@ class _BizcardPreviewState extends State<BizcardPreview> {
             _viewModel.isOwnCard = state.ownCard;
           }
 
+          print(_viewModel.card?.badges.length??0);
+
           return Scaffold(
             appBar: AppBar(
               title: Text(_viewModel.card?.cardName ?? ''),
@@ -170,9 +172,9 @@ class _BizcardPreviewState extends State<BizcardPreview> {
                               crossAxisCount: 3,
                               mainAxisSpacing: 16,
                               crossAxisSpacing: 16),
-                      itemCount: _viewModel.card?.badges.length,
+                      itemCount: _viewModel.card?.badges.length??0,
                       itemBuilder: (_, idx) {
-                        return Image.network(_viewModel.card?.badges[idx]);
+                        return Image.network(_viewModel.card?.badges[idx]??'');
                       }),
                 ),
 
