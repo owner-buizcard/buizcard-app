@@ -2,9 +2,9 @@ import 'package:bizcard_app/models/contact_info.dart';
 import 'package:bizcard_app/network/api_client.dart';
 
 class ContactService {
-  Future<dynamic> saveContact({required String cardId})async{
+  Future<dynamic> saveContact({required String cardId, required String ownerId})async{
     ApiClient client = ApiClient('/contact', loader: false);
-    return await client.post({'cardId': cardId, 'type': 'Buizcard'});
+    return await client.post({'cardId': cardId, 'ownerId': ownerId, 'type': 'Buizcard'});
   }
 
   Future<dynamic> saveContactDetails({required ContactInfo details})async{

@@ -3,6 +3,7 @@ import 'package:bizcard_app/network/service/analytics_service.dart';
 import 'package:bizcard_app/network/service/auth_service.dart';
 import 'package:bizcard_app/network/service/integration_service.dart';
 import 'package:bizcard_app/network/service/user_service.dart';
+import 'package:bizcard_app/utils/global.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -63,16 +64,20 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   _onIntegrate(IntegrateEvent event, Emitter emit)async{
     try{
       Uri uri = Uri.parse(event.url);
+      var updated = [];
       if(event.url.contains('zoho')){
         String? code = uri.queryParameters['code'];
         String? server = uri.queryParameters['accounts-server'];
         await service.connectZohoCRM(code: code!, server: server!);
+        updated = [...Global.user!.integrations, "zoho_crm"];
       }else if(event.url.contains('hubspot')){
         String? code = uri.queryParameters['code'];
         await service.connectHubspot(code: code!);
+        updated = [...Global.user!.integrations, "hubspot_crm"];
       }else if(event.url.contains('spreadsheet')){
-        
+        updated = [...Global.user!.integrations, "spreadsheet"];
       }
+      Global.user =  Global.user!.copyWith(integrations: updated);
       emit(Success());
     }catch(error){
       emit(Failure());

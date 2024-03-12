@@ -79,7 +79,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   _onSaveContact(SaveContactEvent event, Emitter emit)async{
     emit(Creating());
     try{
-      var contact = await service.saveContact(cardId: event.cardId);
+      var contact = await service.saveContact(cardId: event.cardId, ownerId: event.ownerId);
       Global.contacts.value.add(Contact.fromJson(contact));
       Global.contacts.notifyListeners();
       emit(ContactCreated());

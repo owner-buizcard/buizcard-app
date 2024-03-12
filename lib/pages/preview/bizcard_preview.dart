@@ -4,7 +4,6 @@ import 'package:bizcard_app/pages/preview/bizcard_preview_viewmodel.dart';
 import 'package:bizcard_app/pages/widgets/gap.dart';
 import 'package:bizcard_app/pages/widgets/main_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cards/bloc/card_bloc.dart';
@@ -65,7 +64,7 @@ class _BizcardPreviewState extends State<BizcardPreview> {
                             onPressed: (state is Creating || state is ContactCreated) 
                               ? null : () => context
                                 .read<ContactsBloc>()
-                                .add(SaveContactEvent(_viewModel.card!.id)),
+                                .add(SaveContactEvent(_viewModel.card!.id, _viewModel.card!.createdBy)),
                             label: state is Creating
                               ? const CircularProgressIndicator()
                               : Text(state is ContactCreated ? 'Saved' : 'Save Contact')),

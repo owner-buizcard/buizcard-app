@@ -37,7 +37,6 @@ class _SettingsViewState extends State<SettingsView> {
       backgroundColor: const Color(0xFFFAFAFA),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leadingWidth: 30,
         backgroundColor: Colors.transparent,
         title: const Text('Settings'),
       ),
